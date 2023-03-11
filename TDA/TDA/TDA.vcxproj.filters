@@ -16,6 +16,9 @@
     <Filter Include="EnumFiles">
       <UniqueIdentifier>{adc60950-44b8-4e06-9f4b-570c4909436a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DetoursX">
+      <UniqueIdentifier>{156caecf-e91e-4587-88b8-c4586f67f398}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileX.h">
@@ -36,6 +39,9 @@
     <ClInclude Include="AutoBuffer.h">
       <Filter>MemX</Filter>
     </ClInclude>
+    <ClInclude Include="DetoursX.h">
+      <Filter>DetoursX</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FileX.cpp">
@@ -55,6 +61,9 @@
     </ClCompile>
     <ClCompile Include="AutoBuffer.cpp">
       <Filter>MemX</Filter>
+    </ClCompile>
+    <ClCompile Include="DetoursX.cpp">
+      <Filter>DetoursX</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
