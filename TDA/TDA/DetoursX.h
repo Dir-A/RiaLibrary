@@ -1,4 +1,4 @@
-//#define __DetoursX__
+#define __DetoursX__
 #ifdef __DetoursX__
 
 #pragma once
@@ -11,6 +11,7 @@ namespace TDA
 	{
 	public:
 		static BOOL DetourAttachFunc(PVOID ppRawFunc, PVOID pNewFunc);
+		static BOOL DetourDetachFunc(PVOID ppRawFunc, PVOID pNewFunc);
 		static BOOL HookCreateFontA(DWORD dwCharSet, LPCSTR lpFontName);
 	private:
 

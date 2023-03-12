@@ -19,7 +19,23 @@ namespace TDA
 
 		if (erroAttach == NO_ERROR && erroCommit == NO_ERROR) return false;
 
-		MessageBoxW(NULL, L"DetourAttach Failed!!", NULL, NULL);
+		MessageBoxW(NULL, L"DetourAttachFunc Failed!!", NULL, NULL);
+
+		return true;
+	}
+
+	BOOL DetoursX::DetourDetachFunc(PVOID ppRawFunc, PVOID pNewFunc)
+	{
+		DetourRestoreAfterWith();
+		DetourTransactionBegin();
+		DetourUpdateThread(GetCurrentThread());
+
+		LONG erroDetach = DetourDetach((PVOID*)ppRawFunc, pNewFunc);
+		LONG erroCommit = DetourTransactionCommit();
+
+		if (erroDetach == NO_ERROR && erroCommit == NO_ERROR) return false;
+
+		MessageBoxW(NULL, L"DetourDetachFunc Failed!!", NULL, NULL);
 
 		return true;
 	}

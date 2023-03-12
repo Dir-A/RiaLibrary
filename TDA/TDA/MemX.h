@@ -11,7 +11,7 @@ namespace TDA
 		static BOOL ReadMemory(LPVOID lpAddress, LPVOID lpBuffer, SIZE_T nSize);
 		static BOOL WriteHookCode(DWORD dwRawAddress, DWORD dwNewAddress, SIZE_T szHookCode);
 		static BOOL SetHook(DWORD dwRawAddr, DWORD dwTarAddr, SIZE_T szRawSize);
-		static DWORD MemSearch(DWORD dwBeginAddr, PBYTE aSearchCode, SIZE_T szCode, BOOL isDirection);
+		static DWORD MemSearch(DWORD pFind, SIZE_T szFind, PBYTE pToFind, SIZE_T szToFind, BOOL backward);
 
 	};
 }
