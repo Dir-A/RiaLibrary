@@ -1,7 +1,7 @@
 #include "msimg32.h"
 
 
-DWORD g_dwExeImageBase = (DWORD)GetModuleHandleW(NULL);
+static DWORD g_dwExeBase = (DWORD)GetModuleHandleW(NULL);
 
 
 VOID StartHook()

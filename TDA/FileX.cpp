@@ -74,6 +74,8 @@ namespace TDA
 	{
 		for (size_t ite = 0; pPath[ite]; ite++)
 		{
+			if ((uint8_t)pPath[ite] > 0x7F) { ite++; continue; }
+
 			switch (pPath[ite])
 			{
 			case '/':
