@@ -1,7 +1,7 @@
 #include <Windows.h>
-#include "../ThirdParty/detours/include/detours.h"
+#include "../../ThirdParty/detours/include/detours.h"
 
-#pragma comment(lib,"../ThirdParty/detours/lib.X86/detours.lib")
+#pragma comment(lib,"../../ThirdParty/detours/lib.X86/detours.lib")
 
 
 INT APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
@@ -10,10 +10,10 @@ INT APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	PROCESS_INFORMATION pi = { 0 };
 	si.cb = sizeof(si);
 
-	LPCWSTR applicationName = L"eden_pm_en.exe";
-	LPCSTR dllName = "EdenPMHook.dll";
+	LPCWSTR applicationName = L"cmvs32.exe";
+	LPCSTR dllName[2] = { "Aoitori_uncen.dll","Longinus.dll" };
 
-	if (DetourCreateProcessWithDllW(applicationName, NULL, NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &si, &pi, dllName, NULL))
+	if (DetourCreateProcessWithDllsW(applicationName, NULL, NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &si, &pi, 2, dllName, NULL))
 	{
 		ResumeThread(pi.hThread);
 		CloseHandle(pi.hThread);

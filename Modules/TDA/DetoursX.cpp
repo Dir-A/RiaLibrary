@@ -1,7 +1,7 @@
 #include "DetoursX.h"
 
-#include "../ThirdParty/detours/include/detours.h"
-#pragma comment(lib,"../ThirdParty/detours/lib.X86/detours.lib")
+#include "../../ThirdParty/detours/include/detours.h"
+#pragma comment(lib,"../../ThirdParty/detours/lib.X86/detours.lib")
 
 
 namespace TDA
