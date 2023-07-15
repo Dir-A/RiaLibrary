@@ -134,7 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\lib\Rxx\Rxx.vcxproj">
-      <Project>{6b1ab12f-a3bb-4513-9592-3c15a1100fbe}</Project>
+      <Project>{458b082f-937b-4cab-9405-68b4df3af90f}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

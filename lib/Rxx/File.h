@@ -10,6 +10,11 @@ namespace Rut
 {
 	namespace FileX
 	{
+		void         MakeDirViaPath(const wchar_t* cpPath);
+		void         MakeDirViaPath(const char* cpPath);
+		void         MakeDirViaPath(std::wstring& wsPath);
+		void         MakeDirViaPath(std::string& msPath);
+
 		void         SaveFileViaPath(const char* cpPath, void* pData, size_t nBytes);
 		void         SaveFileViaPath(const wchar_t* wpPath, void* pData, size_t nBytes);
 		void         SaveFileViaPath(std::wstring& wsPath, void* pData, size_t nBytes);

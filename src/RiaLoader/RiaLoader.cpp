@@ -18,17 +18,27 @@ INT APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	PROCESS_INFORMATION pi = { 0 };
 	si.cb = sizeof(si);
 
-	std::wstring exe_name_noext = PathRemoveExtension(GetFileNameViaBaseW((uint32_t)hInstance));
+	std::wstring exe_name_noext = PathRemoveExtension(GetModuleNameViaBaseW((uint32_t)hInstance));
 
 	try
 	{
 		INI_File ini(exe_name_noext + L".ini");
-		KeysMap& node_ria = ini.Get(L"RiaLoader");
-		std::wstring inject_exe_name = node_ria[L"TargetEXE"];
-		std::wstring inject_dll_name = node_ria[L"TargetDLL"];
-		std::string  inject_dll_name_ms = WStrToStr(inject_dll_name, CP_ACP);
+		std::wstring exe_name = ini[L"RiaLoader"][L"TargetEXE"];
+		std::uint32_t dll_count = ini[L"RiaLoader"][L"TargetDLLCount"];
 
-		if (DetourCreateProcessWithDllW(inject_exe_name.c_str(), NULL, NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &si, &pi, inject_dll_name_ms.c_str(), NULL))
+		std::vector<std::string> dll_list;
+		for (uint32_t ite_dll = 0; ite_dll < dll_count; ite_dll++)
+		{
+			dll_list.emplace_back(ini[L"RiaLoader"][std::wstring(L"TargetDLLName_") + std::to_wstring(ite_dll)]);
+		}
+
+		LPCSTR* dll_name_array = new LPCSTR[dll_count];
+		for (size_t ite_dll = 0; ite_dll < dll_count; ite_dll++)
+		{
+			dll_name_array[ite_dll] = dll_list[ite_dll].c_str();
+		}
+
+		if (DetourCreateProcessWithDllsW(exe_name.c_str(), NULL, NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &si, &pi, dll_count, dll_name_array, NULL))
 		{
 			ResumeThread(pi.hThread);
 			CloseHandle(pi.hThread);
@@ -38,6 +48,8 @@ INT APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 		{
 			MessageBoxW(NULL, L"DetourCreateProcessWithDll Failed!", NULL, MB_OK);
 		}
+
+		delete[] dll_name_array;
 	}
 	catch (const std::runtime_error& err)
 	{

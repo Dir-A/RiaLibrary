@@ -11,18 +11,57 @@ namespace Rut
 {
 	namespace FileX
 	{
+		void MakeDirViaPath(const wchar_t* wpPath)
+		{
+			size_t len = wcslen(wpPath);
+			wchar_t path[MAX_PATH];
+			memcpy(path, wpPath, (len + 1) * 2);
+
+			for (size_t ite_char = 0; ite_char < len; ite_char++)
+			{
+				switch (path[ite_char])
+				{
+				case L'/':
+				case L'\\':
+				{
+					path[ite_char] = L'\0';
+					CreateDirectoryW(path, NULL);
+					path[ite_char] = L'\\';
+				}
+				break;
+
+				case L'.':
+				case L':': { ite_char++; } break;
+				}
+			}
+		}
+
+		void MakeDirViaPath(const char* cpPath)
+		{
+			MakeDirViaPath(StrToWStr(cpPath, CP_ACP).c_str());
+		}
+
+		void MakeDirViaPath(std::wstring& wsPath)
+		{
+			MakeDirViaPath(wsPath.c_str());
+		}
+
+		void MakeDirViaPath(std::string& msPath)
+		{
+			MakeDirViaPath(msPath.c_str());
+		}
+
+
 		void SaveFileViaPath(const wchar_t* wpPath, void* pData, size_t nBytes)
 		{
-			std::wstring path = PathRemoveFileName(GetCurrentDirW() + wpPath);
-			FormatSlash_Ptr((wchar_t*)path.c_str(), L'\\');
-			SHCreateDirectoryExW(NULL, path.c_str(), NULL);
+			MakeDirViaPath(wpPath);
 
-			HANDLE hFile = CreateFileW(wpPath, GENERIC_WRITE, FILE_SHARE_WRITE, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-			if (hFile == INVALID_HANDLE_VALUE) { throw std::runtime_error("SaveFileViaPath: Create File Error!"); }
+			HANDLE hfile = CreateFileW(wpPath, GENERIC_WRITE, FILE_SHARE_WRITE, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+			if (hfile == INVALID_HANDLE_VALUE) { throw std::runtime_error("SaveFileViaPath: Create File Error!"); }
 
-			WriteFile(hFile, pData, nBytes, NULL, NULL);
-			FlushFileBuffers(hFile);
-			CloseHandle(hFile);
+			WriteFile(hfile, pData, nBytes, NULL, NULL);
+			FlushFileBuffers(hfile);
+			CloseHandle(hfile);
 		}
 
 		void SaveFileViaPath(const char* cpPath, void* pData, size_t nBytes)
@@ -86,7 +125,7 @@ namespace Rut
 
 		std::string GetCurrentDirA()
 		{
-			char tmp[MAX_PATH] = { 0 };
+			char tmp[MAX_PATH];
 			size_t sz = GetCurrentDir_Ptr(tmp);
 			std::string path;
 			path.resize(sz);
@@ -96,7 +135,7 @@ namespace Rut
 
 		std::wstring GetCurrentDirW()
 		{
-			wchar_t tmp[MAX_PATH] = { 0 };
+			wchar_t tmp[MAX_PATH];
 			size_t sz = GetCurrentDir_Ptr(tmp);
 			std::wstring path;
 			path.resize(sz);
