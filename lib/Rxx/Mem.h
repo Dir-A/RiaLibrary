@@ -1,8 +1,6 @@
 ﻿#pragma once
 #include <Windows.h>
 
-#include "Mem_Auto.h"
-
 //Ria's Utility Library X
 namespace Rut
 {

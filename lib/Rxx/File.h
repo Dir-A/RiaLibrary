@@ -1,9 +1,9 @@
 ﻿#pragma once
 #include <string>
 
-#include "String.h"
 #include "File_Enum.h"
 #include "File_Stream.hpp"
+#include "RxStream.h"
 
 //Ria's Utility Library X
 namespace Rut

@@ -1,7 +1,6 @@
 ﻿#include <Windows.h>
 
 #include "../../lib/Rxx/File.h"
-#include "../../lib/Rxx/Str.h"
 #include "../../lib/Rxx/INI.h"
 #include "../../third/detours/include/detours.h"
 
@@ -9,7 +8,6 @@
 
 using namespace Rcf::INI;
 using namespace Rut::FileX;
-using namespace Rut::StrX;
 
 
 INT APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)

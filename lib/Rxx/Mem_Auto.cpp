@@ -1,4 +1,5 @@
 ﻿#include "Mem_Auto.h"
+#include "RxStream.h"
 
 using namespace Rut::FileX;
 
@@ -73,10 +74,10 @@ namespace Rut
 
 		uint8_t* AutoMem::LoadFileViaSize(const std::wstring& wsFile, size_t szFile)
 		{
-			std::ifstream ifs = OpenFileBinaryStream(wsFile);
-			if (szFile == -1) { szFile = static_cast<size_t>(GetFileSize(ifs)); }
+			RxIStream_Binary ifs = wsFile.c_str();
+			if (szFile == -1) { szFile = ifs.GetSize(); }
 
-			ifs.read((char*)ReSize(szFile), szFile);
+			ifs.Read(ReSize(szFile), szFile);
 			return m_pData;
 		}
 

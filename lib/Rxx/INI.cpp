@@ -24,11 +24,11 @@ namespace Rcf
 
 		void INI_File::Parse(const std::wstring& wsINI)
 		{
-			std::wifstream wifs_ini = OpenFileUTF8Stream(wsINI);
+			 RxIStream_UTF8 wifs_ini = wsINI.c_str();
 
 			std::size_t pos = -1;
 			std::wstring node_name;
-			for (std::wstring line; std::getline(wifs_ini, line);)
+			for (std::wstring line; wifs_ini.GetLine(line);)
 			{
 				if (line.empty()) { continue; }
 
@@ -58,8 +58,9 @@ namespace Rcf
 
 		void INI_File::Save(const std::wstring& wsFile)
 		{
-			std::wofstream wofs_ini = CreateFileUTF8Stream(wsFile);
-			wofs_ini << Dump();
+			RxOStream_UTF8 wofs_ini = wsFile.c_str();
+			std::wstring dump = Dump();
+			wofs_ini.WriteLine(dump.data(), dump.size());
 		}
 
 		std::wstring INI_File::Dump()
