@@ -2,16 +2,14 @@
 #include <iostream>
 #include <Windows.h>
 
-#include "../../lib/Rxx/INI.h"
-#include "../../lib/Rxx/Mem.h"
-#include "../../lib/Rxx/Hook.h"
+#include "../../lib/Rxx/RxINI.h"
+#include "../../lib/Rxx/RxStream.h"
 
-using namespace Rcf::INI;
+using namespace Rcf::RxINI;
 
 
 int wmain(int argc, wchar_t* argv[])
 {
-	Rut::HookX::DetourAttachFunc((void*)0x0, (void*)0x0);
 	try
 	{
 		// Init
@@ -24,7 +22,7 @@ int wmain(int argc, wchar_t* argv[])
 		//INI_File ini(L"File.ini");
 
 		// Print 
-		std::wcout << ini;
+		//std::wcout << ini;
 
 		// Add
 		ini.Add(L"Section1", L"Name", L"The Art of War");

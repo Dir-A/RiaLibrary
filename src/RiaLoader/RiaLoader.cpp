@@ -1,13 +1,14 @@
 ﻿#include <Windows.h>
 
-#include "../../lib/Rxx/File.h"
-#include "../../lib/Rxx/INI.h"
+#include "../../lib/Rxx/RxINI.h"
+#include "../../lib/Rxx/RxPath.h"
+#include "../../lib/Rxx/RxStream.h"
 #include "../../third/detours/include/detours.h"
 
 #pragma comment(lib,"../../third/detours/lib.X86/detours.lib")
 
-using namespace Rcf::INI;
-using namespace Rut::FileX;
+using namespace Rcf;
+using namespace Rut;
 
 
 INT APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
@@ -16,11 +17,11 @@ INT APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	PROCESS_INFORMATION pi = { 0 };
 	si.cb = sizeof(si);
 
-	std::wstring exe_name_noext = PathRemoveExtension(GetModuleNameViaBaseW((uint32_t)hInstance));
+	std::wstring exe_name_noext = RxPath::PathRemoveExtension(RxPath::GetModuleNameViaBaseW((uint32_t)hInstance));
 
 	try
 	{
-		INI_File ini(exe_name_noext + L".ini");
+		RxINI::INI_File ini(exe_name_noext + L".ini");
 		std::wstring exe_name = ini[L"RiaLoader"][L"TargetEXE"];
 		std::uint32_t dll_count = ini[L"RiaLoader"][L"TargetDLLCount"];
 

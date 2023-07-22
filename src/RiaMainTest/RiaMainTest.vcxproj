@@ -19,78 +19,42 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RxConsole.h" />
-    <ClInclude Include="RxConsole\RxConsole_Put.h" />
-    <ClInclude Include="RxConsole\RxConsole_Alloc.h" />
-    <ClInclude Include="RxHook.h" />
-    <ClInclude Include="RxHook\RxHook_Mem.h" />
-    <ClInclude Include="RxHook\RxHook_Write.h" />
-    <ClInclude Include="RxHook\RxHook_API.h" />
-    <ClInclude Include="RxHook\RxHook_API_DEF.h" />
-    <ClInclude Include="RxINI.h" />
-    <ClInclude Include="RxINI\RxINI_UTF8.h" />
-    <ClInclude Include="RxINI\RxINI_Value.h" />
-    <ClInclude Include="RxPath.h" />
-    <ClInclude Include="RxPath\RxPath_MakePath.h" />
-    <ClInclude Include="RxPath\RxPath_FileEnum.h" />
-    <ClInclude Include="RxStream.h" />
-    <ClInclude Include="RxStream\RxStream_ANSI.h" />
-    <ClInclude Include="RxStream\RxStream_AutoMem.h" />
-    <ClInclude Include="RxStream\RxStream_Binary.h" />
-    <ClInclude Include="RxStream\RxStream_UTF16.h" />
-    <ClInclude Include="RxStream\RxStream_UTF8.h" />
-    <ClInclude Include="RxString.h" />
-    <ClInclude Include="RxString\RxString_Convert.h" />
-    <ClInclude Include="RxString\RxString_Trim.h" />
+    <ProjectReference Include="..\..\lib\Rxx\Rxx.vcxproj">
+      <Project>{458b082f-937b-4cab-9405-68b4df3af90f}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RxConsole\RxConsole_Put.cpp" />
-    <ClCompile Include="RxConsole\RxConsole_Alloc.cpp" />
-    <ClCompile Include="RxHook\RxHook_Mem.cpp" />
-    <ClCompile Include="RxHook\RxHook_Write.cpp" />
-    <ClCompile Include="RxHook\RxHook_API.cpp" />
-    <ClCompile Include="RxINI\RxINI_UTF8.cpp" />
-    <ClCompile Include="RxINI\RxINI_Value.cpp" />
-    <ClCompile Include="RxPath\RxPath_MakePath.cpp" />
-    <ClCompile Include="RxPath\RxPath_FileEnum.cpp" />
-    <ClCompile Include="RxStream\RxStream_ANSI.cpp" />
-    <ClCompile Include="RxStream\RxStream_AutoMem.cpp" />
-    <ClCompile Include="RxStream\RxStream_Binary.cpp" />
-    <ClCompile Include="RxStream\RxStream_UTF16.cpp" />
-    <ClCompile Include="RxStream\RxStream_UTF8.cpp" />
-    <ClCompile Include="RxString\RxString_Convert.cpp" />
-    <ClCompile Include="RxString\RxString_Trim.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{458B082F-937B-4CAB-9405-68B4DF3AF90F}</ProjectGuid>
-    <RootNamespace>Rut</RootNamespace>
+    <ProjectGuid>{3f31ae2c-4c0f-42e3-acdb-01a41338ebac}</ProjectGuid>
+    <RootNamespace>RiaMainTest</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Rxx</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -114,22 +78,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(IncludePath)</IncludePath>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -142,9 +90,6 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -162,9 +107,6 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -178,9 +120,6 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -198,9 +137,6 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
