@@ -3,8 +3,8 @@
 
 namespace Rut
 {
-	namespace RxConsole
+	namespace RxStream
 	{
-		FILE* Set(const wchar_t* lpTitle);
+		FILE* SetConsole(const wchar_t* lpTitle);
 	}
 }

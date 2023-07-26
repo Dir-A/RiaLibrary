@@ -1,4 +1,4 @@
-#include "RxConsole_Alloc.h"
+#include "AllocConsole.h"
 
 #include <stdio.h>
 #include <locale.h>
@@ -7,7 +7,7 @@
 
 namespace Rut
 {
-	namespace RxConsole
+	namespace RxStream
 	{
 		bool __stdcall SetConsoleTop(LPVOID lpParameter)
 		{
@@ -57,7 +57,7 @@ namespace Rut
 		}
 
 
-		FILE* Set(const wchar_t* lpTitle)
+		FILE* SetConsole(const wchar_t* lpTitle)
 		{
 			AllocConsole();
 			AttachConsole(ATTACH_PARENT_PROCESS);

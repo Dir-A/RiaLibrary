@@ -1,18 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="RxStream\RxStream_Binary.cpp">
-      <Filter>RxStream</Filter>
-    </ClCompile>
-    <ClCompile Include="RxStream\RxStream_ANSI.cpp">
-      <Filter>RxStream</Filter>
-    </ClCompile>
-    <ClCompile Include="RxStream\RxStream_UTF8.cpp">
-      <Filter>RxStream</Filter>
-    </ClCompile>
-    <ClCompile Include="RxStream\RxStream_UTF16.cpp">
-      <Filter>RxStream</Filter>
-    </ClCompile>
     <ClCompile Include="RxINI\RxINI_Value.cpp">
       <Filter>RxINI</Filter>
     </ClCompile>
@@ -31,9 +19,6 @@
     <ClCompile Include="RxPath\RxPath_FileEnum.cpp">
       <Filter>RxPath</Filter>
     </ClCompile>
-    <ClCompile Include="RxStream\RxStream_AutoMem.cpp">
-      <Filter>RxStream</Filter>
-    </ClCompile>
     <ClCompile Include="RxHook\RxHook_API.cpp">
       <Filter>RxHook</Filter>
     </ClCompile>
@@ -43,27 +28,27 @@
     <ClCompile Include="RxHook\RxHook_Mem.cpp">
       <Filter>RxHook</Filter>
     </ClCompile>
-    <ClCompile Include="RxConsole\RxConsole_Put.cpp">
-      <Filter>RxConsole</Filter>
+    <ClCompile Include="RxStream\ConsoleStream\PutConsole.cpp">
+      <Filter>RxStream\ConsoleStream</Filter>
     </ClCompile>
-    <ClCompile Include="RxConsole\RxConsole_Alloc.cpp">
-      <Filter>RxConsole</Filter>
+    <ClCompile Include="RxStream\ConsoleStream\AllocConsole.cpp">
+      <Filter>RxStream\ConsoleStream</Filter>
+    </ClCompile>
+    <ClCompile Include="RxStream\FileStream\TextStream.cpp">
+      <Filter>RxStream\FileStream</Filter>
+    </ClCompile>
+    <ClCompile Include="RxStream\FileStream\BinaryStream.cpp">
+      <Filter>RxStream\FileStream</Filter>
+    </ClCompile>
+    <ClCompile Include="RxStream\MemoryStream\AutoMem.cpp">
+      <Filter>RxStream\MemoryStream</Filter>
+    </ClCompile>
+    <ClCompile Include="RxStream\FileStream\BasicStream.cpp">
+      <Filter>RxStream\FileStream</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RxStream.h" />
-    <ClInclude Include="RxStream\RxStream_Binary.h">
-      <Filter>RxStream</Filter>
-    </ClInclude>
-    <ClInclude Include="RxStream\RxStream_ANSI.h">
-      <Filter>RxStream</Filter>
-    </ClInclude>
-    <ClInclude Include="RxStream\RxStream_UTF8.h">
-      <Filter>RxStream</Filter>
-    </ClInclude>
-    <ClInclude Include="RxStream\RxStream_UTF16.h">
-      <Filter>RxStream</Filter>
-    </ClInclude>
     <ClInclude Include="RxINI\RxINI_UTF8.h">
       <Filter>RxINI</Filter>
     </ClInclude>
@@ -84,9 +69,6 @@
     <ClInclude Include="RxPath\RxPath_FileEnum.h">
       <Filter>RxPath</Filter>
     </ClInclude>
-    <ClInclude Include="RxStream\RxStream_AutoMem.h">
-      <Filter>RxStream</Filter>
-    </ClInclude>
     <ClInclude Include="RxHook\RxHook_API.h">
       <Filter>RxHook</Filter>
     </ClInclude>
@@ -100,14 +82,25 @@
       <Filter>RxHook</Filter>
     </ClInclude>
     <ClInclude Include="RxHook.h" />
-    <ClInclude Include="RxConsole\RxConsole_Put.h">
-      <Filter>RxConsole</Filter>
-    </ClInclude>
-    <ClInclude Include="RxConsole.h" />
-    <ClInclude Include="RxConsole\RxConsole_Alloc.h">
-      <Filter>RxConsole</Filter>
-    </ClInclude>
     <ClInclude Include="RxINI.h" />
+    <ClInclude Include="RxStream\ConsoleStream\PutConsole.h">
+      <Filter>RxStream\ConsoleStream</Filter>
+    </ClInclude>
+    <ClInclude Include="RxStream\ConsoleStream\AllocConsole.h">
+      <Filter>RxStream\ConsoleStream</Filter>
+    </ClInclude>
+    <ClInclude Include="RxStream\FileStream\TextStream.h">
+      <Filter>RxStream\FileStream</Filter>
+    </ClInclude>
+    <ClInclude Include="RxStream\FileStream\BinaryStream.h">
+      <Filter>RxStream\FileStream</Filter>
+    </ClInclude>
+    <ClInclude Include="RxStream\MemoryStream\AutoMem.h">
+      <Filter>RxStream\MemoryStream</Filter>
+    </ClInclude>
+    <ClInclude Include="RxStream\FileStream\BasicStream.h">
+      <Filter>RxStream\FileStream</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="RxStream">
@@ -125,8 +118,14 @@
     <Filter Include="RxHook">
       <UniqueIdentifier>{a8496099-7f08-49d8-9b54-7440b37e441c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="RxConsole">
-      <UniqueIdentifier>{a8680636-e6d1-475a-a1b4-df4c641c4495}</UniqueIdentifier>
+    <Filter Include="RxStream\ConsoleStream">
+      <UniqueIdentifier>{75bdb29a-1387-4a31-bfa3-42942ab1458c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RxStream\FileStream">
+      <UniqueIdentifier>{b5d3c31d-98de-4571-85e4-b215a1f784e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RxStream\MemoryStream">
+      <UniqueIdentifier>{1f6889a8-9d22-45ce-bd4b-473471bb7ff8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

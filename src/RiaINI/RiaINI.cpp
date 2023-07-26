@@ -16,13 +16,10 @@ int wmain(int argc, wchar_t* argv[])
 		INI_File ini;
 
 		// Parse INI File
-		//ini.Parse(L"1.ini");
+		ini.Parse(L"1.ini");
 
 		// Init And Parse INI File
-		//INI_File ini(L"File.ini");
-
-		// Print 
-		//std::wcout << ini;
+		INI_File ini(L"File.ini");
 
 		// Add
 		ini.Add(L"Section1", L"Name", L"The Art of War");

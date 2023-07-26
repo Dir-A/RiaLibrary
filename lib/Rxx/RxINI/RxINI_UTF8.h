@@ -19,12 +19,11 @@ namespace Rcf
 		private:
 			NodesMap m_mpNodes;
 
-		private:
+		public:
 			NodesMap::iterator At(const std::wstring& wsNode);
 			NodesMap::iterator End();
 			void Parse(const std::wstring& wsINI);
 
-		public:
 			INI_File();
 			INI_File(const std::wstring& wsINI);
 

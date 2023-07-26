@@ -1,5 +1,5 @@
-#include "RxStream_AutoMem.h"
-#include "RxStream_Binary.h"
+#include "AutoMem.h"
+#include "../FileStream/BinaryStream.h"
 
 
 namespace Rut
@@ -47,14 +47,14 @@ namespace Rut
 
 		AutoMem::~AutoMem()
 		{
+			if (m_pData != nullptr) { delete[] m_pData; }
 			m_szData = 0;
-			if (m_pData) { delete[] m_pData; }
 			m_pData = nullptr;
 		}
 
-		uint8_t* AutoMem::ReSize(size_t szRes)
+		uint8_t* AutoMem::SetSize(size_t szRes)
 		{
-			if (!m_szData)
+			if (m_szData == 0)
 			{
 				m_pData = new uint8_t[szRes];
 				m_szData = szRes;
@@ -70,18 +70,28 @@ namespace Rut
 			return m_pData;
 		}
 
-		uint8_t* AutoMem::LoadFileViaSize(const std::wstring& wsFile, size_t szFile)
+		size_t AutoMem::GetSize()
 		{
-			IStream_Binary ifs = wsFile.c_str();
-			if (szFile == -1) { szFile = ifs.GetSize(); }
+			return m_szData;
+		}
 
-			ifs.Read(ReSize(szFile), szFile);
+		uint8_t* AutoMem::GetPtr()
+		{ 
 			return m_pData;
 		}
+
 
 		void AutoMem::SaveDataToFile(const std::wstring& wsFile)
 		{
 			SaveFileViaPath(wsFile.c_str(), m_pData, m_szData);
+		}
+
+		uint8_t* AutoMem::LoadFileViaSize(const std::wstring& wsFile, size_t szFile)
+		{
+			BinaryStream ifs = { wsFile.c_str(), RIO::RIO_IN };
+			if (szFile == AutoMem_AutoSize) { szFile = ifs.GetSize(); }
+			ifs.Read(SetSize(szFile), szFile);
+			return m_pData;
 		}
 	}
 }
