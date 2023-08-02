@@ -27,10 +27,10 @@ namespace Rut
 
 		};
 
-		void SaveFileViaPath(const char* cpPath, void* pData, size_t nBytes);
-		void SaveFileViaPath(const wchar_t* wpPath, void* pData, size_t nBytes);
-		void SaveFileViaPath(std::string_view msPath, void* pData, size_t nBytes);
-		void SaveFileViaPath(std::wstring_view wsPath, void* pData, size_t nBytes);
+		void SaveFileViaPath(const char* cpPath, void* pData, uint32_t nBytes);
+		void SaveFileViaPath(const wchar_t* wpPath, void* pData, uint32_t nBytes);
+		void SaveFileViaPath(std::string_view msPath, void* pData, uint32_t nBytes);
+		void SaveFileViaPath(std::wstring_view wsPath, void* pData, uint32_t nBytes);
 
 		template <typename T_FileName>
 		std::streamsize GetFileSize(const T_FileName& tFile)

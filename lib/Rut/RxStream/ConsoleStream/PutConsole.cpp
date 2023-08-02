@@ -15,42 +15,42 @@ namespace Rut
 
 		bool PutConsole(const char* cpStr)
 		{
-			return PutConsole(cpStr, strlen(cpStr));
+			return PutConsole(cpStr, (uint32_t)strlen(cpStr));
 		}
 
-		bool PutConsole(const char* cpStr, size_t nChar)
+		bool PutConsole(const char* cpStr, uint32_t nChar)
 		{
 			return WriteConsoleA(GetStdHandle(STD_OUTPUT_HANDLE), cpStr, nChar, NULL, NULL);
 		}
 
 		bool PutConsole(std::string_view msStr)
 		{
-			return PutConsole(msStr.data(), msStr.size());
+			return PutConsole(msStr.data(), (uint32_t)msStr.size());
 		}
 
 		bool PutConsole(const wchar_t* wpStr)
 		{
-			return PutConsole(wpStr, wcslen(wpStr));
+			return PutConsole(wpStr, (uint32_t)wcslen(wpStr));
 		}
 
-		bool PutConsole(const wchar_t* wpStr, size_t nChar)
+		bool PutConsole(const wchar_t* wpStr, uint32_t nChar)
 		{
 			return WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), wpStr, nChar, NULL, NULL);
 		}
 
 		bool PutConsole(std::wstring_view wsStr)
 		{
-			return PutConsole(wsStr.data(), wsStr.size());
+			return PutConsole(wsStr.data(), (uint32_t)wsStr.size());
 		}
 
-		bool PutConsoleMBCS(const char* cpStr, size_t uiCodePage)
+		bool PutConsoleMBCS(const char* cpStr, uint32_t uiCodePage)
 		{
 			std::wstring out_str;
-			size_t cch = RxString::ToWCS(cpStr, out_str, uiCodePage);
+			int32_t cch = RxString::ToWCS(cpStr, out_str, uiCodePage);
 			return PutConsole(out_str.c_str(), cch);
 		}
 
-		bool PutConsoleMBCS(std::string_view msStr, size_t uiCodePage)
+		bool PutConsoleMBCS(std::string_view msStr, uint32_t uiCodePage)
 		{
 			return PutConsoleMBCS(msStr.data(), uiCodePage);
 		}
@@ -61,7 +61,8 @@ namespace Rut
 
 			va_list args = nullptr;
 			va_start(args, cpFormat);
-			int cch = vsprintf_s(buffer, sg_uiBufferCount, cpFormat, args);
+			int32_t cch = vsprintf_s(buffer, sg_uiBufferCount, cpFormat, args);
+			if (cch <= 0) { return false; }
 			va_end(args);
 
 			return PutConsole(buffer, cch);
@@ -73,7 +74,8 @@ namespace Rut
 
 			va_list args = nullptr;
 			va_start(args, cpFormat);
-			int cch = vswprintf_s(buffer, sg_uiBufferCount, cpFormat, args);
+			int32_t cch = vswprintf_s(buffer, sg_uiBufferCount, cpFormat, args);
+			if (cch <= 0) { return false; }
 			va_end(args);
 
 			return PutConsole(buffer, cch);

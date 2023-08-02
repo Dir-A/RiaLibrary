@@ -3,8 +3,8 @@
 
 #include <Windows.h>
 
-#include "../../../third/detours/include/detours.h"
-#pragma comment(lib,"../../../third/detours/lib.X86/detours.lib")
+#include "../third/detours/include/detours.h"
+#pragma comment(lib,"../third/detours/lib.X86/detours.lib")
 
 
 namespace Rut

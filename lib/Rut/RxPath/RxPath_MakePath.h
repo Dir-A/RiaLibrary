@@ -6,16 +6,21 @@ namespace Rut
 {
 	namespace RxPath
 	{
+		bool         FileExist(const char* cpPath);
+		bool         FileExist(const wchar_t* wpPath);
+		bool         FileExist(std::string_view msPath);
+		bool         FileExist(std::wstring_view wsPath);
+
 		void         MakeDirViaPath(const wchar_t* cpPath);
 		void         MakeDirViaPath(const char* cpPath);
 		void         MakeDirViaPath(std::wstring& wsPath);
 		void         MakeDirViaPath(std::string& msPath);
 
 
-		size_t		 GetModuleNameViaBase_Ptr(char* cpBuf, uint32_t uiBase);
-		size_t		 GetModuleNameViaBase_Ptr(wchar_t* wpBuf, uint32_t uiBase);
-		std::string  GetModuleNameViaBaseA(uint32_t uiBase);
-		std::wstring GetModuleNameViaBaseW(uint32_t uiBase);
+		size_t		 GetModuleNameViaBase_Ptr(char* cpBuf, std::uintptr_t uiBase);
+		size_t		 GetModuleNameViaBase_Ptr(wchar_t* wpBuf, std::uintptr_t uiBase);
+		std::string  GetModuleNameViaBaseA(std::uintptr_t uiBase);
+		std::wstring GetModuleNameViaBaseW(std::uintptr_t uiBase);
 
 		size_t       GetCurrentDir_Ptr(char* pPath);
 		size_t       GetCurrentDir_Ptr(wchar_t* pPath);
@@ -23,8 +28,8 @@ namespace Rut
 		std::wstring GetCurrentDirW();
 
 
-		char* FormatSlash_Ptr(char* cpPath, char cSlash);
-		wchar_t* FormatSlash_Ptr(wchar_t* wpPath, wchar_t wcSlash);
+		char*        FormatSlash_Ptr(char* cpPath, char cSlash);
+		wchar_t*     FormatSlash_Ptr(wchar_t* wpPath, wchar_t wcSlash);
 		std::string  FormatSlash(const std::string& msPath, char cSlash);
 		std::wstring FormatSlash(const std::wstring& wsPath, wchar_t wcSlash);
 

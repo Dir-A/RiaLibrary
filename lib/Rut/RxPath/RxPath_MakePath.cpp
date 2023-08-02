@@ -9,6 +9,27 @@ namespace Rut
 {
 	namespace RxPath
 	{
+		bool FileExist(const char* cpPath)
+		{
+			std::wstring path = RxString::ToWCS(cpPath, CP_ACP);
+			return FileExist(path.data());
+		}
+
+		bool FileExist(const wchar_t* wpPath)
+		{
+			return (GetFileAttributesW(wpPath) == INVALID_FILE_ATTRIBUTES) ? false : true;
+		}
+
+		bool FileExist(std::string_view msPath)
+		{
+			return FileExist(msPath.data());
+		}
+
+		bool FileExist(std::wstring_view wsPath)
+		{
+			return FileExist(wsPath.data());
+		}
+
 		void MakeDirViaPath(const wchar_t* wpPath)
 		{
 			size_t len = wcslen(wpPath);
@@ -50,19 +71,19 @@ namespace Rut
 		}
 
 
-		size_t GetModuleNameViaBase_Ptr(char* cpBuf, uint32_t uiBase)
+		size_t GetModuleNameViaBase_Ptr(char* cpBuf, std::uintptr_t uiBase)
 		{
 			GetModuleFileNameA((HMODULE)uiBase, cpBuf, MAX_PATH);
 			return PathGetFileName_Ptr(cpBuf);
 		}
 
-		size_t GetModuleNameViaBase_Ptr(wchar_t* wpBuf, uint32_t uiBase)
+		size_t GetModuleNameViaBase_Ptr(wchar_t* wpBuf, std::uintptr_t uiBase)
 		{
 			GetModuleFileNameW((HMODULE)uiBase, wpBuf, MAX_PATH);
 			return PathGetFileName_Ptr(wpBuf);
 		}
 
-		std::string GetModuleNameViaBaseA(uint32_t uiBase)
+		std::string GetModuleNameViaBaseA(std::uintptr_t uiBase)
 		{
 			std::string name;
 			name.resize(MAX_PATH);
@@ -70,7 +91,7 @@ namespace Rut
 			return name;
 		}
 
-		std::wstring GetModuleNameViaBaseW(uint32_t uiBase)
+		std::wstring GetModuleNameViaBaseW(std::uintptr_t uiBase)
 		{
 			std::wstring name;
 			name.resize(MAX_PATH);

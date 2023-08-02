@@ -18,53 +18,12 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="RxHook.h" />
-    <ClInclude Include="RxHook\RxHook_Mem.h" />
-    <ClInclude Include="RxHook\RxHook_Write.h" />
-    <ClInclude Include="RxHook\RxHook_API.h" />
-    <ClInclude Include="RxHook\RxHook_API_DEF.h" />
-    <ClInclude Include="RxINI.h" />
-    <ClInclude Include="RxINI\RxINI_UTF8.h" />
-    <ClInclude Include="RxINI\RxINI_Value.h" />
-    <ClInclude Include="RxPath.h" />
-    <ClInclude Include="RxPath\RxPath_MakePath.h" />
-    <ClInclude Include="RxPath\RxPath_FileEnum.h" />
-    <ClInclude Include="RxStream.h" />
-    <ClInclude Include="RxStream\ConsoleStream\AllocConsole.h" />
-    <ClInclude Include="RxStream\ConsoleStream\PutConsole.h" />
-    <ClInclude Include="RxStream\FileStream\TextStream.h" />
-    <ClInclude Include="RxStream\FileStream\BasicStream.h" />
-    <ClInclude Include="RxStream\FileStream\BinaryStream.h" />
-    <ClInclude Include="RxStream\MemoryStream\AutoMem.h" />
-    <ClInclude Include="RxString.h" />
-    <ClInclude Include="RxString\RxString_Convert.h" />
-    <ClInclude Include="RxString\RxString_Trim.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="RxHook\RxHook_Mem.cpp" />
-    <ClCompile Include="RxHook\RxHook_Write.cpp" />
-    <ClCompile Include="RxHook\RxHook_API.cpp" />
-    <ClCompile Include="RxINI\RxINI_UTF8.cpp" />
-    <ClCompile Include="RxINI\RxINI_Value.cpp" />
-    <ClCompile Include="RxPath\RxPath_MakePath.cpp" />
-    <ClCompile Include="RxPath\RxPath_FileEnum.cpp" />
-    <ClCompile Include="RxStream\ConsoleStream\AllocConsole.cpp" />
-    <ClCompile Include="RxStream\ConsoleStream\PutConsole.cpp" />
-    <ClCompile Include="RxStream\FileStream\BasicStream.cpp" />
-    <ClCompile Include="RxStream\FileStream\TextStream.cpp" />
-    <ClCompile Include="RxStream\FileStream\BinaryStream.cpp" />
-    <ClCompile Include="RxStream\MemoryStream\AutoMem.cpp" />
-    <ClCompile Include="RxString\RxString_Convert.cpp" />
-    <ClCompile Include="RxString\RxString_Trim.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{458B082F-937B-4CAB-9405-68B4DF3AF90F}</ProjectGuid>
+    <ProjectGuid>{9fb51927-7856-4e55-89dd-f83fa52b038b}</ProjectGuid>
     <RootNamespace>Rut</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Rxx</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -111,22 +70,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(IncludePath)</IncludePath>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -139,9 +82,6 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -159,9 +99,6 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -175,9 +112,6 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -195,10 +129,34 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="RxPath\RxPath_FileEnum.cpp" />
+    <ClCompile Include="RxPath\RxPath_MakePath.cpp" />
+    <ClCompile Include="RxStream\ConsoleStream\AllocConsole.cpp" />
+    <ClCompile Include="RxStream\ConsoleStream\PutConsole.cpp" />
+    <ClCompile Include="RxStream\FileStream\BasicStream.cpp" />
+    <ClCompile Include="RxStream\FileStream\BinaryStream.cpp" />
+    <ClCompile Include="RxStream\FileStream\TextStream.cpp" />
+    <ClCompile Include="RxStream\MemoryStream\AutoMem.cpp" />
+    <ClCompile Include="RxString\RxString_Convert.cpp" />
+    <ClCompile Include="RxString\RxString_Trim.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="RxPath.h" />
+    <ClInclude Include="RxPath\RxPath_FileEnum.h" />
+    <ClInclude Include="RxPath\RxPath_MakePath.h" />
+    <ClInclude Include="RxStream.h" />
+    <ClInclude Include="RxStream\ConsoleStream\AllocConsole.h" />
+    <ClInclude Include="RxStream\ConsoleStream\PutConsole.h" />
+    <ClInclude Include="RxStream\FileStream\BasicStream.h" />
+    <ClInclude Include="RxStream\FileStream\BinaryStream.h" />
+    <ClInclude Include="RxStream\FileStream\TextStream.h" />
+    <ClInclude Include="RxStream\MemoryStream\AutoMem.h" />
+    <ClInclude Include="RxString.h" />
+    <ClInclude Include="RxString\RxString_Convert.h" />
+    <ClInclude Include="RxString\RxString_Trim.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,6 +1,6 @@
 ﻿#include "RxINI_UTF8.h"
-#include "../RxString.h"
-#include "../RxStream.h"
+#include "../../Rut/RxString.h"
+#include "../../Rut/RxStream.h"
 
 #include <sstream>
 
@@ -59,7 +59,7 @@ namespace Rcf
 		{
 			RxStream::TextStream wofs_ini{ wsFile, RIO_OUT, RFM_UTF8 };
 			std::wstring dump = Dump();
-			wofs_ini.WriteLine(dump.data(), dump.size());
+			wofs_ini.WriteLine(dump.data(), (uint32_t)dump.size());
 		}
 
 		std::wstring INI_File::Dump()

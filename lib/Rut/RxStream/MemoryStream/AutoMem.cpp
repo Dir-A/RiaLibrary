@@ -40,7 +40,7 @@ namespace Rut
 			LoadFileViaSize(wsFile);
 		}
 
-		AutoMem::AutoMem(const std::wstring& wsFile, size_t szFile) : m_pData(nullptr), m_szData(0)
+		AutoMem::AutoMem(const std::wstring& wsFile, uint32_t szFile) : m_pData(nullptr), m_szData(0)
 		{
 			LoadFileViaSize(wsFile, szFile);
 		}
@@ -52,7 +52,7 @@ namespace Rut
 			m_pData = nullptr;
 		}
 
-		uint8_t* AutoMem::SetSize(size_t szRes)
+		uint8_t* AutoMem::SetSize(uint32_t szRes)
 		{
 			if (m_szData == 0)
 			{
@@ -70,7 +70,7 @@ namespace Rut
 			return m_pData;
 		}
 
-		size_t AutoMem::GetSize()
+		uint32_t AutoMem::GetSize()
 		{
 			return m_szData;
 		}
@@ -86,7 +86,7 @@ namespace Rut
 			SaveFileViaPath(wsFile.c_str(), m_pData, m_szData);
 		}
 
-		uint8_t* AutoMem::LoadFileViaSize(const std::wstring& wsFile, size_t szFile)
+		uint8_t* AutoMem::LoadFileViaSize(const std::wstring& wsFile, uint32_t szFile)
 		{
 			BinaryStream ifs = { wsFile.c_str(), RIO::RIO_IN };
 			if (szFile == AutoMem_AutoSize) { szFile = ifs.GetSize(); }

@@ -6,21 +6,21 @@ namespace Rut
 {
 	namespace RxString
 	{
-		std::wstring ToWCS(const std::string_view msStr, size_t uCodePage)
+		std::wstring ToWCS(const std::string_view msStr, uint32_t uCodePage)
 		{
 			std::wstring wsString;
 			if (ToWCS(msStr, wsString, uCodePage) == 0) { return std::wstring(); }
 			return wsString;
 		}
 
-		std::string ToMBCS(const std::wstring_view wsStr, size_t uCodePage)
+		std::string ToMBCS(const std::wstring_view wsStr, uint32_t uCodePage)
 		{
 			std::string msString;
 			if (ToMBCS(wsStr, msString, uCodePage) == 0) { return std::string(); }
 			return msString;
 		}
 
-		size_t ToWCS(const std::string_view msStr, std::wstring& wsStr, size_t uCodePage)
+		int32_t ToWCS(const std::string_view msStr, std::wstring& wsStr, uint32_t uCodePage)
 		{
 			int charCount = MultiByteToWideChar
 			(
@@ -39,7 +39,7 @@ namespace Rut
 			return charCount;
 		}
 
-		size_t ToMBCS(const std::wstring_view wsStr, std::string& msStr, size_t uCodePage)
+		int32_t ToMBCS(const std::wstring_view wsStr, std::string& msStr, uint32_t uCodePage)
 		{
 			int wcharCount = WideCharToMultiByte
 			(

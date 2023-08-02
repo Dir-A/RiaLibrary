@@ -37,24 +37,24 @@ namespace Rut
 			Close();
 		}
 
-		void SaveFileViaPath(const char* cpPath, void* pData, size_t nBytes)
+		void SaveFileViaPath(const char* cpPath, void* pData, uint32_t nBytes)
 		{
 			SaveFileViaPath(RxString::ToWCS(cpPath, CP_ACP).c_str(), pData, nBytes);
 		}
 
-		void SaveFileViaPath(const wchar_t* wpPath, void* pData, size_t nBytes)
+		void SaveFileViaPath(const wchar_t* wpPath, void* pData, uint32_t nBytes)
 		{
 			RxPath::MakeDirViaPath(wpPath);
 			RxStream::BinaryStream rxostream{ wpPath, RIO::RIO_OUT };
 			rxostream.Write(pData, nBytes);
 		}
 
-		void SaveFileViaPath(std::string_view msPath, void* pData, size_t nBytes)
+		void SaveFileViaPath(std::string_view msPath, void* pData, uint32_t nBytes)
 		{
 			SaveFileViaPath(msPath.data(), pData, nBytes);
 		}
 
-		void SaveFileViaPath(std::wstring_view wsPath, void* pData, size_t nBytes)
+		void SaveFileViaPath(std::wstring_view wsPath, void* pData, uint32_t nBytes)
 		{
 			SaveFileViaPath(wsPath.data(), pData, nBytes);
 		}
