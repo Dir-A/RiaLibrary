@@ -1,10 +1,7 @@
 #pragma once
 #include <corecrt_wstdio.h>
 
-namespace Rut
+namespace Rut::RxStream
 {
-	namespace RxStream
-	{
-		FILE* SetConsole(const wchar_t* lpTitle);
-	}
+	FILE* SetConsole(const wchar_t* lpTitle);
 }
