@@ -70,31 +70,31 @@ namespace Rut::RxPath
 	}
 
 
-	size_t GetModuleNameViaBase_Ptr(char* cpBuf, std::uintptr_t uiBase)
+	size_t GetModuleNameViaBase_Ptr(char* cpBuf, void* pBase)
 	{
-		GetModuleFileNameA((HMODULE)uiBase, cpBuf, MAX_PATH);
+		GetModuleFileNameA((HMODULE)pBase, cpBuf, MAX_PATH);
 		return PathGetFileName_Ptr(cpBuf);
 	}
 
-	size_t GetModuleNameViaBase_Ptr(wchar_t* wpBuf, std::uintptr_t uiBase)
+	size_t GetModuleNameViaBase_Ptr(wchar_t* wpBuf, void* pBase)
 	{
-		GetModuleFileNameW((HMODULE)uiBase, wpBuf, MAX_PATH);
+		GetModuleFileNameW((HMODULE)pBase, wpBuf, MAX_PATH);
 		return PathGetFileName_Ptr(wpBuf);
 	}
 
-	std::string GetModuleNameViaBaseA(std::uintptr_t uiBase)
+	std::string GetModuleNameViaBaseA(void* pBase)
 	{
 		std::string name;
 		name.resize(MAX_PATH);
-		name.resize(GetModuleNameViaBase_Ptr((char*)name.c_str(), uiBase));
+		name.resize(GetModuleNameViaBase_Ptr((char*)name.c_str(), pBase));
 		return name;
 	}
 
-	std::wstring GetModuleNameViaBaseW(std::uintptr_t uiBase)
+	std::wstring GetModuleNameViaBaseW(void* pBase)
 	{
 		std::wstring name;
 		name.resize(MAX_PATH);
-		name.resize(GetModuleNameViaBase_Ptr((wchar_t*)name.c_str(), uiBase));
+		name.resize(GetModuleNameViaBase_Ptr((wchar_t*)name.c_str(), pBase));
 		return name;
 	}
 

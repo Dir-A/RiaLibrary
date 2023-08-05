@@ -14,10 +14,10 @@ namespace Rut::RxPath
 	void         MakeDirViaPath(std::string_view msPath);
 	void         MakeDirViaPath(std::wstring_view wsPath);
 
-	size_t		 GetModuleNameViaBase_Ptr(char* cpBuf, std::uintptr_t uiBase);
-	size_t		 GetModuleNameViaBase_Ptr(wchar_t* wpBuf, std::uintptr_t uiBase);
-	std::string  GetModuleNameViaBaseA(std::uintptr_t uiBase);
-	std::wstring GetModuleNameViaBaseW(std::uintptr_t uiBase);
+	size_t		 GetModuleNameViaBase_Ptr(char* cpBuf, void* pBase);
+	size_t		 GetModuleNameViaBase_Ptr(wchar_t* wpBuf, void* pBase);
+	std::string  GetModuleNameViaBaseA(void* pBase);
+	std::wstring GetModuleNameViaBaseW(void* pBase);
 
 	size_t       GetCurrentDir_Ptr(char* pPath);
 	size_t       GetCurrentDir_Ptr(wchar_t* pPath);
