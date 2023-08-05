@@ -21,7 +21,7 @@ namespace Rcf::RxINI
 
 	void INI_File::Parse(const std::wstring& wsINI)
 	{
-		RxStream::TextStream wifs_ini = { wsINI, RIO_IN, RFM_UTF8 };
+		RxStream::Text wifs_ini = { wsINI, RIO_IN, RFM_UTF8 };
 
 		std::size_t pos = -1;
 		std::wstring node_name;
@@ -55,7 +55,7 @@ namespace Rcf::RxINI
 
 	void INI_File::Save(const std::wstring& wsFile)
 	{
-		RxStream::TextStream wofs_ini{ wsFile, RIO_OUT, RFM_UTF8 };
+		RxStream::Text wofs_ini{ wsFile, RIO_OUT, RFM_UTF8 };
 		std::wstring dump = Dump();
 		wofs_ini.WriteLine(dump.data(), (uint32_t)dump.size());
 	}

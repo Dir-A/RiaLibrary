@@ -9,11 +9,10 @@ namespace Rut::RxPath
 	bool         FileExist(std::string_view msPath);
 	bool         FileExist(std::wstring_view wsPath);
 
-	void         MakeDirViaPath(const wchar_t* cpPath);
 	void         MakeDirViaPath(const char* cpPath);
-	void         MakeDirViaPath(std::wstring& wsPath);
-	void         MakeDirViaPath(std::string& msPath);
-
+	void         MakeDirViaPath(const wchar_t* cpPath);
+	void         MakeDirViaPath(std::string_view msPath);
+	void         MakeDirViaPath(std::wstring_view wsPath);
 
 	size_t		 GetModuleNameViaBase_Ptr(char* cpBuf, std::uintptr_t uiBase);
 	size_t		 GetModuleNameViaBase_Ptr(wchar_t* wpBuf, std::uintptr_t uiBase);
@@ -26,8 +25,8 @@ namespace Rut::RxPath
 	std::wstring GetCurrentDirW();
 
 
-	char* FormatSlash_Ptr(char* cpPath, char cSlash);
-	wchar_t* FormatSlash_Ptr(wchar_t* wpPath, wchar_t wcSlash);
+	char*        FormatSlash_Ptr(char* cpPath, char cSlash);
+	wchar_t*     FormatSlash_Ptr(wchar_t* wpPath, wchar_t wcSlash);
 	std::string  FormatSlash(const std::string& msPath, char cSlash);
 	std::wstring FormatSlash(const std::wstring& wsPath, wchar_t wcSlash);
 

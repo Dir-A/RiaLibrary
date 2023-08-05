@@ -136,9 +136,7 @@
     <ClCompile Include="RxStream\ConsoleStream\AllocConsole.cpp" />
     <ClCompile Include="RxStream\ConsoleStream\PutConsole.cpp" />
     <ClCompile Include="RxStream\FileStream\BasicStream.cpp" />
-    <ClCompile Include="RxStream\FileStream\BinaryStream.cpp" />
     <ClCompile Include="RxStream\FileStream\TextStream.cpp" />
-    <ClCompile Include="RxStream\MemoryStream\AutoMem.cpp" />
     <ClCompile Include="RxString\RxString_Convert.cpp" />
     <ClCompile Include="RxString\RxString_Trim.cpp" />
   </ItemGroup>
@@ -150,9 +148,9 @@
     <ClInclude Include="RxStream\ConsoleStream\AllocConsole.h" />
     <ClInclude Include="RxStream\ConsoleStream\PutConsole.h" />
     <ClInclude Include="RxStream\FileStream\BasicStream.h" />
-    <ClInclude Include="RxStream\FileStream\BinaryStream.h" />
+    <ClInclude Include="RxStream\FileStream\BinaryStream.hpp" />
     <ClInclude Include="RxStream\FileStream\TextStream.h" />
-    <ClInclude Include="RxStream\MemoryStream\AutoMem.h" />
+    <ClInclude Include="RxStream\MemoryStream\AutoMem.hpp" />
     <ClInclude Include="RxString.h" />
     <ClInclude Include="RxString\RxString_Convert.h" />
     <ClInclude Include="RxString\RxString_Trim.h" />

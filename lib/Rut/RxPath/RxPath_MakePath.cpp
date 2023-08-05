@@ -28,6 +28,12 @@ namespace Rut::RxPath
 		return FileExist(wsPath.data());
 	}
 
+
+	void MakeDirViaPath(const char* cpPath)
+	{
+		MakeDirViaPath(RxString::ToWCS(cpPath, CP_ACP).c_str());
+	}
+
 	void MakeDirViaPath(const wchar_t* wpPath)
 	{
 		size_t len = wcslen(wpPath);
@@ -53,19 +59,14 @@ namespace Rut::RxPath
 		}
 	}
 
-	void MakeDirViaPath(const char* cpPath)
+	void MakeDirViaPath(std::string_view msPath)
 	{
-		MakeDirViaPath(RxString::ToWCS(cpPath, CP_ACP).c_str());
+		MakeDirViaPath(msPath.data());
 	}
 
-	void MakeDirViaPath(std::wstring& wsPath)
+	void MakeDirViaPath(std::wstring_view wsPath)
 	{
-		MakeDirViaPath(wsPath.c_str());
-	}
-
-	void MakeDirViaPath(std::string& msPath)
-	{
-		MakeDirViaPath(msPath.c_str());
+		MakeDirViaPath(wsPath.data());
 	}
 
 

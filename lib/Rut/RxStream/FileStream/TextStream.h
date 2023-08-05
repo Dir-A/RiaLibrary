@@ -1,5 +1,5 @@
 #pragma once
-#include "BinaryStream.h"
+#include "BinaryStream.hpp"
 #include "../../RxString.h"
 
 
@@ -19,24 +19,29 @@ namespace Rut::RxStream
 	static constexpr uint32_t WRITELINE_ERROR = -1;
 
 
-	class TextStream : private BasicStream
+	class Text : private BasicStream
 	{
 	private:
 		RFM m_rxFormat;
 
 	public:
-		TextStream();
-		TextStream(const char* cpPath, RIO emAccess, RFM emFormat = RFM::RFM_ANSI, RCO emCreate = RCO::RCO_AUTO);
-		TextStream(const wchar_t* wpPath, RIO emAccess, RFM emFormat = RFM::RFM_ANSI, RCO emCreate = RCO::RCO_AUTO);
-		TextStream(std::string_view msPath, RIO emAccess, RFM emFormat = RFM::RFM_ANSI, RCO emCreate = RCO::RCO_AUTO);
-		TextStream(std::wstring_view wsPath, RIO emAccess, RFM emFormat = RFM::RFM_ANSI, RCO emCreate = RCO::RCO_AUTO);
+		Text() : m_rxFormat(RFM::RFM_ANSI)
+		{
 
-		TextStream& operator >>(std::string& msStr) { ReadLine(msStr); return *this; }
-		TextStream& operator >>(std::wstring& wsStr) { ReadLine(wsStr); return *this; }
-		TextStream& operator <<(const char* cpStr) { WriteLine(cpStr); return *this; }
-		TextStream& operator <<(const wchar_t* wpStr) { WriteLine(wpStr); return *this; }
-		TextStream& operator <<(std::string_view msStr) { WriteLine(msStr.data(), (uint32_t)msStr.size()); return *this; }
-		TextStream& operator <<(std::wstring_view wsStr) { WriteLine(wsStr.data(), (uint32_t)wsStr.size()); return *this; }
+		}
+
+		template <typename T_STR> Text(T_STR PATH, RIO emAccess, RFM emFormat, RCO emCreate) : m_rxFormat(emFormat)
+		{
+			this->Create(PATH, emAccess, emCreate);
+			EnsureBOM(emAccess);
+		}
+
+		Text& operator >>(std::string& msStr) { ReadLine(msStr); return *this; }
+		Text& operator >>(std::wstring& wsStr) { ReadLine(wsStr); return *this; }
+		Text& operator <<(const char* cpStr) { WriteLine(cpStr); return *this; }
+		Text& operator <<(const wchar_t* wpStr) { WriteLine(wpStr); return *this; }
+		Text& operator <<(std::string_view msStr) { WriteLine(msStr.data(), (uint32_t)msStr.size()); return *this; }
+		Text& operator <<(std::wstring_view wsStr) { WriteLine(wsStr.data(), (uint32_t)wsStr.size()); return *this; }
 
 		void WriteBOM();
 		void CheckBOM();

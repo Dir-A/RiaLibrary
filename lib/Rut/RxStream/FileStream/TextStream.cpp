@@ -3,37 +3,7 @@
 
 namespace Rut::RxStream
 {
-	TextStream::TextStream() : m_rxFormat(RFM::RFM_ANSI)
-	{
-
-	}
-
-	TextStream::TextStream(const char* cpPath, RIO emAccess, RFM emFormat, RCO emCreate) : m_rxFormat(emFormat)
-	{
-		this->Create(cpPath, emAccess, emCreate);
-		EnsureBOM(emAccess);
-	}
-
-	TextStream::TextStream(const wchar_t* wpPath, RIO emAccess, RFM emFormat, RCO emCreate) : m_rxFormat(emFormat)
-	{
-		this->Create(wpPath, emAccess, emCreate);
-		EnsureBOM(emAccess);
-	}
-
-	TextStream::TextStream(std::string_view msPath, RIO emAccess, RFM emFormat, RCO emCreate) : m_rxFormat(emFormat)
-	{
-		this->Create(msPath.data(), emAccess, emCreate);
-		EnsureBOM(emAccess);
-	}
-
-	TextStream::TextStream(std::wstring_view wsPath, RIO emAccess, RFM emFormat, RCO emCreate) : m_rxFormat(emFormat)
-	{
-		this->Create(wsPath.data(), emAccess, emCreate);
-		EnsureBOM(emAccess);
-	}
-
-
-	void TextStream::WriteBOM()
+	void Text::WriteBOM()
 	{
 		switch (m_rxFormat)
 		{
@@ -46,7 +16,7 @@ namespace Rut::RxStream
 		}
 	}
 
-	void TextStream::CheckBOM()
+	void Text::CheckBOM()
 	{
 		uint32_t bom = 0; Read(&bom, sizeof(bom));
 
@@ -68,7 +38,7 @@ namespace Rut::RxStream
 		}
 	}
 
-	void TextStream::EnsureBOM(RIO emAccess)
+	void Text::EnsureBOM(RIO emAccess)
 	{
 		switch (emAccess)
 		{
@@ -87,13 +57,13 @@ namespace Rut::RxStream
 	}
 
 
-	uint32_t TextStream::WriteLine(const char* cpStr)
+	uint32_t Text::WriteLine(const char* cpStr)
 	{
 		uint32_t char_count = (uint32_t)strlen(cpStr);
 		return WriteLine((char*)cpStr, char_count);
 	}
 
-	uint32_t TextStream::WriteLine(const char* cpStr, uint32_t nChar)
+	uint32_t Text::WriteLine(const char* cpStr, uint32_t nChar)
 	{
 		switch (m_rxFormat)
 		{
@@ -129,19 +99,19 @@ namespace Rut::RxStream
 		return WRITELINE_ERROR;
 	}
 
-	uint32_t TextStream::WriteLine(std::string_view msStr)
+	uint32_t Text::WriteLine(std::string_view msStr)
 	{
 		return WriteLine(msStr.data(), (uint32_t)msStr.size());
 	}
 
 
-	uint32_t TextStream::WriteLine(const wchar_t* cpStr)
+	uint32_t Text::WriteLine(const wchar_t* cpStr)
 	{
 		uint32_t wchar_len = (uint32_t)wcslen(cpStr);
 		return WriteLine(cpStr, wchar_len);
 	}
 
-	uint32_t TextStream::WriteLine(const wchar_t* cpStr, uint32_t nChar)
+	uint32_t Text::WriteLine(const wchar_t* cpStr, uint32_t nChar)
 	{
 		switch (m_rxFormat)
 		{
@@ -175,13 +145,13 @@ namespace Rut::RxStream
 		return WRITELINE_ERROR;
 	}
 
-	uint32_t TextStream::WriteLine(std::wstring_view wsStr)
+	uint32_t Text::WriteLine(std::wstring_view wsStr)
 	{
 		return WriteLine(wsStr.data(), (uint32_t)wsStr.size());
 	}
 
 
-	void TextStream::MoveNextLine()
+	void Text::MoveNextLine()
 	{
 		switch (m_rxFormat)
 		{
@@ -192,19 +162,19 @@ namespace Rut::RxStream
 	}
 
 
-	std::string TextStream::ReadLineA()
+	std::string Text::ReadLineA()
 	{
 		std::string line;
 		return ReadLine(line) ? line : "";
 	}
 
-	std::wstring TextStream::ReadLineW()
+	std::wstring Text::ReadLineW()
 	{
 		std::wstring line;
 		return ReadLine(line) ? line : L"";
 	}
 
-	bool TextStream::ReadLine(std::string& msLine)
+	bool Text::ReadLine(std::string& msLine)
 	{
 		uint32_t line_len = 0;
 		uint32_t buf_size = 0x100;
@@ -226,7 +196,7 @@ namespace Rut::RxStream
 		}
 	}
 
-	bool TextStream::ReadLine(std::wstring& wsLine)
+	bool Text::ReadLine(std::wstring& wsLine)
 	{
 		uint32_t line_len = 0;
 		uint32_t buf_size = 0x100;
@@ -248,7 +218,7 @@ namespace Rut::RxStream
 		}
 	}
 
-	uint32_t TextStream::ReadLine(char* cpBuffer, uint32_t nMaxChar)
+	uint32_t Text::ReadLine(char* cpBuffer, uint32_t nMaxChar)
 	{
 		switch (m_rxFormat)
 		{
@@ -294,7 +264,7 @@ namespace Rut::RxStream
 		return READLINE_ERROR;
 	}
 
-	uint32_t TextStream::ReadLine(wchar_t* wpBuffer, uint32_t nMaxChar)
+	uint32_t Text::ReadLine(wchar_t* wpBuffer, uint32_t nMaxChar)
 	{
 		switch (m_rxFormat)
 		{
@@ -333,7 +303,7 @@ namespace Rut::RxStream
 		}
 	}
 
-	uint32_t TextStream::ReadLineMBCS(char* cpBuffer, uint32_t nMaxChar)
+	uint32_t Text::ReadLineMBCS(char* cpBuffer, uint32_t nMaxChar)
 	{
 		uint32_t beg_pointer = this->GetPointer();
 		if (IsEnd()) { return READLINE_ERROR; } // End of File
@@ -385,7 +355,7 @@ namespace Rut::RxStream
 		}
 	}
 
-	uint32_t TextStream::ReadLineWide(wchar_t* wpBuffer, uint32_t nMaxChar)
+	uint32_t Text::ReadLineWide(wchar_t* wpBuffer, uint32_t nMaxChar)
 	{
 		uint32_t beg_pointer = this->GetPointer();
 		if (IsEnd()) { return READLINE_ERROR; } // End of File

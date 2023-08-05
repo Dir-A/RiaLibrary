@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\lib\Rxx\Rxx.vcxproj">
-      <Project>{458b082f-937b-4cab-9405-68b4df3af90f}</Project>
-    </ProjectReference>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ProjectReference Include="..\..\lib\Rut\Rut.vcxproj">
+      <Project>{9fb51927-7856-4e55-89dd-f83fa52b038b}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
