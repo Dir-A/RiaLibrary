@@ -30,7 +30,7 @@ namespace Rut::RxStream
 
 		}
 
-		template <typename T_STR> Text(T_STR PATH, RIO emAccess, RFM emFormat, RCO emCreate) : m_rxFormat(emFormat)
+		template <typename T_STR> Text(T_STR PATH, RIO emAccess, RFM emFormat, RCO emCreate = RCO::RCO_AUTO) : m_rxFormat(emFormat)
 		{
 			this->Create(PATH, emAccess, emCreate);
 			EnsureBOM(emAccess);
