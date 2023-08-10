@@ -11,14 +11,11 @@ namespace Rut::RxStream
 	class AutoMem
 	{
 	private:
-		uint32_t m_uiMemSize;
 		uint8_t* m_pMemData;
+		uint32_t m_uiMemSize;
 
 	public:
-		AutoMem() : m_pMemData(nullptr), m_uiMemSize(0) 
-		{
-
-		}
+		AutoMem() : m_pMemData(nullptr), m_uiMemSize(0) { }
 
 		AutoMem(const AutoMem& buffer)
 		{
@@ -94,17 +91,6 @@ namespace Rut::RxStream
 			ifs.Read(SetSize(uiSize), uiSize);
 			return m_pMemData;
 		}
-
-		uint32_t GetSize() 
-		{ 
-			return m_uiMemSize;
-		}
-
-		uint8_t* GetPtr() 
-		{ 
-			return m_pMemData;
-		}
-
 	public:
 		template <typename T_PTR> operator T_PTR* () 
 		{ 
@@ -121,5 +107,9 @@ namespace Rut::RxStream
 			SetSize(tSize); 
 			return *this; 
 		}
+
+	public:
+		uint8_t* GetPtr() { return m_pMemData; }
+		uint32_t GetMaxSize() { return m_uiMemSize; }
 	};
 }
