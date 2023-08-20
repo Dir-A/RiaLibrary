@@ -1,4 +1,6 @@
 #include "BasicStream.h"
+#include "../../RxString.h"
+
 
 namespace Rut::RxStream
 {
@@ -80,24 +82,24 @@ namespace Rut::RxStream
 	bool BasicStream::IsEnd()
 	{
 		size_t file_size = GetSize();
-		size_t current_pointer = GetPointer();
+		size_t current_pointer = GetPos();
 		return current_pointer >= file_size;
 	}
 
 
-	uint32_t BasicStream::SetPointer(long nOffset)
+	uint32_t BasicStream::SetPos(uint32_t nOffset)
 	{
-		return ::SetFilePointer(m_hFile, nOffset, NULL, FILE_BEGIN);
+		return ::SetFilePointer(m_hFile, (LONG)nOffset, NULL, FILE_BEGIN);
 	}
 
-	uint32_t BasicStream::GetPointer()
+	uint32_t BasicStream::GetPos()
 	{
 		return ::SetFilePointer(m_hFile, NULL, NULL, FILE_CURRENT);
 	}
 
-	uint32_t BasicStream::MovePointer(long nDistance)
+	uint32_t BasicStream::MovePos(uint32_t nDistance)
 	{
-		return ::SetFilePointer(m_hFile, nDistance, NULL, FILE_CURRENT);
+		return ::SetFilePointer(m_hFile, (LONG)nDistance, NULL, FILE_CURRENT);
 	}
 
 	uint32_t BasicStream::GetSize(uint32_t* pHigh)

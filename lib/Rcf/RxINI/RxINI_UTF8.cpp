@@ -21,11 +21,13 @@ namespace Rcf::RxINI
 
 	void INI_File::Parse(const std::wstring& wsINI)
 	{
+		std::vector<std::wstring> text_line;
 		RxStream::Text wifs_ini = { wsINI, RIO_IN, RFM_UTF8 };
+		wifs_ini.ReadAllLine(text_line);
 
 		std::size_t pos = -1;
 		std::wstring node_name;
-		for (std::wstring line; wifs_ini.ReadLine(line);)
+		for (auto& line : text_line)
 		{
 			if (line.empty()) { continue; }
 

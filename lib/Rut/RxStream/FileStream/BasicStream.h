@@ -3,8 +3,6 @@
 #include <Windows.h>
 #include <cstdint>
 
-#include "../../RxString.h"
-
 
 namespace Rut
 {
@@ -47,11 +45,10 @@ namespace Rut::RxStream
 		bool Flush();
 		bool IsEnd();
 
-		uint32_t SetPointer(long nOffset);
-		uint32_t GetPointer();
-		uint32_t MovePointer(long nDistance);
-
+		uint32_t GetPos();
 		uint32_t GetSize(uint32_t* pHigh = nullptr);
+		uint32_t SetPos(uint32_t nOffset);
+		uint32_t MovePos(uint32_t nDistance);
 
 		uint32_t Read(void* pBuffer, uint32_t nSize);
 		uint32_t Write(void* pData, uint32_t nSize);
