@@ -3,3 +3,19 @@
 ################################################################################
 
 /.vs
+/lib/Rut/Debug
+/Debug
+/lib/Rut/Release
+/Release
+/src/RiaMainTest/Debug
+/src/RiaMainTest/Release
+/lib/Ram/Debug
+/lib/Rcf/Debug
+/lib/Ram/Release
+/lib/Rcf/Release
+/src/ProxyDLL/Debug
+/src/ProxyDLL/Release
+/src/RiaINI/Debug
+/src/RiaINI/Release
+/src/RiaLoader/Debug
+/src/RiaLoader/Release
