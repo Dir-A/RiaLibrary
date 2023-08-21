@@ -4,22 +4,19 @@
     <Filter Include="INI">
       <UniqueIdentifier>{074a2e25-66a3-476b-9b03-0c96cc69e6f0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="INI\RxINI">
-      <UniqueIdentifier>{fb7ca4d5-df6e-4f40-9e49-3f0ad8100bc0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="JSON">
       <UniqueIdentifier>{58c699ce-7321-4c8a-a7af-31c35c2bc787}</UniqueIdentifier>
     </Filter>
+    <Filter Include="INI\INI">
+      <UniqueIdentifier>{fb7ca4d5-df6e-4f40-9e49-3f0ad8100bc0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RxINI.h">
-      <Filter>INI</Filter>
+    <ClInclude Include="RxINI\INI_Value.h">
+      <Filter>INI\INI</Filter>
     </ClInclude>
-    <ClInclude Include="RxINI\RxINI_Value.h">
-      <Filter>INI\RxINI</Filter>
-    </ClInclude>
-    <ClInclude Include="RxINI\RxINI_UTF8.h">
-      <Filter>INI\RxINI</Filter>
+    <ClInclude Include="RxINI\INI_File.h">
+      <Filter>INI\INI</Filter>
     </ClInclude>
     <ClInclude Include="RxJson\JFile.h">
       <Filter>JSON</Filter>
@@ -27,13 +24,15 @@
     <ClInclude Include="RxJson\JValue.h">
       <Filter>JSON</Filter>
     </ClInclude>
+    <ClInclude Include="RxINI.h" />
+    <ClInclude Include="RxJson.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RxINI\RxINI_Value.cpp">
-      <Filter>INI\RxINI</Filter>
+    <ClCompile Include="RxINI\INI_Value.cpp">
+      <Filter>INI\INI</Filter>
     </ClCompile>
-    <ClCompile Include="RxINI\RxINI_UTF8.cpp">
-      <Filter>INI\RxINI</Filter>
+    <ClCompile Include="RxINI\INI_File.cpp">
+      <Filter>INI\INI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

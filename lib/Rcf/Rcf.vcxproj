@@ -132,14 +132,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="RxINI.h" />
-    <ClInclude Include="RxINI\RxINI_UTF8.h" />
-    <ClInclude Include="RxINI\RxINI_Value.h" />
+    <ClInclude Include="RxINI\INI_File.h" />
+    <ClInclude Include="RxINI\INI_Value.h" />
+    <ClInclude Include="RxJson.h" />
     <ClInclude Include="RxJson\JFile.h" />
     <ClInclude Include="RxJson\JValue.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RxINI\RxINI_UTF8.cpp" />
-    <ClCompile Include="RxINI\RxINI_Value.cpp" />
+    <ClCompile Include="RxINI\INI_File.cpp" />
+    <ClCompile Include="RxINI\INI_Value.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rut\Rut.vcxproj">

@@ -3,4 +3,9 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Test_RxStream.h" />
+    <ClInclude Include="Test_RxJson.h" />
+    <ClInclude Include="Test_RxINI.h" />
+  </ItemGroup>
 </Project>

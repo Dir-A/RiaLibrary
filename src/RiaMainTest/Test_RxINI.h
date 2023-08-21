@@ -1,14 +1,15 @@
-﻿#include <string.h>
+#pragma once
+#include <string.h>
 #include <iostream>
 #include <Windows.h>
 
-#include "../../lib/Rxx/RxINI.h"
-#include "../../lib/Rxx/RxStream.h"
+#include "../../lib/Rcf/RxINI.h"
+#include "../../lib/Rut/RxStream.h"
 
 using namespace Rcf::RxINI;
 
 
-int wmain(int argc, wchar_t* argv[])
+void TestRxINI()
 {
 	try
 	{
@@ -54,6 +55,5 @@ int wmain(int argc, wchar_t* argv[])
 	catch (const std::runtime_error& err)
 	{
 		std::cerr << err.what() << '\n';
-		return -1;
 	}
 }

@@ -1,3 +1,3 @@
 #pragma once
 
-#include "RxINI/RxINI_UTF8.h"
+#include "RxINI/INI_File.h"
