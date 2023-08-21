@@ -1,5 +1,7 @@
 ﻿#pragma once
+#include <string>
 #include <cstdint>
+#include <Windows.h>
 
 
 namespace Rut::RxHook
@@ -9,4 +11,6 @@ namespace Rut::RxHook
 	bool SetHook(uint32_t uiRawAddr, uint32_t uiTarAddr, uint32_t szRawSize);
 	bool DetourAttachFunc(void* ppRawFunc, void* pNewFunc);
 	bool DetourDetachFunc(void* ppRawFunc, void* pNewFunc);
+
+	bool CreateProcessWithDlls(std::wstring_view wsAppName, uint32_t uiFlags, uint32_t nDlls, const char** rlpDlls, LPSTARTUPINFOW pStartupInfo, LPPROCESS_INFORMATION pProcessInformation);
 }

@@ -1,10 +1,11 @@
 ﻿#include "RxHook_Write.h"
 #include "RxHook_Mem.h"
 
+
 #include <Windows.h>
 
-#include "../third/detours/include/detours.h"
-#pragma comment(lib,"../third/detours/lib.X86/detours.lib")
+#include "../../../third/detours/include/detours.h"
+#pragma comment(lib,"../../third/detours/lib.X86/detours.lib")
 
 
 namespace Rut::RxHook
@@ -108,5 +109,10 @@ namespace Rut::RxHook
 		MessageBoxW(NULL, L"DetourDetachFunc Failed!!", NULL, NULL);
 
 		return true;
+	}
+
+	bool CreateProcessWithDlls(std::wstring_view wsAppName, uint32_t uiFlags, uint32_t nDlls, const char** rlpDlls, LPSTARTUPINFOW lpStartupInfo, LPPROCESS_INFORMATION lpProcessInformation)
+	{
+		return DetourCreateProcessWithDllsW(wsAppName.data(), NULL, NULL, NULL, FALSE, uiFlags, NULL, NULL, lpStartupInfo, lpProcessInformation, nDlls, rlpDlls, NULL);
 	}
 }

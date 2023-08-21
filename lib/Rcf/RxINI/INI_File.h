@@ -2,7 +2,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "RxINI_Value.h"
+#include "INI_Value.h"
 
 
 namespace Rcf::RxINI

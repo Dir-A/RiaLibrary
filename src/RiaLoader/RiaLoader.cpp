@@ -1,11 +1,9 @@
 ﻿#include <Windows.h>
 
-#include "../../lib/Rxx/RxINI.h"
-#include "../../lib/Rxx/RxPath.h"
-#include "../../lib/Rxx/RxStream.h"
-#include "../../third/detours/include/detours.h"
-
-#pragma comment(lib,"../../third/detours/lib.X86/detours.lib")
+#include "../../lib/Rcf/RxINI.h"
+#include "../../lib/Rut/RxPath.h"
+#include "../../lib/Rut/RxStream.h"
+#include "../../lib/Rhk/RxHook.h"
 
 using namespace Rcf;
 using namespace Rut;
@@ -17,7 +15,7 @@ INT APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	PROCESS_INFORMATION pi = { 0 };
 	si.cb = sizeof(si);
 
-	std::wstring exe_name_noext = RxPath::PathRemoveExtension(RxPath::GetModuleNameViaBaseW((uint32_t)hInstance));
+	std::wstring exe_name_noext = RxPath::PathRemoveExtension(RxPath::GetModuleNameViaBaseW(hInstance));
 
 	try
 	{
@@ -31,17 +29,20 @@ INT APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 			dll_list.emplace_back(ini[L"RiaLoader"][std::wstring(L"TargetDLLName_") + std::to_wstring(ite_dll)]);
 		}
 
-		LPCSTR* dll_name_array = new LPCSTR[dll_count];
+		const char** dll_name_array = new const char*[dll_count];
 		for (size_t ite_dll = 0; ite_dll < dll_count; ite_dll++)
 		{
 			dll_name_array[ite_dll] = dll_list[ite_dll].c_str();
 		}
 
-		if (DetourCreateProcessWithDllsW(exe_name.c_str(), NULL, NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &si, &pi, dll_count, dll_name_array, NULL))
+		if (RxHook::CreateProcessWithDlls(exe_name.c_str(), CREATE_SUSPENDED, dll_count, dll_name_array, &si, &pi))
 		{
-			ResumeThread(pi.hThread);
-			CloseHandle(pi.hThread);
-			CloseHandle(pi.hProcess);
+			if (pi.hThread)
+			{
+				ResumeThread(pi.hThread);
+				CloseHandle(pi.hThread);
+				CloseHandle(pi.hProcess);
+			}
 		}
 		else
 		{
