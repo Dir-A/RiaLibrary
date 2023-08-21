@@ -7,6 +7,9 @@
     <Filter Include="INI\RxINI">
       <UniqueIdentifier>{fb7ca4d5-df6e-4f40-9e49-3f0ad8100bc0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="JSON">
+      <UniqueIdentifier>{58c699ce-7321-4c8a-a7af-31c35c2bc787}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RxINI.h">
@@ -17,6 +20,12 @@
     </ClInclude>
     <ClInclude Include="RxINI\RxINI_UTF8.h">
       <Filter>INI\RxINI</Filter>
+    </ClInclude>
+    <ClInclude Include="RxJson\JFile.h">
+      <Filter>JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="RxJson\JValue.h">
+      <Filter>JSON</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

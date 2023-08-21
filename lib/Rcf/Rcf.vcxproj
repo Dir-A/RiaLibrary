@@ -134,6 +134,8 @@
     <ClInclude Include="RxINI.h" />
     <ClInclude Include="RxINI\RxINI_UTF8.h" />
     <ClInclude Include="RxINI\RxINI_Value.h" />
+    <ClInclude Include="RxJson\JFile.h" />
+    <ClInclude Include="RxJson\JValue.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RxINI\RxINI_UTF8.cpp" />
