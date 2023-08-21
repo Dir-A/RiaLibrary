@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="RxBench\Record.cpp" />
     <ClCompile Include="RxPath\RxPath_FileEnum.cpp" />
     <ClCompile Include="RxPath\RxPath_MakePath.cpp" />
     <ClCompile Include="RxStream\ConsoleStream\AllocConsole.cpp" />
@@ -141,6 +142,8 @@
     <ClCompile Include="RxString\RxString_Trim.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="RxBench.h" />
+    <ClInclude Include="RxBench\Record.h" />
     <ClInclude Include="RxPath.h" />
     <ClInclude Include="RxPath\RxPath_FileEnum.h" />
     <ClInclude Include="RxPath\RxPath_MakePath.h" />

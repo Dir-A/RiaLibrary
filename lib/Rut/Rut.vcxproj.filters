@@ -19,6 +19,9 @@
     <Filter Include="RxString">
       <UniqueIdentifier>{dbf61932-7a86-46ae-98cd-ae4a3d872c55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RxBench">
+      <UniqueIdentifier>{11b4abdc-7086-4cd9-a3c0-25703dd1c7e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RxPath\RxPath_MakePath.cpp">
@@ -44,6 +47,9 @@
     </ClCompile>
     <ClCompile Include="RxString\RxString_Convert.cpp">
       <Filter>RxString</Filter>
+    </ClCompile>
+    <ClCompile Include="RxBench\Record.cpp">
+      <Filter>RxBench</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,5 +86,9 @@
     <ClInclude Include="RxStream.h" />
     <ClInclude Include="RxString.h" />
     <ClInclude Include="RxPath.h" />
+    <ClInclude Include="RxBench\Record.h">
+      <Filter>RxBench</Filter>
+    </ClInclude>
+    <ClInclude Include="RxBench.h" />
   </ItemGroup>
 </Project>
