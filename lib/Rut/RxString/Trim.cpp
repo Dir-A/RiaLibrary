@@ -1,4 +1,4 @@
-﻿#include "RxString_Trim.h"
+﻿#include "Trim.h"
 
 
 namespace Rut::RxString

@@ -4,7 +4,7 @@
 #include <Windows.h>
 
 #include "BasicStream.h"
-#include "../../RxPath/RxPath_MakePath.h"
+#include "../../RxPath.h"
 
 
 namespace Rut::RxStream

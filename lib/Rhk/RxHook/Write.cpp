@@ -1,5 +1,5 @@
-﻿#include "RxHook_Write.h"
-#include "RxHook_Mem.h"
+﻿#include "Write.h"
+#include "Mem.h"
 
 
 #include <Windows.h>

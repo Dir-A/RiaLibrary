@@ -24,10 +24,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RxPath\RxPath_MakePath.cpp">
+    <ClCompile Include="RxPath\MakePath.cpp">
       <Filter>RxPath</Filter>
     </ClCompile>
-    <ClCompile Include="RxPath\RxPath_FileEnum.cpp">
+    <ClCompile Include="RxPath\FileEnum.cpp">
       <Filter>RxPath</Filter>
     </ClCompile>
     <ClCompile Include="RxStream\ConsoleStream\PutConsole.cpp">
@@ -42,10 +42,10 @@
     <ClCompile Include="RxStream\FileStream\BasicStream.cpp">
       <Filter>RxStream\FileStream</Filter>
     </ClCompile>
-    <ClCompile Include="RxString\RxString_Trim.cpp">
+    <ClCompile Include="RxString\Trim.cpp">
       <Filter>RxString</Filter>
     </ClCompile>
-    <ClCompile Include="RxString\RxString_Convert.cpp">
+    <ClCompile Include="RxString\Convert.cpp">
       <Filter>RxString</Filter>
     </ClCompile>
     <ClCompile Include="RxBench\Record.cpp">
@@ -53,10 +53,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RxPath\RxPath_MakePath.h">
+    <ClInclude Include="RxPath\MakePath.h">
       <Filter>RxPath</Filter>
     </ClInclude>
-    <ClInclude Include="RxPath\RxPath_FileEnum.h">
+    <ClInclude Include="RxPath\FileEnum.h">
       <Filter>RxPath</Filter>
     </ClInclude>
     <ClInclude Include="RxStream\ConsoleStream\PutConsole.h">
@@ -77,10 +77,10 @@
     <ClInclude Include="RxStream\MemoryStream\AutoMem.hpp">
       <Filter>RxStream\MemoryStream</Filter>
     </ClInclude>
-    <ClInclude Include="RxString\RxString_Convert.h">
+    <ClInclude Include="RxString\Convert.h">
       <Filter>RxString</Filter>
     </ClInclude>
-    <ClInclude Include="RxString\RxString_Trim.h">
+    <ClInclude Include="RxString\Trim.h">
       <Filter>RxString</Filter>
     </ClInclude>
     <ClInclude Include="RxStream.h" />

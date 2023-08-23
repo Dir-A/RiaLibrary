@@ -6,28 +6,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RxHook\RxHook_Mem.h">
+    <ClInclude Include="RxHook\Mem.h">
       <Filter>RxHook</Filter>
     </ClInclude>
-    <ClInclude Include="RxHook\RxHook_Write.h">
+    <ClInclude Include="RxHook\Write.h">
       <Filter>RxHook</Filter>
     </ClInclude>
-    <ClInclude Include="RxHook\RxHook_API.h">
+    <ClInclude Include="RxHook\API.h">
       <Filter>RxHook</Filter>
     </ClInclude>
-    <ClInclude Include="RxHook\RxHook_API_DEF.h">
+    <ClInclude Include="RxHook\API_DEF.h">
       <Filter>RxHook</Filter>
     </ClInclude>
     <ClInclude Include="RxHook.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RxHook\RxHook_Write.cpp">
+    <ClCompile Include="RxHook\Write.cpp">
       <Filter>RxHook</Filter>
     </ClCompile>
-    <ClCompile Include="RxHook\RxHook_API.cpp">
+    <ClCompile Include="RxHook\API.cpp">
       <Filter>RxHook</Filter>
     </ClCompile>
-    <ClCompile Include="RxHook\RxHook_Mem.cpp">
+    <ClCompile Include="RxHook\Mem.cpp">
       <Filter>RxHook</Filter>
     </ClCompile>
   </ItemGroup>

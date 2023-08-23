@@ -132,21 +132,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="RxBench\Record.cpp" />
-    <ClCompile Include="RxPath\RxPath_FileEnum.cpp" />
-    <ClCompile Include="RxPath\RxPath_MakePath.cpp" />
+    <ClCompile Include="RxPath\FileEnum.cpp" />
+    <ClCompile Include="RxPath\MakePath.cpp" />
     <ClCompile Include="RxStream\ConsoleStream\AllocConsole.cpp" />
     <ClCompile Include="RxStream\ConsoleStream\PutConsole.cpp" />
     <ClCompile Include="RxStream\FileStream\BasicStream.cpp" />
     <ClCompile Include="RxStream\FileStream\TextStream.cpp" />
-    <ClCompile Include="RxString\RxString_Convert.cpp" />
-    <ClCompile Include="RxString\RxString_Trim.cpp" />
+    <ClCompile Include="RxString\Convert.cpp" />
+    <ClCompile Include="RxString\Trim.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RxBench.h" />
     <ClInclude Include="RxBench\Record.h" />
     <ClInclude Include="RxPath.h" />
-    <ClInclude Include="RxPath\RxPath_FileEnum.h" />
-    <ClInclude Include="RxPath\RxPath_MakePath.h" />
+    <ClInclude Include="RxPath\FileEnum.h" />
+    <ClInclude Include="RxPath\MakePath.h" />
     <ClInclude Include="RxStream.h" />
     <ClInclude Include="RxStream\ConsoleStream\AllocConsole.h" />
     <ClInclude Include="RxStream\ConsoleStream\PutConsole.h" />
@@ -155,8 +155,8 @@
     <ClInclude Include="RxStream\FileStream\TextStream.h" />
     <ClInclude Include="RxStream\MemoryStream\AutoMem.hpp" />
     <ClInclude Include="RxString.h" />
-    <ClInclude Include="RxString\RxString_Convert.h" />
-    <ClInclude Include="RxString\RxString_Trim.h" />
+    <ClInclude Include="RxString\Convert.h" />
+    <ClInclude Include="RxString\Trim.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
