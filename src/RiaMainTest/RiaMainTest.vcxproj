@@ -22,17 +22,21 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\lib\Rcf\Rcf.vcxproj">
-      <Project>{5aa48d8f-34d7-46dd-9a3f-0a3fd203c20b}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\lib\Rut\Rut.vcxproj">
       <Project>{9fb51927-7856-4e55-89dd-f83fa52b038b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\RxINI\RxINI.vcxproj">
+      <Project>{4958972d-40b7-4194-a33a-aff208af2f31}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\RxJson\RxJson.vcxproj">
+      <Project>{eac7c735-b5c1-4aa0-b24a-f56d42b26196}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Test_RxINI.h" />
     <ClInclude Include="Test_RxJson.h" />
     <ClInclude Include="Test_RxStream.h" />
+    <ClInclude Include="Test_RxString.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

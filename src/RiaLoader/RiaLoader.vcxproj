@@ -137,14 +137,14 @@
     <None Include="RiaLoader.ini" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\lib\Rcf\Rcf.vcxproj">
-      <Project>{5aa48d8f-34d7-46dd-9a3f-0a3fd203c20b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\lib\Rhk\Rhk.vcxproj">
-      <Project>{47d36658-0b77-4845-8edf-136fb6c816ab}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\lib\Rut\Rut.vcxproj">
       <Project>{9fb51927-7856-4e55-89dd-f83fa52b038b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\RxHook\RxHook.vcxproj">
+      <Project>{f4646bc2-de2d-435a-899b-5599059f85b2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\RxINI\RxINI.vcxproj">
+      <Project>{4958972d-40b7-4194-a33a-aff208af2f31}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

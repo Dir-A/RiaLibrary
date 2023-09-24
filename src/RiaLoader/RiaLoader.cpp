@@ -1,11 +1,10 @@
 ﻿#include <Windows.h>
 
-#include "../../lib/Rcf/RxINI.h"
 #include "../../lib/Rut/RxPath.h"
 #include "../../lib/Rut/RxStream.h"
-#include "../../lib/Rhk/RxHook.h"
+#include "../../lib/RxINI/RxINI.h"
+#include "../../lib/RxHook/RxHook.h"
 
-using namespace Rcf;
 using namespace Rut;
 
 
@@ -15,11 +14,11 @@ INT APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	PROCESS_INFORMATION pi = { 0 };
 	si.cb = sizeof(si);
 
-	std::wstring exe_name_noext = RxPath::PathRemoveExtension(RxPath::GetModuleNameViaBaseW(hInstance));
+	std::wstring exe_name_noext = RxPath::NotSuffix(RxPath::ModuleNameW(hInstance));
 
 	try
 	{
-		RxINI::INI_File ini(exe_name_noext + L".ini");
+		INI::File ini(exe_name_noext + L".ini");
 		std::wstring exe_name = ini[L"RiaLoader"][L"TargetEXE"];
 		std::uint32_t dll_count = ini[L"RiaLoader"][L"TargetDLLCount"];
 

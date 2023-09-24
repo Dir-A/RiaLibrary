@@ -1,8 +1,8 @@
-﻿#include "INI_Value.h"
+﻿#include "../include/Value.h"
 #include "../../Rut/RxString.h"
 
 
-namespace Rcf::RxINI
+namespace Rut::INI
 {
 	Value::Value()
 	{

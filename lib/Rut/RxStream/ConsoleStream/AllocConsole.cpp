@@ -5,6 +5,7 @@
 #include <Windows.h>
 
 
+#ifdef WIN32
 namespace Rut::RxStream
 {
 	bool __stdcall SetConsoleTop(LPVOID lpParameter)
@@ -68,3 +69,5 @@ namespace Rut::RxStream
 		return SetConsoleSTDIO();
 	}
 }
+#endif // WIN32
+

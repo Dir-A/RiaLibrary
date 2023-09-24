@@ -1,5 +1,7 @@
 #include "TextStream.h"
 
+#include "../../RxString.h"
+
 
 namespace Rut::RxStream
 {
@@ -55,29 +57,29 @@ namespace Rut::RxStream
 	}
 
 
-	uint32_t Text::WriteLine(const char* cpStr)
+	size_t Text::WriteLine(const char* cpStr)
 	{
-		uint32_t char_count = (uint32_t)strlen(cpStr);
+		size_t char_count = strlen(cpStr);
 		return WriteLine((char*)cpStr, char_count);
 	}
 
-	uint32_t Text::WriteLine(const wchar_t* cpStr)
+	size_t Text::WriteLine(const wchar_t* cpStr)
 	{
-		uint32_t wchar_len = (uint32_t)wcslen(cpStr);
+		size_t wchar_len = wcslen(cpStr);
 		return WriteLine(cpStr, wchar_len);
 	}
 
-	uint32_t Text::WriteLine(std::string_view msStr)
+	size_t Text::WriteLine(std::string_view msStr)
 	{
-		return WriteLine(msStr.data(), (uint32_t)msStr.size());
+		return WriteLine(msStr.data(), msStr.size());
 	}
 
-	uint32_t Text::WriteLine(std::wstring_view wsStr)
+	size_t Text::WriteLine(std::wstring_view wsStr)
 	{
-		return WriteLine(wsStr.data(), (uint32_t)wsStr.size());
+		return WriteLine(wsStr.data(), wsStr.size());
 	}
 
-	uint32_t Text::WriteLine(const wchar_t* cpStr, uint32_t nChar)
+	size_t Text::WriteLine(const wchar_t* cpStr, size_t nChar)
 	{
 		switch (m_rxFormat)
 		{
@@ -88,7 +90,7 @@ namespace Rut::RxStream
 			uint32_t code_page = CP_ACP;
 			if (m_rxFormat == RFM_UTF8) { code_page = CP_UTF8; }
 			RxString::ToMBCS(cpStr, mbcs, code_page);
-			return Write(mbcs.data(), (uint32_t)mbcs.size());
+			return Write(mbcs.data(), mbcs.size());
 		}
 		break;
 
@@ -102,7 +104,7 @@ namespace Rut::RxStream
 		return 0;
 	}
 
-	uint32_t Text::WriteLine(const char* cpStr, uint32_t nChar)
+	size_t Text::WriteLine(const char* cpStr, size_t nChar)
 	{
 		switch (m_rxFormat)
 		{
@@ -118,7 +120,7 @@ namespace Rut::RxStream
 			std::wstring u16str;
 			RxString::ToWCS(cpStr, u16str, CP_ACP);
 			RxString::ToMBCS(u16str, u8str, CP_UTF8);
-			return Write(u8str.data(), (uint32_t)u8str.size());
+			return Write(u8str.data(), u8str.size());
 		}
 		break;
 
@@ -126,7 +128,7 @@ namespace Rut::RxStream
 		{
 			std::wstring wide;
 			RxString::ToWCS(cpStr, wide, CP_ACP);
-			return Write(wide.data(), (uint32_t)(wide.size() * 2));
+			return Write(wide.data(), (wide.size() * 2));
 		}
 		break;
 		}
@@ -219,8 +221,8 @@ namespace Rut::RxStream
 
 	void Text::ReadRawText(std::string& msText)
 	{
-		uint32_t bom = this->GetPos();
-		uint32_t size = this->GetSize() - bom;
+		size_t bom = this->GetPos();
+		size_t size = this->GetSize() - bom;
 
 		switch (m_rxFormat)
 		{
@@ -258,8 +260,8 @@ namespace Rut::RxStream
 
 	void Text::ReadRawText(std::wstring& wsText)
 	{
-		uint32_t bom = this->GetPos();
-		uint32_t size = this->GetSize() - bom;
+		size_t bom = this->GetPos();
+		size_t size = this->GetSize() - bom;
 
 		switch (m_rxFormat)
 		{

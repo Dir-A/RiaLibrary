@@ -1,7 +1,6 @@
 ﻿#include "Write.h"
 #include "Mem.h"
 
-
 #include <Windows.h>
 
 #include "../../../third/detours/include/detours.h"
@@ -10,34 +9,24 @@
 
 namespace Rut::RxHook
 {
-	bool WriteHookCode(uint32_t uiRawAddress, uint32_t uiNewAddress, uint32_t szHookCode)
+	void SetHookCode_Jmp(std::uintptr_t uiRawAddress, std::uintptr_t uiNewAddress, std::size_t szHookCode)
 	{
-		UCHAR code[0xF];
-		memset(code, 0x90, 0xF);
+		uint8_t code[0x5] = { 0xE9, 0x00, 0x00, 0x00, 0x00 };
+		*(uint32_t*)(code + 1) = uiNewAddress - uiRawAddress - sizeof(code);
+		SysMemWrite((LPVOID)uiRawAddress, &code, sizeof(code));
 
-		*(UCHAR*)(code + 0) = 0xE9;
-		*(DWORD*)(code + 1) = uiNewAddress - uiRawAddress - 5;
-
-		if (WriteMemory((LPVOID)uiRawAddress, &code, szHookCode)) return TRUE;
-
-		MessageBoxW(NULL, L"WriteHookCode Failed!!", NULL, NULL);
-
-		return FALSE;
+		size_t fil_size = szHookCode - 5;
+		if (fil_size) { SysMemFill((void*)(uiRawAddress + 5), 0x90, fil_size); }
 	}
 
-	bool WriteHookCode_RET(uint32_t uiRawAddress, uint32_t uiRetAddress, uint32_t uiNewAddress)
+	void SetHookCode_Call(std::uintptr_t uiRawAddress, std::uintptr_t uiNewAddress, std::size_t szHookCode)
 	{
-		UCHAR code[0xF];
-		memset(code, 0x90, 0xF);
+		uint8_t code[0x5] = { 0xE8, 0x00, 0x00, 0x00, 0x00 };
+		*(uint32_t*)(code + 1) = uiNewAddress - uiRawAddress - sizeof(code);
+		SysMemWrite((LPVOID)uiRawAddress, &code, sizeof(code));
 
-		*(UCHAR*)(code + 0) = 0xE9;
-		*(DWORD*)(code + 1) = uiNewAddress - uiRawAddress - 5;
-
-		if (WriteMemory((LPVOID)uiRawAddress, &code, uiRetAddress - uiRawAddress)) return TRUE;
-
-		MessageBoxW(NULL, L"WriteHookCode Failed!!", NULL, NULL);
-
-		return FALSE;
+		size_t fil_size = szHookCode - 5;
+		if (fil_size) { SysMemFill((void*)(uiRawAddress + 5), 0x90, fil_size); }
 	}
 
 	bool SetHook(uint32_t uiRawAddr, uint32_t uiTarAddr, uint32_t szRawSize)
@@ -48,9 +37,9 @@ namespace Rut::RxHook
 		BYTE retJmp[] = { 0xE9,0x00,0x00,0x00,0x00 };
 		BYTE tarCal[] = { 0xE8,0x00,0x00,0x00,0x00 };
 
-		BOOL protect = VirtualProtect((LPVOID)uiRawAddr, 0x1000, PAGE_EXECUTE_READWRITE, &old);
+		SysMemAccess((LPVOID)uiRawAddr, 0x1000, PAGE_EXECUTE_READWRITE);
 		PBYTE alloc = (PBYTE)VirtualAlloc(NULL, 0x1000, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
-		if (alloc && protect)
+		if (alloc)
 		{
 			//Copy the Code for the original address to alloc address
 			memcpy(alloc, (PVOID)uiRawAddr, szRawSize);

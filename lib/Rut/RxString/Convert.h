@@ -2,6 +2,7 @@
 #include <string>
 
 
+#ifdef WIN32
 namespace Rut::RxString
 {
 	std::wstring ToWCS(const std::string_view msStr, uint32_t uCodePage);
@@ -10,3 +11,4 @@ namespace Rut::RxString
 	std::string  ToMBCS(const std::wstring_view wsStr, uint32_t uCodePage);
 	int32_t ToMBCS(const std::wstring_view wsStr, std::string& msStr, uint32_t uCodePage);
 }
+#endif // WIN32

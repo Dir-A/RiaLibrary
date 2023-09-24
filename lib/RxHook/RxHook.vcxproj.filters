@@ -2,8 +2,19 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="RxHook">
-      <UniqueIdentifier>{667a7ab4-f031-4ca1-a9a9-d708749de617}</UniqueIdentifier>
+      <UniqueIdentifier>{4d28feb9-14a0-45ca-9f41-f0c66a708a78}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RxHook\Mem.cpp">
+      <Filter>RxHook</Filter>
+    </ClCompile>
+    <ClCompile Include="RxHook\Write.cpp">
+      <Filter>RxHook</Filter>
+    </ClCompile>
+    <ClCompile Include="RxHook\API.cpp">
+      <Filter>RxHook</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RxHook\Mem.h">
@@ -19,16 +30,5 @@
       <Filter>RxHook</Filter>
     </ClInclude>
     <ClInclude Include="RxHook.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="RxHook\Write.cpp">
-      <Filter>RxHook</Filter>
-    </ClCompile>
-    <ClCompile Include="RxHook\API.cpp">
-      <Filter>RxHook</Filter>
-    </ClCompile>
-    <ClCompile Include="RxHook\Mem.cpp">
-      <Filter>RxHook</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

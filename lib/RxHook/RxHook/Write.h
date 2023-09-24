@@ -6,8 +6,8 @@
 
 namespace Rut::RxHook
 {
-	bool WriteHookCode(uint32_t uiRawAddress, uint32_t uiNewAddress, uint32_t szHookCode);
-	bool WriteHookCode_RET(uint32_t uiRawAddress, uint32_t uiRetAddress, uint32_t uiNewAddress);
+	void SetHookCode_Jmp(std::uintptr_t uiRawAddress, std::uintptr_t uiNewAddress, std::size_t szHookCode);
+	void SetHookCode_Call(std::uintptr_t uiRawAddress, std::uintptr_t uiNewAddress, std::size_t szHookCode);
 	bool SetHook(uint32_t uiRawAddr, uint32_t uiTarAddr, uint32_t szRawSize);
 	bool DetourAttachFunc(void* ppRawFunc, void* pNewFunc);
 	bool DetourDetachFunc(void* ppRawFunc, void* pNewFunc);

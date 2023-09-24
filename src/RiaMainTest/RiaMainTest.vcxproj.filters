@@ -7,5 +7,6 @@
     <ClInclude Include="Test_RxStream.h" />
     <ClInclude Include="Test_RxJson.h" />
     <ClInclude Include="Test_RxINI.h" />
+    <ClInclude Include="Test_RxString.h" />
   </ItemGroup>
 </Project>

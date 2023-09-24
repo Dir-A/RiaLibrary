@@ -1,6 +1,5 @@
 #pragma once
 #include "BinaryStream.hpp"
-#include "../../RxString.h"
 
 #include <sstream>
 #include <cstdint>
@@ -38,19 +37,19 @@ namespace Rut::RxStream
 
 		Text& operator <<(const char* cpStr) { WriteLine(cpStr); return *this; }
 		Text& operator <<(const wchar_t* wpStr) { WriteLine(wpStr); return *this; }
-		Text& operator <<(std::string_view msStr) { WriteLine(msStr.data(), (uint32_t)msStr.size()); return *this; }
-		Text& operator <<(std::wstring_view wsStr) { WriteLine(wsStr.data(), (uint32_t)wsStr.size()); return *this; }
+		Text& operator <<(std::string_view msStr) { WriteLine(msStr.data(), msStr.size()); return *this; }
+		Text& operator <<(std::wstring_view wsStr) { WriteLine(wsStr.data(), wsStr.size()); return *this; }
 
 		void WriteBOM();
 		void CheckBOM();
 		void EnsureBOM(RIO emAccess);
 
-		uint32_t WriteLine(const char* cpStr);
-		uint32_t WriteLine(const wchar_t* cpStr);
-		uint32_t WriteLine(std::string_view msStr);
-		uint32_t WriteLine(std::wstring_view wsStr);
-		uint32_t WriteLine(const char* cpStr, uint32_t nChar);
-		uint32_t WriteLine(const wchar_t* cpStr, uint32_t nChar);
+		size_t WriteLine(const char* cpStr);
+		size_t WriteLine(const wchar_t* cpStr);
+		size_t WriteLine(std::string_view msStr);
+		size_t WriteLine(std::wstring_view wsStr);
+		size_t WriteLine(const char* cpStr, size_t nChar);
+		size_t WriteLine(const wchar_t* cpStr, size_t nChar);
 
 		void WriteAllLine(std::vector<std::wstring>& vecLine);
 		void WriteAllLine(std::vector<std::string>& vecLine);

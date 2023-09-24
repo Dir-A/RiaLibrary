@@ -1,29 +1,28 @@
 #pragma once
 #include <string>
 
-#include "../../lib/Rcf/RxJson.h"
 #include "../../lib/Rut/RxStream.h"
 #include "../../lib/Rut/RxBench.h"
+#include "../../lib/RxJson/RxJson.h"
 
-using namespace Rcf;
 using namespace Rut;
 
 
 void Func()
 {
-	RxJson::JValue v0;
-	RxJson::JValue v1 = true;
-	RxJson::JValue v2 = 789;
-	RxJson::JValue v3 = 1.23;
-	RxJson::JValue v4 = L"str";
-	RxJson::JValue v5 = RxJson::JArray{ 123,321,1.2,"123" };
-	RxJson::JValue v6 = RxJson::JObject{ std::pair(L"123",6),std::pair(L"666",6),std::pair(L"777",3.2),std::pair(L"888",L"trs") };
+	RxJson::Value v0;
+	RxJson::Value v1 = true;
+	RxJson::Value v2 = 789;
+	RxJson::Value v3 = 1.23;
+	RxJson::Value v4 = L"str";
+	RxJson::Value v5 = RxJson::JArray{ 123,321,1.2,"123" };
+	RxJson::Value v6 = RxJson::JObject{ std::pair(L"123",6),std::pair(L"666",6),std::pair(L"777",3.2),std::pair(L"888",L"trs") };
 
-	v1 = RxJson::JValue(L"123");
+	v1 = RxJson::Value(L"123");
 	v1 = v2;
 	v1 = 456;
 
-	RxJson::JValue jv_obj;
+	RxJson::Value jv_obj;
 	jv_obj.AddKey(L"port", L"192.168.123.1");
 	jv_obj.AddKey(L"title", L"The Json Test");
 	RxJson::JObject& obj = jv_obj;
@@ -34,7 +33,7 @@ void Func()
 	int e = obj[L"count"];
 	double ex = obj[L"remain"];
 
-	RxJson::JValue jv_arr;
+	RxJson::Value jv_arr;
 	jv_arr.Append(true);
 	jv_arr.Append(1);
 	jv_arr.Append(1.2);
@@ -66,23 +65,34 @@ void TestRxJson()
 {
 	//Func();
 
-	RxBench::Record record;
+	//RxBench::Record record;
 
-	record.Beg();
-	RxJson::JValue value;
-	RxJson::JFile file;
-	file.ReadJsonFile(L"test.json");
-	file.Parser(value);
-	record.End();
+	RxJson::Value value;
+	//RxJson::JObject& obj = value[L"Titles"];
+	//Rut::RxJson::Value info_json;
+	//obj[L"JP"] = L"Kunado Kokuki";
+	//obj[L"EN"] = L"Kunado Kokuki";
+	//RxJson::JArray& arr = value[L"Files"];
+	//arr.emplace_back(L"sn1010.ps3");
+	//arr.emplace_back(L"sn1020.ps3");
+	RxJson::Parser parser;
+	parser.Open(L"test.json");
 
-	record.Log();
+	//record.Beg();
+	parser.Read(value);
+	//record.End();
 
-	record.Beg();
+	//record.Log();
+
+	//RxJson::JArray& texts = value[L"Texts"][L"sn1010.ps3"];
+
+
+	//record.Beg();
 	RxStream::Text ofs_json = { L"1.json",RIO::RIO_OUT, RFM::RFM_UTF16 };
 	std::wstring text;
 	value.ToStr(text);
 	ofs_json << text;
-	record.End();
+	//record.End();
 
-	record.Log();
+	//record.Log();
 }

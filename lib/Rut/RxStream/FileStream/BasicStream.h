@@ -1,7 +1,8 @@
 #pragma once
+#include <cstdint>
+#include <fstream>
 #include <stdexcept>
 #include <Windows.h>
-#include <cstdint>
 
 
 namespace Rut
@@ -23,7 +24,78 @@ namespace Rut
 	};
 }
 
-namespace Rut::RxStream
+#ifndef WIN32
+namespace Rut::RxStream::inline C_
+{
+	class BasicStream
+	{
+	protected:
+		FILE* m_pStream;
+
+	protected:
+		BasicStream();
+		BasicStream(BasicStream&& refStream) noexcept;
+		virtual ~BasicStream();
+
+	public:
+		void Create(const char* cpPath, RIO emAccess, RCO emCreate);
+		void Create(const wchar_t* wpPath, RIO emAccess, RCO emCreate);
+		void Create(std::string_view msPath, RIO emAccess, RCO emCreate);
+		void Create(std::wstring_view wsPath, RIO emAccess, RCO emCreate);
+
+		bool Close();
+		bool Flush();
+		bool IsEnd();
+
+		size_t GetPos();
+		size_t GetSize();
+		void SetEnd();
+		void SetPos(size_t nOffset);
+		void MovePos(size_t nDistance);
+
+		size_t Read(void* pBuffer, size_t nSize);
+		size_t Write(void* pData, size_t nSize);
+
+	};
+}
+
+namespace Rut::RxStream::Std
+{
+	class BasicStream
+	{
+	protected:
+		std::fstream m_fsStream;
+
+	protected:
+		BasicStream() {};
+		BasicStream(BasicStream&& refStream) = delete;
+		virtual ~BasicStream();
+
+	public:
+		void Create(const char* cpPath, RIO emAccess, RCO emCreate);
+		void Create(const wchar_t* wpPath, RIO emAccess, RCO emCreate);
+		void Create(std::string_view msPath, RIO emAccess, RCO emCreate);
+		void Create(std::wstring_view wsPath, RIO emAccess, RCO emCreate);
+
+		bool Close();
+		bool Flush();
+		bool IsEnd();
+
+		size_t GetPos();
+		size_t GetSize();
+		void SetEnd();
+		void SetPos(size_t nOffset);
+		void MovePos(size_t nDistance);
+
+		size_t Read(void* pBuffer, size_t nSize);
+		size_t Write(void* pData, size_t nSize);
+
+	};
+}
+#endif // !WIN32
+
+#ifdef WIN32
+namespace Rut::RxStream::inline Win32
 {
 	class BasicStream
 	{
@@ -45,13 +117,16 @@ namespace Rut::RxStream
 		bool Flush();
 		bool IsEnd();
 
-		uint32_t GetPos();
-		uint32_t GetSize(uint32_t* pHigh = nullptr);
-		uint32_t SetPos(uint32_t nOffset);
-		uint32_t MovePos(uint32_t nDistance);
+		size_t GetPos();
+		size_t GetSize(size_t* pHigh = nullptr);
 
-		uint32_t Read(void* pBuffer, uint32_t nSize);
-		uint32_t Write(void* pData, uint32_t nSize);
+		void SetEnd();
+		size_t SetPos(size_t nOffset);
+		size_t MovePos(size_t nDistance);
+
+		size_t Read(void* pBuffer, size_t nSize);
+		size_t Write(void* pData, size_t nSize);
 
 	};
 }
+#endif // WIN32

@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{5aa48d8f-34d7-46dd-9a3f-0a3fd203c20b}</ProjectGuid>
-    <RootNamespace>Rcf</RootNamespace>
+    <ProjectGuid>{4958972d-40b7-4194-a33a-aff208af2f31}</ProjectGuid>
+    <RootNamespace>RxINI</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -76,7 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -91,7 +91,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -106,7 +106,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -121,7 +121,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,21 +131,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\File.cpp" />
+    <ClCompile Include="src\Value.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\File.h" />
+    <ClInclude Include="include\Value.h" />
     <ClInclude Include="RxINI.h" />
-    <ClInclude Include="RxINI\INI_File.h" />
-    <ClInclude Include="RxINI\INI_Value.h" />
-    <ClInclude Include="RxJson.h" />
-    <ClInclude Include="RxJson\JFile.h" />
-    <ClInclude Include="RxJson\JValue.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="RxINI\INI_File.cpp" />
-    <ClCompile Include="RxINI\INI_Value.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Rut\Rut.vcxproj">
-      <Project>{9fb51927-7856-4e55-89dd-f83fa52b038b}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

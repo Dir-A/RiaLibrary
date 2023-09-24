@@ -2,17 +2,17 @@
 #include <string>
 #include <unordered_map>
 
-#include "INI_Value.h"
+#include "Value.h"
 
 
-namespace Rcf::RxINI
+namespace Rut::INI
 {
 	typedef std::wstring							Name;
 	typedef std::wstring							NodeName;
 	typedef std::unordered_map<Name, Value>			KeysMap;
 	typedef std::unordered_map<NodeName, KeysMap>	NodesMap;
 
-	class INI_File
+	class File
 	{
 	private:
 		NodesMap m_mpNodes;
@@ -22,8 +22,8 @@ namespace Rcf::RxINI
 		NodesMap::iterator End();
 		void Parse(const std::wstring& wsINI);
 
-		INI_File();
-		INI_File(const std::wstring& wsINI);
+		File();
+		File(const std::wstring& wsINI);
 
 		std::wstring Dump();
 		void Save(const std::wstring& wsFile);

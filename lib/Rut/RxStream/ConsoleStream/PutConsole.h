@@ -2,6 +2,7 @@
 #include <string>
 
 
+#ifdef WIN32
 namespace Rut::RxStream
 {
 	bool PutConsole(const char* cpStr);
@@ -15,3 +16,5 @@ namespace Rut::RxStream
 	bool PutConsoleMBCS(const char* cpStr, uint32_t uiCodePage);
 	bool PutConsoleMBCS(std::string_view msStr, uint32_t uiCodePage);
 }
+#endif // WIN32
+

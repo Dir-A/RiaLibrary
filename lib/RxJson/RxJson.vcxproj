@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{47d36658-0b77-4845-8edf-136fb6c816ab}</ProjectGuid>
-    <RootNamespace>Rhk</RootNamespace>
+    <ProjectGuid>{eac7c735-b5c1-4aa0-b24a-f56d42b26196}</ProjectGuid>
+    <RootNamespace>RxJson</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -131,16 +131,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="RxHook.h" />
-    <ClInclude Include="RxHook\API.h" />
-    <ClInclude Include="RxHook\API_DEF.h" />
-    <ClInclude Include="RxHook\Mem.h" />
-    <ClInclude Include="RxHook\Write.h" />
+    <ClInclude Include="include\Parser.h" />
+    <ClInclude Include="include\Value.h" />
+    <ClInclude Include="RxJson.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RxHook\API.cpp" />
-    <ClCompile Include="RxHook\Mem.cpp" />
-    <ClCompile Include="RxHook\Write.cpp" />
+    <ClCompile Include="src\Parser.cpp" />
+    <ClCompile Include="src\Value.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

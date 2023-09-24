@@ -6,6 +6,7 @@
 #include <Windows.h>
 
 
+#ifdef WIN32
 namespace Rut::RxStream
 {
 	static constexpr size_t sg_uiBufferCount = 1024;
@@ -79,3 +80,5 @@ namespace Rut::RxStream
 		return PutConsole(buffer, cch);
 	}
 }
+#endif // WIN32
+

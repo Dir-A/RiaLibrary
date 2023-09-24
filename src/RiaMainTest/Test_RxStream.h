@@ -20,5 +20,8 @@ void TestRxStream()
 		record.End();
 	}
 
+	std::wstring ee;
+	RxPath::PathNotSuffix(ee);
+
 	record.Log();
 }

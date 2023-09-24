@@ -1,25 +1,23 @@
-﻿#include "INI_File.h"
+﻿#include "../include/File.h"
 #include "../../Rut/RxString.h"
 #include "../../Rut/RxStream.h"
 
 #include <sstream>
 
 
-namespace Rcf::RxINI
+namespace Rut::INI
 {
-	using namespace Rut;
-
-	INI_File::INI_File()
+	File::File()
 	{
 
 	}
 
-	INI_File::INI_File(const std::wstring& wsINI)
+	File::File(const std::wstring& wsINI)
 	{
 		Parse(wsINI);
 	}
 
-	void INI_File::Parse(const std::wstring& wsINI)
+	void File::Parse(const std::wstring& wsINI)
 	{
 		std::vector<std::wstring> text_line;
 		RxStream::Text wifs_ini = { wsINI, RIO_IN, RFM_UTF8 };
@@ -55,14 +53,14 @@ namespace Rcf::RxINI
 		}
 	}
 
-	void INI_File::Save(const std::wstring& wsFile)
+	void File::Save(const std::wstring& wsFile)
 	{
 		RxStream::Text wofs_ini{ wsFile, RIO_OUT, RFM_UTF8 };
 		std::wstring dump = Dump();
-		wofs_ini.WriteLine(dump.data(), (uint32_t)dump.size());
+		wofs_ini.WriteLine(dump.data(), dump.size());
 	}
 
-	std::wstring INI_File::Dump()
+	std::wstring File::Dump()
 	{
 		std::wstringstream ss;
 		for (auto& node : m_mpNodes)
@@ -75,24 +73,24 @@ namespace Rcf::RxINI
 	}
 
 
-	NodesMap::iterator INI_File::At(const std::wstring& wsNode)
+	NodesMap::iterator File::At(const std::wstring& wsNode)
 	{
 		return m_mpNodes.find(wsNode);
 	}
 
-	NodesMap::iterator INI_File::End()
+	NodesMap::iterator File::End()
 	{
 		return m_mpNodes.end();
 	}
 
-	KeysMap& INI_File::Get(const std::wstring& wsNode)
+	KeysMap& File::Get(const std::wstring& wsNode)
 	{
 		const auto& ite_node = At(wsNode);
 		if (ite_node == End()) { throw std::runtime_error("INI_File::Get: INI File No Find Node"); }
 		return ite_node->second;
 	}
 
-	Value& INI_File::Get(const std::wstring& wsNode, const std::wstring& wsName)
+	Value& File::Get(const std::wstring& wsNode, const std::wstring& wsName)
 	{
 		auto& keys = Get(wsNode);
 		const auto& ite_keys = keys.find(wsName);
@@ -100,22 +98,22 @@ namespace Rcf::RxINI
 		return ite_keys->second;
 	}
 
-	KeysMap& INI_File::operator[] (const std::wstring& wsNode)
+	KeysMap& File::operator[] (const std::wstring& wsNode)
 	{
 		return Get(wsNode);
 	}
 
-	void INI_File::Add(const std::wstring& wsNode, const std::wstring& wsName, const Value& vValue)
+	void File::Add(const std::wstring& wsNode, const std::wstring& wsName, const Value& vValue)
 	{
 		m_mpNodes[wsNode][wsName] = vValue;
 	}
 
-	bool INI_File::Has(const std::wstring& wsNode)
+	bool File::Has(const std::wstring& wsNode)
 	{
 		return At(wsNode) != End() ? true : false;
 	}
 
-	bool INI_File::Has(const std::wstring& wsNode, const std::wstring& wsName)
+	bool File::Has(const std::wstring& wsNode, const std::wstring& wsName)
 	{
 		auto ite_node = At(wsNode);
 		if (ite_node != End())

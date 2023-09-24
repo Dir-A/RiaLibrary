@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{9fb51927-7856-4e55-89dd-f83fa52b038b}</ProjectGuid>
-    <RootNamespace>Rut</RootNamespace>
+    <ProjectGuid>{f4646bc2-de2d-435a-899b-5599059f85b2}</ProjectGuid>
+    <RootNamespace>RxHook</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -131,33 +131,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="RxBench\Record.cpp" />
-    <ClCompile Include="RxPath\Enum.cpp" />
-    <ClCompile Include="RxPath\Path.cpp" />
-    <ClCompile Include="RxStream\ConsoleStream\AllocConsole.cpp" />
-    <ClCompile Include="RxStream\ConsoleStream\PutConsole.cpp" />
-    <ClCompile Include="RxStream\FileStream\BasicStream.cpp" />
-    <ClCompile Include="RxStream\FileStream\TextStream.cpp" />
-    <ClCompile Include="RxStream\MemoryStream\AutoMem.cpp" />
-    <ClCompile Include="RxString\Convert.cpp" />
-    <ClCompile Include="RxString\Trim.cpp" />
+    <ClCompile Include="RxHook\API.cpp" />
+    <ClCompile Include="RxHook\Mem.cpp" />
+    <ClCompile Include="RxHook\Write.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RxBench.h" />
-    <ClInclude Include="RxBench\Record.h" />
-    <ClInclude Include="RxPath.h" />
-    <ClInclude Include="RxPath\Enum.h" />
-    <ClInclude Include="RxPath\Path.h" />
-    <ClInclude Include="RxStream.h" />
-    <ClInclude Include="RxStream\ConsoleStream\AllocConsole.h" />
-    <ClInclude Include="RxStream\ConsoleStream\PutConsole.h" />
-    <ClInclude Include="RxStream\FileStream\BasicStream.h" />
-    <ClInclude Include="RxStream\FileStream\BinaryStream.hpp" />
-    <ClInclude Include="RxStream\FileStream\TextStream.h" />
-    <ClInclude Include="RxStream\MemoryStream\AutoMem.hpp" />
-    <ClInclude Include="RxString.h" />
-    <ClInclude Include="RxString\Convert.h" />
-    <ClInclude Include="RxString\Trim.h" />
+    <ClInclude Include="RxHook.h" />
+    <ClInclude Include="RxHook\API.h" />
+    <ClInclude Include="RxHook\API_DEF.h" />
+    <ClInclude Include="RxHook\Mem.h" />
+    <ClInclude Include="RxHook\Write.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
