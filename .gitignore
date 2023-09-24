@@ -26,3 +26,7 @@
 /src/RiaMainTest/x64/Debug
 /src/ProxyDLL/x64/Debug
 /x64/Debug
+/lib/RxHook/Debug
+/lib/RxINI/Debug
+/lib/RxJson/Debug
+/lib/RxUI/Debug
