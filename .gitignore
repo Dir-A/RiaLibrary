@@ -22,3 +22,7 @@
 /src/RiaMainTest/test.json
 /lib/Rhk/Release
 /lib/Rhk/Debug
+/lib/Rut/x64/Debug
+/src/RiaMainTest/x64/Debug
+/src/ProxyDLL/x64/Debug
+/x64/Debug
