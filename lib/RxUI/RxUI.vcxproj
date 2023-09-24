@@ -18,59 +18,35 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\lib\Rut\Rut.vcxproj">
-      <Project>{9fb51927-7856-4e55-89dd-f83fa52b038b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\lib\RxINI\RxINI.vcxproj">
-      <Project>{4958972d-40b7-4194-a33a-aff208af2f31}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\lib\RxJson\RxJson.vcxproj">
-      <Project>{eac7c735-b5c1-4aa0-b24a-f56d42b26196}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\lib\RxUI\RxUI.vcxproj">
-      <Project>{47251a05-1168-490c-8c8b-2585c491ca1f}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Test_RxINI.h" />
-    <ClInclude Include="Test_RxJson.h" />
-    <ClInclude Include="Test_RxStream.h" />
-    <ClInclude Include="Test_RxString.h" />
-    <ClInclude Include="Test_RxUI.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{3f31ae2c-4c0f-42e3-acdb-01a41338ebac}</ProjectGuid>
-    <RootNamespace>RiaMainTest</RootNamespace>
+    <ProjectGuid>{47251a05-1168-490c-8c8b-2585c491ca1f}</ProjectGuid>
+    <RootNamespace>RxUI</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -154,6 +130,28 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Win32.h" />
+    <ClInclude Include="Win32\Dialog\OpenFileDialog.h" />
+    <ClInclude Include="Win32\Font\Font_Basic.h" />
+    <ClInclude Include="Win32\Font\Default.h" />
+    <ClInclude Include="Win32\UI\UI_Basic.h" />
+    <ClInclude Include="Win32\UI\Tools.h" />
+    <ClInclude Include="Win32\Widget\Button.h" />
+    <ClInclude Include="Win32\Widget\CheckBox.h" />
+    <ClInclude Include="Win32\Widget\GroupBox.h" />
+    <ClInclude Include="Win32\Widget\Editor.h" />
+    <ClInclude Include="Win32\Widget\Radio.h" />
+    <ClInclude Include="Win32\Widget\Widget_Basic.h" />
+    <ClInclude Include="Win32\Window\MainWindow.h" />
+    <ClInclude Include="Win32\Window\Window_Basic.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Win32\Dialog\OpenFileDialog.cpp" />
+    <ClCompile Include="Win32\UI\Tools.cpp" />
+    <ClCompile Include="Win32\UI\UI_Basic.cpp" />
+    <ClCompile Include="Win32\Window\MainWindow.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

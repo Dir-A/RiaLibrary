@@ -8,5 +8,6 @@
     <ClInclude Include="Test_RxJson.h" />
     <ClInclude Include="Test_RxINI.h" />
     <ClInclude Include="Test_RxString.h" />
+    <ClInclude Include="Test_RxUI.h" />
   </ItemGroup>
 </Project>

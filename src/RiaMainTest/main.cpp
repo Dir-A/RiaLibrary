@@ -1,8 +1,8 @@
 #include <iostream>
-#include "Test_RxJson.h"
+#include "Test_RxUI.h"
 
 
 int main(int argc, char* argv[])
 {
-	TestRxJson();
+	TestRxUI();
 }
