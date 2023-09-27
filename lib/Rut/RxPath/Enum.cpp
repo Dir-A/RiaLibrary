@@ -1,4 +1,4 @@
-#include "Enum.h"
+﻿#include "Enum.h"
 
 #include <queue>
 #include <Windows.h>

@@ -1,4 +1,4 @@
-#include "TextStream.h"
+﻿#include "TextStream.h"
 
 #include "../../RxString.h"
 

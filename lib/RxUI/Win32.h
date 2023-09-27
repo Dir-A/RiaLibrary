@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 // UI
 #include "Win32/UI/Tools.h"

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "RxStream/FileStream/TextStream.h"
 #include "RxStream/FileStream/BinaryStream.hpp"

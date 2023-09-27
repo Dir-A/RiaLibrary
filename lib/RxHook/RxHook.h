@@ -1,6 +1,5 @@
-#pragma once
+﻿#pragma once
 
-#include "RxHook/Mem.h"
-#include "RxHook/API.h"
-#include "RxHook/Write.h"
-#include "RxHook/API_DEF.h"
+#include "src/API.h"
+#include "src/Mem.h"
+#include "src/Hook.h"

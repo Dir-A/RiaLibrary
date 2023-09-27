@@ -1,4 +1,4 @@
-#include "AllocConsole.h"
+﻿#include "AllocConsole.h"
 
 #include <stdio.h>
 #include <locale.h>

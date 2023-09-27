@@ -1,4 +1,4 @@
-#include "Tools.h"
+ï»¿#include "Tools.h"
 #include <stdexcept>
 #include <dwmapi.h>
 #include <versionhelpers.h>
@@ -50,7 +50,7 @@ namespace RxUI::Win32::Tools
 		}
 	}
 
-	// WS_EX_LAYERED »á¶ÔĞÔÄÜÔì³ÉÓ°Ïì£¬µ«ÊÇÔİÊ±Ã»ÕÒµ½²»¿ªÆô¸ÃÊôĞÔÔÚDWMÏÂµÄÊó±ê´©Í¸·½·¨
+	// WS_EX_LAYERED ä¼šå¯¹æ€§èƒ½é€ æˆå½±å“ï¼Œä½†æ˜¯æš‚æ—¶æ²¡æ‰¾åˆ°ä¸å¼€å¯è¯¥å±æ€§åœ¨DWMä¸‹çš„é¼ æ ‡ç©¿é€æ–¹æ³•
 	bool EnableMouseClickThrough(HWND hWnd)
 	{
 		::SetWindowLongPtrW(hWnd, GWL_EXSTYLE, ::GetWindowLongPtrW(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED | WS_EX_TRANSPARENT);
