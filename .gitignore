@@ -2,31 +2,5 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+/.out/build
 /.vs
-/lib/Rut/Debug
-/Debug
-/lib/Rut/Release
-/Release
-/src/RiaMainTest/Debug
-/src/RiaMainTest/Release
-/lib/Ram/Debug
-/lib/Rcf/Debug
-/lib/Ram/Release
-/lib/Rcf/Release
-/src/ProxyDLL/Debug
-/src/ProxyDLL/Release
-/src/RiaINI/Debug
-/src/RiaINI/Release
-/src/RiaLoader/Debug
-/src/RiaLoader/Release
-/src/RiaMainTest/test.json
-/lib/Rhk/Release
-/lib/Rhk/Debug
-/lib/Rut/x64/Debug
-/src/RiaMainTest/x64/Debug
-/src/ProxyDLL/x64/Debug
-/x64/Debug
-/lib/RxHook/Debug
-/lib/RxINI/Debug
-/lib/RxJson/Debug
-/lib/RxUI/Debug
