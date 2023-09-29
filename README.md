@@ -1,6 +1,9 @@
 # RiaLibrary
 My Toolbox  
 
+# Todo
+- [ ] Cross-Platform
+
 ## Ria's Utility Library X
 
 - [ ] RxStream
