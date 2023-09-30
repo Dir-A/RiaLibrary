@@ -1,6 +1,11 @@
 ﻿#include "Convert.h"
-#include <Windows.h>
 #include <stdexcept>
+
+#ifdef WIN32
+
+#include <Windows.h>
+
+#endif // WIN32
 
 
 #ifdef WIN32

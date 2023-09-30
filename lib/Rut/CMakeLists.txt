@@ -15,7 +15,10 @@ list(APPEND SRC_FILE
     "${CMAKE_CURRENT_SOURCE_DIR}/RxStream/FileStream/BasicStream.cpp" 
     "${CMAKE_CURRENT_SOURCE_DIR}/RxStream/FileStream/TextStream.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/RxStream/MemoryStream/AutoMem.cpp" 
-    "${CMAKE_CURRENT_SOURCE_DIR}/RxString/Convert.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/RxCvt/Cvt.cpp" 
+    "${CMAKE_CURRENT_SOURCE_DIR}/RxCvt/UTF8_Cvt.cpp" 
+    "${CMAKE_CURRENT_SOURCE_DIR}/RxCvt/MBCS_Cvt.cpp" 
+    "${CMAKE_CURRENT_SOURCE_DIR}/RxString/Convert.cpp" 
     "${CMAKE_CURRENT_SOURCE_DIR}/RxString/Trim.cpp")
 
 # Set Library
