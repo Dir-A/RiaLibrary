@@ -26,11 +26,13 @@ namespace Rut::RxCvt
 
 		const char* mstr_ptr = msStr.data();
 		size_t wstr_len = StrToWStr(mstr_ptr, mstr_len, nullptr, 0, uCodePage);
-
 		if (wstr_len == 0) { throw std::runtime_error("RxCvt::ToWCS Error!"); }
 
 		wsStr.resize(wstr_len);
-		return StrToWStr(mstr_ptr, mstr_len, wsStr.data(), wstr_len, uCodePage);
+		wstr_len = StrToWStr(mstr_ptr, mstr_len, wsStr.data(), wstr_len, uCodePage);
+		if (wstr_len == 0) { throw std::runtime_error("RxCvt::ToWCS Error!"); }
+
+		return wstr_len;
 	}
 
 	size_t ToMBCS(const std::wstring_view wsStr, std::string& msStr, size_t uCodePage)
@@ -45,15 +47,15 @@ namespace Rut::RxCvt
 		bool is_error = false;
 
 		msStr.resize(mstr_bytes);
-		size_t bytes_ret = WStrToStr(wstr_ptr, wstr_len, msStr.data(), mstr_bytes, uCodePage, &is_error, "?");
-		if (is_error) { throw std::runtime_error("RxCvt::ToMBCS Error!"); }
+		mstr_bytes = WStrToStr(wstr_ptr, wstr_len, msStr.data(), mstr_bytes, uCodePage, &is_error, "?");
+		if (is_error || (mstr_bytes == 0) ) { throw std::runtime_error("RxCvt::ToMBCS Error!"); }
 
-		return bytes_ret;
+		return mstr_bytes;
 	}
 }
 
 
-#ifndef WIN32
+#ifdef WIN32
 #include <Windows.h>
 
 
