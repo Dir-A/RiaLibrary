@@ -103,19 +103,12 @@ namespace Rut::RxCvt
 		size_t ite_byte = 0;
 		while (true)
 		{
-			uint8_t dbcs_h = (uint8_t)cpStr[ite_byte++];
-			if (dbcs_h == '\0') { break; }
-
-			if (dbcs_h >= 0x81u)
-			{
-				uint8_t dbcs_l = (uint8_t)cpStr[ite_byte++];
-				uint16_t dbcs_char = (dbcs_h << 0x8) | (dbcs_l);
-				wpStr[ite_wide++] = fnToUnicodeChar(dbcs_char);
-			}
-			else
-			{
-				wpStr[ite_wide++] = fnToUnicodeChar(dbcs_h);
-			}
+			uint16_t dbcs = (uint8_t)cpStr[ite_byte++];
+			if (dbcs == '\0') { break; }
+			if (dbcs >= 0x81u) { dbcs = (dbcs << 0x8) | ((uint8_t)cpStr[ite_byte++]); }
+			uint16_t code = fnToUnicodeChar(dbcs);
+			if (code == 0) { return 0; }
+			wpStr[ite_wide++] = code;
 		}
 		return ite_wide;
 	}
@@ -158,7 +151,6 @@ namespace Rut::RxCvt
 
 	static size_t CvtUnicodeStrToMbcsStr(const wchar_t* wpStr, char* cpStr, pToMbcsChar fnToMbcsChar, bool* isError, const char* cpDefault)
 	{
-		// Cvt String
 		size_t ite_byte = 0;
 		size_t ite_wide = 0;
 		while (true)
