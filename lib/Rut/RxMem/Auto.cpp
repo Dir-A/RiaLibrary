@@ -1,24 +1,24 @@
-﻿#include "AutoMem.hpp"
+﻿#include "Auto.h"
 
 
-namespace Rut::RxStream
+namespace Rut::RxMem
 {
-	AutoMem::AutoMem() : m_pMemData(nullptr), m_uiMemSize(0), m_uiMaxSize(0)
+	Auto::Auto() : m_pMemData(nullptr), m_uiMemSize(0), m_uiMaxSize(0)
 	{
 
 	}
 
-	AutoMem::AutoMem(const AutoMem& buffer) :AutoMem()
+	Auto::Auto(const Auto& buffer) :Auto()
 	{ 
 		this->Copy(buffer);
 	}
 
-	AutoMem::AutoMem(AutoMem&& buffer)noexcept :AutoMem() 
+	Auto::Auto(Auto&& buffer)noexcept :Auto()
 	{ 
 		this->Move(buffer);
 	}
 
-	AutoMem::~AutoMem()
+	Auto::~Auto()
 	{
 		if (m_pMemData != nullptr) { delete[] m_pMemData; }
 		m_uiMemSize = 0;
@@ -26,7 +26,7 @@ namespace Rut::RxStream
 		m_pMemData = nullptr;
 	}
 
-	AutoMem& AutoMem::Copy(const AutoMem& buffer)
+	Auto& Auto::Copy(const Auto& buffer)
 	{
 		if (buffer.m_pMemData != nullptr)
 		{
@@ -45,7 +45,7 @@ namespace Rut::RxStream
 		return *this;
 	}
 
-	AutoMem& AutoMem::Move(AutoMem& buffer)
+	Auto& Auto::Move(Auto& buffer)
 	{
 		this->m_pMemData = buffer.m_pMemData;
 		this->m_uiMemSize = buffer.m_uiMemSize;
@@ -58,7 +58,7 @@ namespace Rut::RxStream
 		return *this;
 	}
 
-	AutoMem& AutoMem::Append(AutoMem& rfAutoMem)
+	Auto& Auto::Append(Auto& rfAutoMem)
 	{
 		size_t cur_size = this->GetSize();
 		size_t append_size = rfAutoMem.GetSize();
@@ -70,35 +70,35 @@ namespace Rut::RxStream
 		return *this;
 	}
 
-	AutoMem& AutoMem::operator[] (size_t tSize)
+	Auto& Auto::operator[] (size_t tSize)
 	{
-		SetSize(tSize);
+		this->SetSize(tSize);
 		return *this;
 	}
 
-	AutoMem& AutoMem::operator=(AutoMem&& rfAutoMem) noexcept
+	Auto& Auto::operator=(Auto&& rfAutoMem) noexcept
 	{
-		this->~AutoMem();
+		this->~Auto();
 		return this->Move(rfAutoMem);
 	}
 
-	AutoMem& AutoMem::operator=(const AutoMem& rfAutoMem)
+	Auto& Auto::operator=(const Auto& rfAutoMem)
 	{
-		this->~AutoMem();
+		this->~Auto();
 		return this->Copy(rfAutoMem);
 	}
 
-	uint8_t* AutoMem::GetPtr()
+	uint8_t* Auto::GetPtr()
 	{
 		return m_pMemData;
 	}
 
-	size_t AutoMem::GetSize()
+	size_t Auto::GetSize()
 	{
 		return m_uiMemSize;
 	}
 
-	uint8_t* AutoMem::SetSize(size_t uiNewSize, bool isCopy)
+	uint8_t* Auto::SetSize(size_t uiNewSize, bool isCopy)
 	{
 		if (this->m_uiMemSize == 0)
 		{

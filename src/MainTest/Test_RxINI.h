@@ -3,10 +3,9 @@
 #include <iostream>
 #include <Windows.h>
 
-#include "../../lib/Rcf/RxINI.h"
-#include "../../lib/Rut/RxStream.h"
+#include "../../lib/Rut/RxFS.h"
+#include "../../lib/RxINI/RxINI.h"
 
-using namespace Rcf::RxINI;
 
 
 void TestRxINI()
@@ -14,13 +13,13 @@ void TestRxINI()
 	try
 	{
 		// Init
-		INI_File ini;
+		// Rut::RxINI::Parser ini;
 
 		// Parse INI File
-		ini.Parse(L"1.ini");
+		// ini.Parse(L"1.ini");
 
 		// Init And Parse INI File
-		INI_File ini(L"File.ini");
+		Rut::RxINI::Parser ini(L"File.ini");
 
 		// Add
 		ini.Add(L"Section1", L"Name", L"The Art of War");

@@ -1,26 +1,26 @@
-﻿#include "File.h"
-#include "../../Rut/RxString.h"
-#include "../../Rut/RxStream.h"
+﻿#include "Parser.h"
+#include "../../Rut/RxStr.h"
+#include "../../Rut/RxFS.h"
 
 #include <sstream>
 
 
-namespace Rut::INI
+namespace Rut::RxINI
 {
-	File::File()
+	Parser::Parser()
 	{
 
 	}
 
-	File::File(const std::wstring& wsINI)
+	Parser::Parser(const std::wstring& wsINI)
 	{
 		Parse(wsINI);
 	}
 
-	void File::Parse(const std::wstring& wsINI)
+	void Parser::Parse(const std::wstring& wsINI)
 	{
 		std::vector<std::wstring> text_line;
-		RxStream::Text wifs_ini = { wsINI, RIO_IN, RFM_UTF8 };
+		RxFS::Text wifs_ini = { wsINI, RIO_IN, RFM_UTF8 };
 		wifs_ini.ReadAllLine(text_line);
 
 		std::size_t pos = -1;
@@ -38,7 +38,7 @@ namespace Rut::INI
 			{
 				pos = line.find_first_of(L']');
 				if (pos == std::wstring::npos) { throw std::runtime_error("INI_File:Parse: Get Node Error!"); }
-				node_name = RxString::Trim(line.substr(1, pos - 1));
+				node_name = RxStr::Trim(line.substr(1, pos - 1));
 			}
 			break;
 
@@ -46,21 +46,21 @@ namespace Rut::INI
 			{
 				pos = line.find_first_of(L'=');
 				if ((pos == std::wstring::npos) || (pos == 0)) { throw std::runtime_error("INI_File::Parse: Get Key Error!"); }
-				m_mpNodes[node_name][RxString::Trim(line.substr(0, pos))] = RxString::Trim(line.substr(pos + 1));
+				m_mpNodes[node_name][RxStr::Trim(line.substr(0, pos))] = RxStr::Trim(line.substr(pos + 1));
 			}
 			break;
 			}
 		}
 	}
 
-	void File::Save(const std::wstring& wsFile)
+	void Parser::Save(const std::wstring& wsFile)
 	{
-		RxStream::Text wofs_ini{ wsFile, RIO_OUT, RFM_UTF8 };
+		RxFS::Text wofs_ini{ wsFile, RIO_OUT, RFM_UTF8 };
 		std::wstring dump = Dump();
 		wofs_ini.WriteLine(dump.data(), dump.size());
 	}
 
-	std::wstring File::Dump()
+	std::wstring Parser::Dump()
 	{
 		std::wstringstream ss;
 		for (auto& node : m_mpNodes)
@@ -73,24 +73,24 @@ namespace Rut::INI
 	}
 
 
-	NodesMap::iterator File::At(const std::wstring& wsNode)
+	NodesMap::iterator Parser::At(const std::wstring& wsNode)
 	{
 		return m_mpNodes.find(wsNode);
 	}
 
-	NodesMap::iterator File::End()
+	NodesMap::iterator Parser::End()
 	{
 		return m_mpNodes.end();
 	}
 
-	KeysMap& File::Get(const std::wstring& wsNode)
+	KeysMap& Parser::Get(const std::wstring& wsNode)
 	{
 		const auto& ite_node = At(wsNode);
 		if (ite_node == End()) { throw std::runtime_error("INI_File::Get: INI File No Find Node"); }
 		return ite_node->second;
 	}
 
-	Value& File::Get(const std::wstring& wsNode, const std::wstring& wsName)
+	Value& Parser::Get(const std::wstring& wsNode, const std::wstring& wsName)
 	{
 		auto& keys = Get(wsNode);
 		const auto& ite_keys = keys.find(wsName);
@@ -98,22 +98,22 @@ namespace Rut::INI
 		return ite_keys->second;
 	}
 
-	KeysMap& File::operator[] (const std::wstring& wsNode)
+	KeysMap& Parser::operator[] (const std::wstring& wsNode)
 	{
 		return Get(wsNode);
 	}
 
-	void File::Add(const std::wstring& wsNode, const std::wstring& wsName, const Value& vValue)
+	void Parser::Add(const std::wstring& wsNode, const std::wstring& wsName, const Value& vValue)
 	{
 		m_mpNodes[wsNode][wsName] = vValue;
 	}
 
-	bool File::Has(const std::wstring& wsNode)
+	bool Parser::Has(const std::wstring& wsNode)
 	{
 		return At(wsNode) != End() ? true : false;
 	}
 
-	bool File::Has(const std::wstring& wsNode, const std::wstring& wsName)
+	bool Parser::Has(const std::wstring& wsNode, const std::wstring& wsName)
 	{
 		auto ite_node = At(wsNode);
 		if (ite_node != End())

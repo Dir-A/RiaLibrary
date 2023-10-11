@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Set Source File Path
 list(APPEND SRC_FILE 
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/File.cpp" 
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Parser.cpp" 
     "${CMAKE_CURRENT_SOURCE_DIR}/src/Value.cpp" 
 )
 

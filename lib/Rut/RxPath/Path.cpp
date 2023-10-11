@@ -1,6 +1,6 @@
 ﻿#include "Path.h"
-#include "../RxString.h"
-#include "../RxStream.h"
+#include "../RxCvt.h"
+#include "../RxFs.h"
 
 #include <Windows.h>
 #include <Shlwapi.h>
@@ -160,7 +160,7 @@ namespace Rut::RxPath
 			if (wpPath[ite_char] == L'.')
 			{
 				size_t suffix_len = nChar - ite_char + 1;
-				memcpy(wpPath, wpPath + ite_char, suffix_len * 2);
+				memcpy(wpPath, wpPath + ite_char, suffix_len * sizeof(wchar_t));
 				return ite_char;
 			}
 		}
@@ -319,18 +319,7 @@ namespace Rut::RxPath
 	}
 }
 
-#ifndef WIN32
-namespace Rut::RxPath::Std
-{
-	std::filesystem::path CurrentPath()
-	{
-		return std::filesystem::current_path();
-	}
-}
-#endif // !WIN32
-
-#ifdef WIN32
-namespace Rut::RxPath::Win32
+namespace Rut::RxPath
 {
 	bool Exist(const char* cpPath)
 	{
@@ -412,14 +401,14 @@ namespace Rut::RxPath::Win32
 		return MakeDir(wsPath.data());
 	}
 
-	void MakeDirViaPath(const char* cpPath)
+	bool MakeDirViaPath(const char* cpPath)
 	{
-		MakeDirViaPath(RxString::ToWCS(cpPath, CP_ACP).c_str());
+		return MakeDirViaPath(RxCvt::ToWCS(cpPath, CP_ACP).c_str());
 	}
 
-	void MakeDirViaPath(const wchar_t* wpPath)
+	bool MakeDirViaPath(const wchar_t* wpPath)
 	{
-		size_t len = wcslen(wpPath);
+		const size_t len = wcslen(wpPath);
 		wchar_t path[MAX_PATH];
 		memcpy(path, wpPath, (len + 1) * 2);
 
@@ -440,21 +429,23 @@ namespace Rut::RxPath::Win32
 			case L':': { ite_char++; } break;
 			}
 		}
+
+		return true;
 	}
 
-	void MakeDirViaPath(std::string_view msPath)
+	bool MakeDirViaPath(std::string_view msPath)
 	{
-		MakeDirViaPath(msPath.data());
+		return MakeDirViaPath(msPath.data());
 	}
 
-	void MakeDirViaPath(std::wstring_view wsPath)
+	bool MakeDirViaPath(std::wstring_view wsPath)
 	{
-		MakeDirViaPath(wsPath.data());
+		return MakeDirViaPath(wsPath.data());
 	}
 
 	std::uintmax_t FileSize(const char* cpPath)
 	{
-		HANDLE hfile = CreateFileA(cpPath, GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+		const HANDLE hfile = CreateFileA(cpPath, GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
 		if (hfile == INVALID_HANDLE_VALUE) { return 0; }
 		std::uintmax_t h_size = 0;
 		std::uintmax_t size = GetFileSize(hfile, (LPDWORD)(&h_size));
@@ -465,7 +456,7 @@ namespace Rut::RxPath::Win32
 
 	std::uintmax_t FileSize(const wchar_t* wpPath)
 	{
-		HANDLE hfile = CreateFileW(wpPath, GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+		const HANDLE hfile = CreateFileW(wpPath, GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
 		if (hfile == INVALID_HANDLE_VALUE) { return 0; }
 		std::uintmax_t h_size = 0;
 		std::uintmax_t size = GetFileSize(hfile, (LPDWORD)(&h_size));
@@ -574,4 +565,3 @@ namespace Rut::RxPath::Win32
 	}
 
 }
-#endif // WIN32

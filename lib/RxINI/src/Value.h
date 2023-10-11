@@ -2,7 +2,7 @@
 #include <string>
 
 
-namespace Rut::INI
+namespace Rut::RxINI
 {
 	class Value
 	{

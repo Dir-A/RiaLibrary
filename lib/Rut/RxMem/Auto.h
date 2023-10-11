@@ -1,14 +1,14 @@
 ﻿#pragma once
 #include <string>
 
-#include "../FileStream/BinaryStream.hpp"
+#include "../RxFS/Binary.hpp"
 
 
-namespace Rut::RxStream
+namespace Rut::RxMem
 {
 	static constexpr size_t AutoMem_AutoSize = -1;
 
-	class AutoMem
+	class Auto
 	{
 	private:
 		uint8_t* m_pMemData;
@@ -16,20 +16,20 @@ namespace Rut::RxStream
 		size_t m_uiMaxSize;
 
 	public:
-		AutoMem();
-		AutoMem(const AutoMem& buffer);
-		AutoMem(AutoMem&& buffer) noexcept;
-		template <typename T_STR> AutoMem(T_STR T_PATH) : AutoMem() { LoadFile(T_PATH); }
-		template <typename T_STR> AutoMem(T_STR T_PATH, size_t szFile) : AutoMem() { LoadFile(T_PATH, szFile); }
-		~AutoMem();
+		Auto();
+		Auto(const Auto& buffer);
+		Auto(Auto&& buffer) noexcept;
+		template <typename T_STR> Auto(T_STR T_PATH) : Auto() { LoadFile(T_PATH); }
+		template <typename T_STR> Auto(T_STR T_PATH, size_t szFile) : Auto() { LoadFile(T_PATH, szFile); }
+		~Auto();
 
-		AutoMem& Copy(const AutoMem& buffer);
-		AutoMem& Move(AutoMem& buffer);
-		AutoMem& Append(AutoMem& rfAutoMem);
+		Auto& Copy(const Auto& buffer);
+		Auto& Move(Auto& buffer);
+		Auto& Append(Auto& rfAutoMem);
 
-		AutoMem& operator[] (size_t tSize);
-		AutoMem& operator=(AutoMem&& rfAutoMem) noexcept;
-		AutoMem& operator=(const AutoMem& rfAutoMem);
+		Auto& operator[] (size_t tSize);
+		Auto& operator=(Auto&& rfAutoMem) noexcept;
+		Auto& operator=(const Auto& rfAutoMem);
 
 	public:
 		template <typename T_PTR> operator T_PTR* () { return (T_PTR*)m_pMemData; }
@@ -37,7 +37,7 @@ namespace Rut::RxStream
 		template <typename T_STR> void SaveData(T_STR PATH) { SaveFileViaPath(PATH, m_pMemData, m_uiMemSize); }
 		template <typename T_STR> uint8_t* LoadFile(T_STR PATH, size_t uiSize = AutoMem_AutoSize)
 		{
-			Binary ifs{ PATH, RIO::RIO_IN };
+			RxFS::Binary ifs{ PATH, RIO::RIO_IN };
 			if (uiSize == AutoMem_AutoSize) { uiSize = ifs.GetSize(); }
 			ifs.Read(SetSize(uiSize), uiSize);
 			return m_pMemData;

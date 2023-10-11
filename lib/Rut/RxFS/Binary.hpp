@@ -1,15 +1,14 @@
 ﻿#pragma once
 #include <string>
 #include <stdexcept>
-#include <Windows.h>
 
-#include "BasicStream.h"
-#include "../../RxPath.h"
+#include "Basic.h"
+#include "../RxPath.h"
 
 
-namespace Rut::RxStream
+namespace Rut::RxFS
 {
-	class Binary : public BasicStream
+	class Binary : public Basic
 	{
 	public:
 		Binary() 
@@ -54,7 +53,6 @@ namespace Rut::RxStream
 	template <typename T_STR> void SaveFileViaPath(T_STR PATH, void* pData, size_t nBytes)
 	{
 		RxPath::MakeDirViaPath(PATH);
-		Binary ofs{ PATH, RIO::RIO_OUT };
-		ofs.Write(pData, nBytes);
+		Binary{ PATH, RIO::RIO_OUT }.Write(pData, nBytes);
 	}
 }

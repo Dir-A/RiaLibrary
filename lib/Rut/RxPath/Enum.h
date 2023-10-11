@@ -1,32 +1,16 @@
 ﻿#pragma once
 #include <string>
 #include <vector>
-#include <filesystem>
 
-#ifndef WIN32
-namespace Rut::RxPath::Std
+
+namespace Rut::RxPath
 {
-	bool AllFilePaths(const std::filesystem::path& fsBasePath, std::vector<std::string>& vecList);
-	bool AllFilePaths(const std::filesystem::path& fsBasePath, std::vector<std::wstring>& vecList);
+	bool AllFilePaths(const std::string_view msBasePath, std::vector<std::string>& vecList);
+	bool AllFilePaths(const std::wstring_view wsBasePath, std::vector<std::wstring>& vecList);
 
-	bool CurFileNames(const std::filesystem::path& fsBasePath, std::vector<std::string>& vecList, bool isAddBasePath = false);
-	bool CurFileNames(const std::filesystem::path& fsBasePath, std::vector<std::wstring>& vecList, bool isAddBasePath = false);
+	bool CurFileNames(const std::string_view msBasePath, std::vector<std::string>& vecList, bool isAddBasePath = false);
+	bool CurFileNames(const std::wstring_view wsBasePath, std::vector<std::wstring>& vecList, bool isAddBasePath = false);
 
-	bool CurFolderNames(const std::filesystem::path& fsBasePath, std::vector<std::string>& vecList, bool isAddBasePath = false);
-	bool CurFolderNames(const std::filesystem::path& fsBasePath, std::vector<std::wstring>& vecList, bool isAddBasePath = false);
+	bool CurFolderNames(const std::string_view msFolder, std::vector<std::string>& vecList, bool isAddBasePath = false);
+	bool CurFolderNames(const std::wstring_view wsFolder, std::vector<std::wstring>& vecList, bool isAddBasePath = false);
 }
-#endif // WIN32
-
-#ifdef WIN32
-namespace Rut::RxPath::inline Win32
-{
-	bool AllFilePaths(const std::string& msBasePath, std::vector<std::string>& vecList);
-	bool AllFilePaths(const std::wstring& wsBasePath, std::vector<std::wstring>& vecList);
-
-	bool CurFileNames(const std::string& msBasePath, std::vector<std::string>& vecList, bool isAddBasePath = false);
-	bool CurFileNames(const std::wstring& wsBasePath, std::vector<std::wstring>& vecList, bool isAddBasePath = false);
-
-	bool CurFolderNames(const std::string& msFolder, std::vector<std::string>& vecList, bool isAddBasePath = false);
-	bool CurFolderNames(const std::wstring& wsFolder, std::vector<std::wstring>& vecList, bool isAddBasePath = false);
-}
-#endif // WIN32

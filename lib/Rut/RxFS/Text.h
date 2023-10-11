@@ -1,9 +1,9 @@
 ﻿#pragma once
-#include "BinaryStream.hpp"
-
 #include <sstream>
 #include <cstdint>
 #include <functional>
+
+#include "Basic.h"
 
 
 namespace Rut
@@ -16,9 +16,9 @@ namespace Rut
 	};
 }
 
-namespace Rut::RxStream
+namespace Rut::RxFS
 {
-	class Text : private BasicStream
+	class Text : private Basic
 	{
 	private:
 		RFM m_rxFormat;

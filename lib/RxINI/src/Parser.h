@@ -5,14 +5,14 @@
 #include "Value.h"
 
 
-namespace Rut::INI
+namespace Rut::RxINI
 {
 	typedef std::wstring							Name;
 	typedef std::wstring							NodeName;
 	typedef std::unordered_map<Name, Value>			KeysMap;
 	typedef std::unordered_map<NodeName, KeysMap>	NodesMap;
 
-	class File
+	class Parser
 	{
 	private:
 		NodesMap m_mpNodes;
@@ -22,8 +22,8 @@ namespace Rut::INI
 		NodesMap::iterator End();
 		void Parse(const std::wstring& wsINI);
 
-		File();
-		File(const std::wstring& wsINI);
+		Parser();
+		Parser(const std::wstring& wsINI);
 
 		std::wstring Dump();
 		void Save(const std::wstring& wsFile);

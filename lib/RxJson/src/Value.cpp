@@ -155,12 +155,6 @@ namespace Rut::RxJson
 	}
 
 	//Array
-	JArray& Value::ToAry()
-	{
-		SureArray();
-		return *m_Value.pAry;
-	}
-
 	void Value::SureArray()
 	{
 		if (m_Type == JVALUE_NUL)
@@ -189,12 +183,6 @@ namespace Rut::RxJson
 
 
 	// Obj
-	JObject& Value::ToOBJ()
-	{
-		SureObject();
-		return *(m_Value.pObj);
-	}
-
 	Value& Value::operator[](const wchar_t* wpKey)
 	{
 		JObject& obj = this->ToOBJ();
@@ -287,7 +275,46 @@ namespace Rut::RxJson
 		return str;
 	}
 
-	void Value::ToStr(std::wstring& wsText, bool isFormat)
+
+	JArray& Value::ToAry()
+	{
+		SureArray();
+		return *m_Value.pAry;
+	}
+
+	JObject& Value::ToOBJ()
+	{
+		SureObject();
+		return *(m_Value.pObj);
+	}
+
+	int Value::ToInt()
+	{
+		return this->operator int();
+	}
+
+	bool Value::ToBool()
+	{
+		return this->operator bool();
+	}
+
+	double Value::ToDouble()
+	{
+		return this->operator double();
+	}
+
+	const wchar_t* Value::ToStringPtr()
+	{
+		return this->operator std::wstring_view().data();
+	}
+
+	std::wstring_view Value::ToStringView()
+	{
+		return this->operator std::wstring_view();
+	}
+
+
+	void Value::Dump(std::wstring& wsText, bool isFormat)
 	{
 		static size_t count = 0;
 
@@ -322,27 +349,24 @@ namespace Rut::RxJson
 			wsText.append(1, L'\"');
 			for (auto ch : *(m_Value.pStr))
 			{
-				if ((ch > 0x1F) && (ch != L'\"')) // graphic symbols
+				switch (ch)
+				{
+				case L'\n': ch = L'n'; break;
+				case L'\r': ch = L'r'; break;
+				case L'\b': ch = L'b'; break;
+				case L'\t': ch = L't'; break;
+				case L'\f': ch = L'f'; break;
+				case L'\"': ch = L'"'; break;
+				case L'\\': ch = L'\\'; break;
+				default:
 				{
 					wsText.append(1, ch);
+					continue;
 				}
-				else // control characters
-				{
-					switch (ch)
-					{
-					case L'\n': ch = L'n'; break;
-					case L'\r': ch = L'r'; break;
-					case L'\b': ch = L'b'; break;
-					case L'\t': ch = L't'; break;
-					case L'\f': ch = L'f'; break;
-					case L'\"': ch = L'"'; break;
-					case L'\\': ch = L'\\'; break;
-					default: throw std::runtime_error("Unknow Control Characters!");
-					}
+				}
 
-					wsText.append(1, L'\\');
-					wsText.append(1, ch);
-				}
+				wsText.append(1, L'\\');
+				wsText.append(1, ch);
 			}
 			wsText.append(1, L'\"');
 		}
@@ -360,7 +384,7 @@ namespace Rut::RxJson
 					wsText.append(1, L'\n');
 					wsText.append(count, L'\t');
 				}
-				value.ToStr(wsText, isFormat);
+				value.Dump(wsText, isFormat);
 				wsText.append(1, L',');
 			}
 			count--;
@@ -400,7 +424,7 @@ namespace Rut::RxJson
 				{
 					wsText.append(1, L' ');
 				}
-				value.second.ToStr(wsText, isFormat);
+				value.second.Dump(wsText, isFormat);
 				wsText.append(1, L',');
 			}
 			count--;

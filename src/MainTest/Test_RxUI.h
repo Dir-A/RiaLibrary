@@ -1,6 +1,7 @@
 ﻿#include "../../lib/RxUI/Win32.h"
+#include "../../lib/Rut/RxFS.h"
 #include "../../lib/Rut/RxPath.h"
-#include "../../lib/Rut/RxStream.h"
+#include "../../lib/Rut/RxConsole.h"
 
 using namespace Rut;
 using namespace RxUI;
@@ -47,7 +48,7 @@ private:
 		if (!path.empty() && RxPath::FileExist(path))
 		{
 			wchar_t buf[100] = { 0 };
-			wsprintfW(buf, L"0x%X Bytes", RxStream::Binary{ path, RIO::RIO_IN }.GetSize());
+			wsprintfW(buf, L"0x%X Bytes", RxFS::Binary{ path, RIO::RIO_IN }.GetSize());
 			m_weSize.SetText(buf);
 		}
 		else
@@ -61,11 +62,11 @@ private:
 		m_weTextBox.AddNewLine(L"Call EditorEvent");
 		if (HIWORD(wParam) == EN_SETFOCUS)
 		{
-			RxStream::PutConsole(L"EN_SETFOCUS\n");
+			RxConsole::Put(L"EN_SETFOCUS\n");
 		}
 		else if (HIWORD(wParam) == EN_KILLFOCUS)
 		{
-			RxStream::PutConsole(L"EN_KILLFOCUS\n");
+			RxConsole::Put(L"EN_KILLFOCUS\n");
 		}
 	}
 
@@ -74,19 +75,19 @@ private:
 		m_weTextBox.AddNewLine(L"Call RadioEvent");
 		if (hWnd == m_wRadio1.GetHandle())
 		{
-			RxStream::PutConsole(L"Radio_1_Checked\n");
+			RxConsole::Put(L"Radio_1_Checked\n");
 			return;
 		}
 
 		if (hWnd == m_wRadio2.GetHandle())
 		{
-			RxStream::PutConsole(L"Radio_2_Checked\n");
+			RxConsole::Put(L"Radio_2_Checked\n");
 			return;
 		}
 
 		if (hWnd == m_wRadio3.GetHandle())
 		{
-			RxStream::PutConsole(L"Radio_3_Checked\n");
+			RxConsole::Put(L"Radio_3_Checked\n");
 			return;
 		}
 
@@ -99,11 +100,11 @@ private:
 		{
 			if (m_wCheckBox1.IsCheck())
 			{
-				RxStream::PutConsole(L"CheckBox_1_Checked\n");
+				RxConsole::Put(L"CheckBox_1_Checked\n");
 			}
 			else
 			{
-				RxStream::PutConsole(L"CheckBox_1_UnChecked\n");
+				RxConsole::Put(L"CheckBox_1_UnChecked\n");
 			}
 			return;
 		}
@@ -112,11 +113,11 @@ private:
 		{
 			if (m_wCheckBox2.IsCheck())
 			{
-				RxStream::PutConsole(L"CheckBox_2_Checked\n");
+				RxConsole::Put(L"CheckBox_2_Checked\n");
 			}
 			else
 			{
-				RxStream::PutConsole(L"CheckBox_2_UnChecked\n");
+				RxConsole::Put(L"CheckBox_2_UnChecked\n");
 			}
 			return;
 		}
@@ -125,11 +126,11 @@ private:
 		{
 			if (m_wCheckBox3.IsCheck())
 			{
-				RxStream::PutConsole(L"CheckBox_3_Checked\n");
+				RxConsole::Put(L"CheckBox_3_Checked\n");
 			}
 			else
 			{
-				RxStream::PutConsole(L"CheckBox_3_UnChecked\n");
+				RxConsole::Put(L"CheckBox_3_UnChecked\n");
 			}
 			return;
 		}

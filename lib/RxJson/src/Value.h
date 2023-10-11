@@ -66,13 +66,11 @@ namespace Rut::RxJson
 		Value& operator = (Value&& rfJValue) noexcept;
 
 		//Array
-		JArray& ToAry();
 		void SureArray();
 		void Append(const Value& rfJValue);
 		void Append(Value&& rfJValue);
 
 		// Obj
-		JObject& ToOBJ();
 		Value& operator[](const wchar_t* wpKey);
 		void SureObject();
 		void AddKey(std::wstring_view wsKey);
@@ -90,7 +88,15 @@ namespace Rut::RxJson
 		operator JObject& ();
 		operator std::wstring_view();
 
-		void ToStr(std::wstring& wsText, bool isFormat = true);
+		JArray& ToAry();
+		JObject& ToOBJ();
+		int ToInt();
+		bool ToBool();
+		double ToDouble();
+		const wchar_t* ToStringPtr();
+		std::wstring_view ToStringView();
+
+		void Dump(std::wstring& wsText, bool isFormat = true);
 	};
 
 }

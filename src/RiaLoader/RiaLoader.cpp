@@ -1,7 +1,7 @@
 ﻿#include <Windows.h>
 
 #include "../../lib/Rut/RxPath.h"
-#include "../../lib/Rut/RxStream.h"
+#include "../../lib/Rut/RxFS.h"
 #include "../../lib/RxINI/RxINI.h"
 #include "../../lib/RxHook/RxHook.h"
 
@@ -18,7 +18,7 @@ INT APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
 	try
 	{
-		INI::File ini(exe_name_noext + L".ini");
+		RxINI::Parser ini{ exe_name_noext + L".ini" };
 		std::wstring exe_name = ini[L"RiaLoader"][L"TargetEXE"];
 		std::uint32_t dll_count = ini[L"RiaLoader"][L"TargetDLLCount"];
 

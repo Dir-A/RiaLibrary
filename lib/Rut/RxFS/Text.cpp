@@ -1,9 +1,8 @@
-﻿#include "TextStream.h"
+﻿#include "Text.h"
+#include "../RxCvt/Cvt.h"
 
-#include "../../RxString.h"
 
-
-namespace Rut::RxStream
+namespace Rut::RxFS
 {
 	void Text::WriteBOM()
 	{
@@ -20,24 +19,24 @@ namespace Rut::RxStream
 
 	void Text::CheckBOM()
 	{
-		uint32_t bom = 0; Read(&bom, sizeof(bom));
+		uint32_t bom = 0; this->Read(&bom, sizeof(bom));
 
 		switch (m_rxFormat)
 		{
 		case RFM::RFM_UTF8:
 		{
-			if ((bom & 0x00FFFFFFU) == 0x00BFBBEFU) { MovePos(-1); return; } // Skip BOM
+			if ((bom & 0x00FFFFFFU) == 0x00BFBBEFU) { this->MovePos(-1); return; } // Skip BOM
 		}
 		break;
 
 		case RFM::RFM_UTF16:
 		{
-			if ((bom & 0x0000FFFFU) == 0x0000FEFF) { MovePos(-2); return; } // Skip BOM
+			if ((bom & 0x0000FFFFU) == 0x0000FEFF) { this->MovePos(-2); return; } // Skip BOM
 		}
 		break;
 		}
 
-		MovePos(-4); // Not BOM Back Pointer
+		this->MovePos(-4); // Not BOM Back Pointer
 	}
 
 	void Text::EnsureBOM(RIO emAccess)
@@ -89,7 +88,7 @@ namespace Rut::RxStream
 			std::string mbcs;
 			uint32_t code_page = CP_ACP;
 			if (m_rxFormat == RFM_UTF8) { code_page = CP_UTF8; }
-			RxString::ToMBCS(cpStr, mbcs, code_page);
+			RxCvt::ToMBCS(cpStr, mbcs, code_page);
 			return Write(mbcs.data(), mbcs.size());
 		}
 		break;
@@ -118,8 +117,8 @@ namespace Rut::RxStream
 		{
 			std::string u8str;
 			std::wstring u16str;
-			RxString::ToWCS(cpStr, u16str, CP_ACP);
-			RxString::ToMBCS(u16str, u8str, CP_UTF8);
+			RxCvt::ToWCS(cpStr, u16str, CP_ACP);
+			RxCvt::ToMBCS(u16str, u8str, CP_UTF8);
 			return Write(u8str.data(), u8str.size());
 		}
 		break;
@@ -127,7 +126,7 @@ namespace Rut::RxStream
 		case RFM::RFM_UTF16:
 		{
 			std::wstring wide;
-			RxString::ToWCS(cpStr, wide, CP_ACP);
+			RxCvt::ToWCS(cpStr, wide, CP_ACP);
 			return Write(wide.data(), (wide.size() * 2));
 		}
 		break;
@@ -239,8 +238,8 @@ namespace Rut::RxStream
 			buf[size] = '\0';
 
 			std::wstring wstr;
-			RxString::ToWCS({ buf, size }, wstr, CP_UTF8);
-			RxString::ToMBCS(wstr, msText, CP_UTF8);
+			RxCvt::ToWCS({ buf, size }, wstr, CP_UTF8);
+			RxCvt::ToMBCS(wstr, msText, CP_UTF8);
 			delete[] buf;
 		}
 		break;
@@ -251,7 +250,7 @@ namespace Rut::RxStream
 			this->Read(buf, size);
 			buf[cch] = '\0';
 
-			RxString::ToMBCS({ buf, cch }, msText, CP_ACP);
+			RxCvt::ToMBCS({ buf, cch }, msText, CP_ACP);
 			delete[] buf;
 		}
 		break;
@@ -274,7 +273,7 @@ namespace Rut::RxStream
 
 			uint32_t code_page = CP_ACP;
 			if (m_rxFormat == RFM_UTF8) { code_page = CP_UTF8; }
-			RxString::ToWCS({ buf, size }, wsText, code_page);
+			RxCvt::ToWCS({ buf, size }, wsText, code_page);
 			delete[] buf;
 		}
 		break;

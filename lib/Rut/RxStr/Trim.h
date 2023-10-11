@@ -3,7 +3,7 @@
 #include <vector>
 
 
-namespace Rut::RxString
+namespace Rut::RxStr
 {
 	std::wstring Trim(std::wstring wsLine, const wchar_t* wFilterChar = L" \r\n\t");
 

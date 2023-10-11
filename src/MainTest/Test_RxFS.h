@@ -1,11 +1,11 @@
 ﻿#pragma once
-#include "../../lib/Rut/RxStream.h"
+#include "../../lib/Rut/RxFS.h"
 #include "../../lib/Rut/RxBench.h"
 
 using namespace Rut;
 
 
-void TestRxStream()
+void TestRxFS()
 {
 	RxBench::Record record;
 
@@ -13,7 +13,7 @@ void TestRxStream()
 	for (size_t i = 0; i < 50; i++)
 	{
 		record.Beg();
-		RxStream::Text ifs_text = { L"test.json", RIO::RIO_IN, RFM::RFM_UTF8 };
+		RxFS::Text ifs_text = { L"test.json", RIO::RIO_IN, RFM::RFM_UTF8 };
 		ifs_text.ReadAllLine(text_list);
 		//RxStream::Text ofs = { L"test_u.json", RIO::RIO_OUT, RFM::RFM_UTF16 };
 		//ofs.WriteAllLine(text_list);
@@ -21,7 +21,7 @@ void TestRxStream()
 	}
 
 	std::wstring ee;
-	RxPath::PathNotSuffix(ee);
+	RxPath::NotSuffix(ee);
 
 	record.Log();
 }

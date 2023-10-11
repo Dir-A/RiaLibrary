@@ -1,10 +1,8 @@
 ﻿#include <iostream>
-#include "Test_RxUI.h"
-
-#include "../../lib/Rut/RxCvt.h"
+#include "Test_RxStr.h"
 
 
 int main(int argc, char* argv[])
 {
-
+    TestRxStr(argc,argv);
 }
