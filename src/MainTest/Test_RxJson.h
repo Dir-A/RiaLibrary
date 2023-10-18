@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <string>
 
-#include "../../lib/Rut/RxFS.h"
+#include "../../lib/Rut/RxFile.h"
 #include "../../lib/Rut/RxBench.h"
 #include "../../lib/RxJson/RxJson.h"
 
@@ -88,10 +88,7 @@ void TestRxJson()
 
 
 	//record.Beg();
-	RxFS::Text ofs_json = { L"1.json",RIO::RIO_OUT, RFM::RFM_UTF16 };
-	std::wstring text;
-	value.Dump(text);
-	ofs_json << text;
+	parser.Save(value, L"1.json");;
 	//record.End();
 
 	//record.Log();
