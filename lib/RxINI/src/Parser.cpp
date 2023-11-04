@@ -20,7 +20,7 @@ namespace Rut::RxINI
 	void Parser::Parse(const std::wstring& wsINI)
 	{
 		std::vector<std::wstring> text_line;
-		RxFile::Text wifs_ini = { wsINI, RIO_IN, RFM_UTF8 };
+		RxFile::Text wifs_ini = { wsINI, RIO_READ, RFM_UTF8 };
 		wifs_ini.ReadAllLine(text_line);
 
 		std::size_t pos = -1;

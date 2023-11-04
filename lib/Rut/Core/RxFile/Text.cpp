@@ -274,9 +274,18 @@ namespace Rut::RxFile
 	}
 
 
+	void Text::Flush()
+	{
+		this->Binary::Flush();
+	}
+
+	void Text::Close()
+	{
+		this->Binary::Close();
+	}
+
 	void Text::Rewind()
 	{
 		this->SetPos(0, RIO_BEGIN);
 	}
-
 }
