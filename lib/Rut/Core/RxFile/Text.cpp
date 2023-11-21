@@ -48,11 +48,11 @@ namespace Rut::RxFile
 	{
 		if (this->GetSize())
 		{
-			if (nMode & RIO_IN) { this->CheckBOM(); }
+			if (nMode & RIO_DATA_IN) { this->CheckBOM(); }
 		}
 		else
 		{
-			if (nMode & RIO_OUT) { this->WriteBOM(); }
+			if (nMode & RIO_DATA_OUT) { this->WriteBOM(); }
 		}
 	}
 

@@ -55,7 +55,7 @@ namespace Rut::RxINI
 
 	void Parser::Save(const std::wstring& wsFile)
 	{
-		RxFile::Text wofs_ini{ wsFile, RIO_OUT, RFM_UTF8 };
+		RxFile::Text wofs_ini{ wsFile, RIO_WRITE, RFM_UTF8 };
 		std::wstring dump = Dump();
 		wofs_ini.WriteLine(dump);
 	}
