@@ -8,15 +8,15 @@
 
 namespace Rut::RxPath
 {
-	void CheckPath(std::string& msPath)
+	static void CheckPath(std::string& msPath)
 	{
-		FormatSlash(msPath, '\\');
+		FormatSlash(msPath.data(), '\\');
 		if (msPath.back() != '\\') { msPath.append(1, '\\'); }
 	}
 
-	void CheckPath(std::wstring& wsPath)
+	static void CheckPath(std::wstring& wsPath)
 	{
-		FormatSlash(wsPath, L'\\');
+		FormatSlash(wsPath.data(), L'\\');
 		if (wsPath.back() != L'\\') { wsPath.append(1, L'\\'); }
 	}
 

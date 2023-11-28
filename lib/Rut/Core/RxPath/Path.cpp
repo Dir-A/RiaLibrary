@@ -45,25 +45,15 @@ namespace Rut::RxPath
 		return nChar;
 	}
 
-	void FileNameRef(std::string& msPath)
-	{
-		msPath.resize(FileName(msPath.data(), msPath.length()));
-	}
-
-	void FileNameRef(std::wstring& wsPath)
-	{
-		wsPath.resize(FileName(wsPath.data(), wsPath.length()));
-	}
-
 	std::string FileName(std::string msPath)
 	{
-		FileNameRef(msPath);
+		FileName(msPath.data(), msPath.size());
 		return msPath;
 	}
 
 	std::wstring FileName(std::wstring wsPath)
 	{
-		FileNameRef(wsPath);
+		FileName(wsPath.data(), wsPath.size());
 		return wsPath;
 	}
 
@@ -111,25 +101,15 @@ namespace Rut::RxPath
 		return nChar;
 	}
 
-	void NotFileNameRef(std::string& msPath)
-	{
-		msPath.resize(NotFileName(msPath.data(), msPath.length()));
-	}
-
-	void NotFileNameRef(std::wstring& wsPath)
-	{
-		wsPath.resize(NotFileName(wsPath.data(), wsPath.length()));
-	}
-
 	std::string NotFileName(std::string msPath)
 	{
-		NotFileNameRef(msPath);
+		NotFileName(msPath.data(), msPath.size());
 		return msPath;
 	}
 
 	std::wstring NotFileName(std::wstring msPath)
 	{
-		NotFileNameRef(msPath);
+		NotFileName(msPath.data(),msPath.size());
 		return msPath;
 	}
 
@@ -164,25 +144,15 @@ namespace Rut::RxPath
 		return nChar;
 	}
 
-	void SuffixRef(std::string& msPath)
-	{
-		msPath.resize(Suffix(msPath.data(), msPath.length()));
-	}
-
-	void SuffixRef(std::wstring& wsPath)
-	{
-		wsPath.resize(Suffix(wsPath.data(), wsPath.length()));
-	}
-
 	std::string Suffix(std::string msPath)
 	{
-		SuffixRef(msPath);
+		Suffix(msPath.data(), msPath.size());
 		return msPath;
 	}
 
 	std::wstring Suffix(std::wstring wsPath)
 	{
-		SuffixRef(wsPath);
+		Suffix(wsPath.data(), wsPath.size());
 		return wsPath;
 	}
 
@@ -215,25 +185,15 @@ namespace Rut::RxPath
 		return nChar;
 	}
 
-	void NotSuffixRef(std::string& msPath)
-	{
-		msPath.resize(NotSuffix(msPath.data(), msPath.length()));
-	}
-
-	void NotSuffixRef(std::wstring& wsPath)
-	{
-		wsPath.resize(NotSuffix(wsPath.data(), wsPath.length()));
-	}
-
 	std::string NotSuffix(std::string msPath)
 	{
-		NotSuffixRef(msPath);
+		NotSuffix(msPath.data(),msPath.size());
 		return msPath;
 	}
 
 	std::wstring NotSuffix(std::wstring wsPath)
 	{
-		NotSuffixRef(wsPath);
+		NotSuffix(wsPath.data(), wsPath.size());
 		return wsPath;
 	}
 
@@ -292,25 +252,15 @@ namespace Rut::RxPath
 		return wpPath;
 	}
 
-	void FormatSlashRef(std::string& msPath, char cSlash)
-	{
-		FormatSlash(msPath.data(), cSlash);
-	}
-
-	void FormatSlashRef(std::wstring& wsPath, wchar_t wcSlash)
-	{
-		FormatSlash(wsPath.data(), wcSlash);
-	}
-
 	std::string FormatSlash(std::string msPath, char cSlash)
 	{
-		FormatSlashRef(msPath, cSlash);
+		FormatSlash(msPath.data(), cSlash);
 		return msPath;
 	}
 
 	std::wstring FormatSlash(std::wstring wsPath, wchar_t wcSlash)
 	{
-		FormatSlashRef(wsPath, wcSlash);
+		FormatSlash(wsPath.data(), wcSlash);
 		return wsPath;
 	}
 }
@@ -436,14 +386,14 @@ namespace Rut::RxPath
 	std::string ModuleNameA(void* pBase)
 	{
 		std::string name = ModulePathA(pBase);
-		FileNameRef(name);
+		FileName(name.data(), name.size());
 		return name;
 	}
 
 	std::wstring ModuleNameW(void* pBase)
 	{
 		std::wstring name = ModulePathW(pBase);
-		FileNameRef(name);
+		FileName(name.data(), name.size());
 		return name;
 	}
 
