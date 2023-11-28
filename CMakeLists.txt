@@ -25,8 +25,6 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_LIST_DIR}/.out/lib)
      add_subdirectory("lib/Rut")
      add_subdirectory("lib/RxUI")
      add_subdirectory("lib/RxHook")
-     add_subdirectory("lib/RxINI")
-     add_subdirectory("lib/RxJson")
 
 # Project
     add_subdirectory("src/MainTest")

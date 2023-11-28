@@ -2,7 +2,7 @@
 #include <Windows.h>
 
 #include "../../lib/Rut/RxPath.h"
-#include "../../lib/RxINI/RxINI.h"
+#include "../../lib/Rut/RxINI.h"
 #include "../../lib/RxHook/RxHook.h"
 
 using namespace Rut;

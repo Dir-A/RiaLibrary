@@ -3,7 +3,7 @@
 
 #include "../../lib/Rut/RxFile.h"
 #include "../../lib/Rut/RxBench.h"
-#include "../../lib/RxJson/RxJson.h"
+#include "../../lib/Rut/RxJson.h"
 
 using namespace Rut;
 

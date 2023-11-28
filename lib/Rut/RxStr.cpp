@@ -1,5 +1,5 @@
 ﻿#include "RxStr.h"
-#include "../../Platform/Platform.h"
+#include "Platform/Platform.h"
 
 #include <stdexcept>
 

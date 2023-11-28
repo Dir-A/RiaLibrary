@@ -1,5 +1,5 @@
-﻿#include "Auto.h"
-#include "../../RxFile.h"
+﻿#include "RxMem.h"
+#include "RxFile.h"
 
 
 namespace Rut::RxMem
@@ -136,7 +136,7 @@ namespace Rut::RxMem
 		return m_upMemData.get();
 	}
 
-	size_t Auto::GetSize()
+	size_t Auto::GetSize() const
 	{
 		return m_uiMemSize;
 	}
