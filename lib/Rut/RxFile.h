@@ -32,7 +32,7 @@ namespace Rut::RxFile
 	protected:
 		Basic();
 		Basic(Basic&& refStream) noexcept;
-		virtual ~Basic();
+		~Basic();
 
 	public:
 		void Create(std::string_view msPath, size_t nMode);
@@ -63,7 +63,6 @@ namespace Rut::RxFile
 		Binary(std::string_view msPath, size_t nMode);
 		Binary(std::wstring_view wsPath, size_t nMode);
 		Binary(const Binary& refStream) = delete;
-		~Binary();
 
 	public:
 		template <typename T_TYPE> operator T_TYPE()

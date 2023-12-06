@@ -21,7 +21,7 @@ namespace Rut::RxFile
 
 	Basic::~Basic()
 	{
-		Close();
+		this->Close();
 	}
 
 
@@ -111,11 +111,6 @@ namespace Rut::RxFile
 	Binary::Binary(std::wstring_view wsPath, size_t nMode)
 	{
 		this->Create(wsPath, nMode);
-	}
-
-	Binary::~Binary()
-	{
-		this->Close();
 	}
 }
 

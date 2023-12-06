@@ -96,7 +96,7 @@ namespace Rut::RxJson
 		const wchar_t* ToStringPtr();
 		std::wstring_view ToStringView();
 
-		void Dump(std::wstring& wsText, bool isFormat = true);
+		void Dump(std::wstring& wsText, bool isFormat = true, bool isOrder = false) const;
 	};
 
 }
@@ -112,6 +112,8 @@ namespace Rut::RxJson
 
 	public:
 		Parser();
+		Parser(std::wstring_view wsJson);
+		Parser(std::wstring_view wsJson, Value& rfJValue);
 		~Parser();
 
 	private:
@@ -121,8 +123,8 @@ namespace Rut::RxJson
 		void AddReadCCH(size_t nCount = 1);
 		wchar_t GetCurChar();
 		wchar_t* GetCurPtr();
-		size_t GeReadCCH();
-		size_t GetJsonCCH();
+		size_t GeReadCCH() const;
+		size_t GetJsonCCH() const;
 
 		void ParseArray(Value& rfJValue);
 		void ParseObject(Value& rfJValue);
@@ -137,6 +139,7 @@ namespace Rut::RxJson
 	public:
 		void Open(std::wstring_view wsJson);
 		bool Read(Value& rfJValue);
-		static void Save(Value& rfJVaue, std::wstring_view wsFileName);
+		bool Load(std::wstring_view wsJson, Value& rfJValue);
+		static void Save(Value& rfJVaue, std::wstring_view wsFileName, bool isFormat = false, bool isOrder = false);
 	};
 }

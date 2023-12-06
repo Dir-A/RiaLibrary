@@ -14,7 +14,7 @@ INT APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	PROCESS_INFORMATION pi = { 0 };
 	si.cb = sizeof(si);
 
-	std::wstring exe_name_noext = RxPath::NotSuffix(RxPath::ModuleNameW(hInstance));
+	std::wstring exe_name_noext = RxPath::RemoveSuffix(RxPath::ModuleNameW(hInstance));
 
 	try
 	{
