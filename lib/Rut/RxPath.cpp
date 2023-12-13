@@ -4,6 +4,7 @@
 #include "Platform/Platform.h"
 
 #include <queue>
+#include <cassert>
 #include <stdexcept>
 #include <Windows.h>
 
@@ -290,7 +291,7 @@ namespace Rut::RxPath
 	}
 
 
-	char* FormatSlash(char* cpPath, char cSlash)
+	char* Format(char* cpPath, char cSlash)
 	{
 		switch (cSlash)
 		{
@@ -318,7 +319,7 @@ namespace Rut::RxPath
 		return cpPath;
 	}
 
-	wchar_t* FormatSlash(wchar_t* wpPath, wchar_t wcSlash)
+	wchar_t* Format(wchar_t* wpPath, wchar_t wcSlash)
 	{
 		switch (wcSlash)
 		{
@@ -344,16 +345,28 @@ namespace Rut::RxPath
 		return wpPath;
 	}
 
-	std::string FormatSlash(std::string msPath, char cSlash)
+	std::string Format(std::string msPath, char cSlash)
 	{
-		FormatSlash(msPath.data(), cSlash);
+		Format(msPath.data(), cSlash);
 		return msPath;
 	}
 
-	std::wstring FormatSlash(std::wstring wsPath, wchar_t wcSlash)
+	std::wstring Format(std::wstring wsPath, wchar_t wcSlash)
 	{
-		FormatSlash(wsPath.data(), wcSlash);
+		Format(wsPath.data(), wcSlash);
 		return wsPath;
+	}
+
+	void Format(std::string& msPath, char cSlash, bool isFolder)
+	{
+		Format(msPath.data(), cSlash);
+		if (isFolder) { (msPath.back() != cSlash) ? (void)(msPath.append(1, cSlash)) : (void)(0); }
+	}
+
+	void Format(std::wstring& wsPath, wchar_t cSlash, bool isFolder)
+	{
+		Format(wsPath.data(), cSlash);
+		if (isFolder) { (wsPath.back() != cSlash) ? (void)(wsPath.append(1, cSlash)) : (void)(0); }
 	}
 }
 
@@ -406,12 +419,39 @@ namespace Rut::RxPath
 
 	static bool MakeDirViaPath(const char* cpPath)
 	{
-		return MakeDirViaPath(RxStr::ToWCS(cpPath, 0).c_str());
+		const size_t len = Platform::StrLen(cpPath);
+		assert(len <= Platform::PLATFORM_MAX_PATH);
+
+		char path[Platform::PLATFORM_MAX_PATH];
+		Platform::StrCpy(path, Platform::PLATFORM_MAX_PATH, cpPath);
+
+		for (size_t ite_unit = 0; ite_unit < len; ite_unit++)
+		{
+			switch (path[ite_unit])
+			{
+			case '/':
+			case '\\':
+			{
+				if ((ite_unit > 0) && ((uint8_t)path[ite_unit - 1] > 0x7F)) { continue; } // check is dbcs char
+				path[ite_unit] = '\0';
+				Platform::MakeDir(path);
+				path[ite_unit] = '\\';
+			}
+			break;
+
+			case '.':
+			case ':': { ite_unit++; } break;
+			}
+		}
+
+		return true;
 	}
 
 	static bool MakeDirViaPath(const wchar_t* wpPath)
 	{
 		const size_t len = Platform::StrLen(wpPath);
+		assert(len <= Platform::PLATFORM_MAX_PATH);
+
 		wchar_t path[Platform::PLATFORM_MAX_PATH];
 		Platform::StrCpy(path, Platform::PLATFORM_MAX_PATH, wpPath);
 
@@ -512,26 +552,14 @@ namespace Rut::RxPath
 
 namespace Rut::RxPath
 {
-	static void CheckPath(std::string& msPath)
+	bool AllFilePaths(std::string msFolder, std::vector<std::string>& vecList)
 	{
-		FormatSlash(msPath.data(), '\\');
-		if (msPath.back() != '\\') { msPath.append(1, '\\'); }
-	}
-
-	static void CheckPath(std::wstring& wsPath)
-	{
-		FormatSlash(wsPath.data(), L'\\');
-		if (wsPath.back() != L'\\') { wsPath.append(1, L'\\'); }
-	}
-
-	bool AllFilePaths(std::string msPath, std::vector<std::string>& vecList)
-	{
-		CheckPath(msPath);
+		RxPath::Format(msFolder, '\\', true);
 
 		std::queue<std::string> dirs;
 		WIN32_FIND_DATAA find_data = { 0 };
 
-		dirs.push(msPath.data());
+		dirs.push(msFolder.data());
 
 		for (HANDLE hFind = INVALID_HANDLE_VALUE; !dirs.empty(); dirs.pop())
 		{
@@ -550,7 +578,7 @@ namespace Rut::RxPath
 					continue;
 				}
 
-				vecList.emplace_back(FormatSlash(dirName + find_data.cFileName, L'/'));
+				vecList.emplace_back(RxPath::Format(dirName + find_data.cFileName, L'/'));
 
 			} while (FindNextFileA(hFind, &find_data));
 
@@ -560,14 +588,14 @@ namespace Rut::RxPath
 		return true;
 	}
 
-	bool AllFilePaths(std::wstring wsPath, std::vector<std::wstring>& vecList)
+	bool AllFilePaths(std::wstring wsFolder, std::vector<std::wstring>& vecList)
 	{
-		CheckPath(wsPath);
+		RxPath::Format(wsFolder, L'\\', true);
 
 		std::queue<std::wstring> dirs;
 		WIN32_FIND_DATAW find_data = { 0 };
 
-		dirs.push(wsPath.data());
+		dirs.push(wsFolder.data());
 
 		for (HANDLE hfile = INVALID_HANDLE_VALUE; !dirs.empty(); dirs.pop())
 		{
@@ -586,7 +614,7 @@ namespace Rut::RxPath
 					continue;
 				}
 
-				vecList.emplace_back(FormatSlash(dirName + find_data.cFileName, L'/'));
+				vecList.emplace_back(RxPath::Format(dirName + find_data.cFileName, L'/'));
 
 			} while (FindNextFileW(hfile, &find_data));
 
@@ -598,7 +626,7 @@ namespace Rut::RxPath
 
 	bool CurFileNames(std::string msFolder, std::vector<std::string>& vecList, bool isAddBasePath)
 	{
-		CheckPath(msFolder);
+		RxPath::Format(msFolder, '\\', true);
 
 		const std::string folder = msFolder.data();
 
@@ -614,11 +642,11 @@ namespace Rut::RxPath
 
 			if (isAddBasePath)
 			{
-				vecList.emplace_back(FormatSlash(msFolder + find_data.cFileName, '/'));
+				vecList.emplace_back(RxPath::Format(msFolder + find_data.cFileName, '/'));
 			}
 			else
 			{
-				vecList.emplace_back(FormatSlash(find_data.cFileName, '/'));
+				vecList.emplace_back(RxPath::Format(find_data.cFileName, '/'));
 			}
 
 		} while (FindNextFileA(hfile, &find_data));
@@ -629,7 +657,7 @@ namespace Rut::RxPath
 
 	bool CurFileNames(std::wstring wsFolder, std::vector<std::wstring>& vecList, bool isAddBasePath)
 	{
-		CheckPath(wsFolder);
+		RxPath::Format(wsFolder, L'\\', true);
 
 		const std::wstring folder = wsFolder.data();
 
@@ -645,11 +673,11 @@ namespace Rut::RxPath
 
 			if (isAddBasePath)
 			{
-				vecList.emplace_back(FormatSlash(wsFolder + find_data.cFileName, L'/'));
+				vecList.emplace_back(RxPath::Format(wsFolder + find_data.cFileName, L'/'));
 			}
 			else
 			{
-				vecList.emplace_back(FormatSlash(find_data.cFileName, L'/'));
+				vecList.emplace_back(RxPath::Format(find_data.cFileName, L'/'));
 			}
 
 		} while (FindNextFileW(hfile, &find_data));
@@ -660,7 +688,7 @@ namespace Rut::RxPath
 
 	bool CurFolderNames(std::string msFolder, std::vector<std::string>& vecList, bool isAddBasePath)
 	{
-		CheckPath(msFolder);
+		RxPath::Format(msFolder, '\\', true);
 
 		const std::string folder = msFolder.data();
 
@@ -676,11 +704,11 @@ namespace Rut::RxPath
 			{
 				if (isAddBasePath)
 				{
-					vecList.emplace_back(FormatSlash(msFolder + find_data.cFileName, '/'));
+					vecList.emplace_back(RxPath::Format(msFolder + find_data.cFileName, '/'));
 				}
 				else
 				{
-					vecList.emplace_back(FormatSlash(find_data.cFileName, '/'));
+					vecList.emplace_back(RxPath::Format(find_data.cFileName, '/'));
 				}
 			}
 
@@ -692,7 +720,7 @@ namespace Rut::RxPath
 
 	bool CurFolderNames(std::wstring wsFolder, std::vector<std::wstring>& vecList, bool isAddBasePath)
 	{
-		CheckPath(wsFolder);
+		RxPath::Format(wsFolder, L'\\', true);
 
 		WIN32_FIND_DATAW find_data = { 0 };
 
@@ -706,11 +734,11 @@ namespace Rut::RxPath
 			{
 				if (isAddBasePath)
 				{
-					vecList.emplace_back(FormatSlash(wsFolder + find_data.cFileName, L'/'));
+					vecList.emplace_back(RxPath::Format(wsFolder + find_data.cFileName, L'/'));
 				}
 				else
 				{
-					vecList.emplace_back(FormatSlash(find_data.cFileName, L'/'));
+					vecList.emplace_back(RxPath::Format(find_data.cFileName, L'/'));
 				}
 			}
 

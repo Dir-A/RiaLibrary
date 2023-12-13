@@ -25,10 +25,12 @@ namespace Rut::RxPath
 	std::string RemoveSuffix(std::string msPath);
 	std::wstring RemoveSuffix(std::wstring wsPath);
 
-	char* FormatSlash(char* cpPath, char cSlash);
-	wchar_t* FormatSlash(wchar_t* wpPath, wchar_t wcSlash);
-	std::string FormatSlash(std::string msPath, char cSlash);
-	std::wstring FormatSlash(std::wstring wsPath, wchar_t wcSlash);
+	char* Format(char* cpPath, char cSlash);
+	wchar_t* Format(wchar_t* wpPath, wchar_t wcSlash);
+	std::string Format(std::string msPath, char cSlash);
+	std::wstring Format(std::wstring wsPath, wchar_t wcSlash);
+	void Format(std::string& msPath, char cSlash, bool isFolder);
+	void Format(std::wstring& wsPath, wchar_t cSlash, bool isFolder);
 
 	bool Exist(std::string_view msPath);
 	bool Exist(std::wstring_view wsPath);
@@ -58,8 +60,29 @@ namespace Rut::RxPath
 	std::wstring ModuleNameW(void* pBase = nullptr);
 }
 
+#include <Windows.h>
 namespace Rut::RxPath
 {
+	class FilterW
+	{
+	private:
+		std::wstring m_wsBasePath;
+		std::vector<std::wstring> m_vcPath;
+
+	public:
+		FilterW()
+		{
+
+		}
+
+		FilterW(std::wstring_view wsBasePath) : m_wsBasePath(wsBasePath)
+		{
+
+		}
+
+
+	};
+
 	bool AllFilePaths(std::string msBasePath, std::vector<std::string>& vecList);
 	bool AllFilePaths(std::wstring wsBasePath, std::vector<std::wstring>& vecList);
 
