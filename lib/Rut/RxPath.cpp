@@ -1,12 +1,10 @@
 ﻿#include "RxPath.h"
 #include "RxStr.h"
 #include "RxFile.h"
-#include "Platform/Platform.h"
+#include "RxSys.h"
 
-#include <queue>
 #include <cassert>
 #include <stdexcept>
-#include <Windows.h>
 
 
 namespace Rut::RxPath
@@ -344,86 +342,17 @@ namespace Rut::RxPath
 
 		return wpPath;
 	}
-
-	std::string Format(std::string msPath, char cSlash)
-	{
-		Format(msPath.data(), cSlash);
-		return msPath;
-	}
-
-	std::wstring Format(std::wstring wsPath, wchar_t wcSlash)
-	{
-		Format(wsPath.data(), wcSlash);
-		return wsPath;
-	}
-
-	void Format(std::string& msPath, char cSlash, bool isFolder)
-	{
-		Format(msPath.data(), cSlash);
-		if (isFolder) { (msPath.back() != cSlash) ? (void)(msPath.append(1, cSlash)) : (void)(0); }
-	}
-
-	void Format(std::wstring& wsPath, wchar_t cSlash, bool isFolder)
-	{
-		Format(wsPath.data(), cSlash);
-		if (isFolder) { (wsPath.back() != cSlash) ? (void)(wsPath.append(1, cSlash)) : (void)(0); }
-	}
 }
 
 namespace Rut::RxPath
 {
-
-	bool Exist(std::string_view msPath)
-	{
-		return Platform::Exist(msPath.data());
-	}
-
-	bool Exist(std::wstring_view wsPath)
-	{
-		return Platform::Exist(wsPath.data());
-	}
-
-
-	bool DirExist(std::string_view msPath)
-	{
-		return Platform::DirExist(msPath.data());
-	}
-
-	bool DirExist(std::wstring_view wsPath)
-	{
-		return Platform::DirExist(wsPath.data());
-	}
-
-
-	bool FileExist(std::string_view msPath)
-	{
-		return Platform::FileExist(msPath.data());
-	}
-
-	bool FileExist(std::wstring_view wsPath)
-	{
-		return Platform::FileExist(wsPath.data());
-	}
-
-
-	bool MakeDir(std::string_view msPath)
-	{
-		return Platform::MakeDir(msPath.data());
-	}
-
-	bool MakeDir(std::wstring_view wsPath)
-	{
-		return Platform::MakeDir(wsPath.data());
-	}
-
-
 	static bool MakeDirViaPath(const char* cpPath)
 	{
-		const size_t len = Platform::StrLen(cpPath);
-		assert(len <= Platform::PLATFORM_MAX_PATH);
+		const size_t len = RxSys::StrLen(cpPath);
+		assert(len <= RxSys::PLATFORM_MAX_PATH);
 
-		char path[Platform::PLATFORM_MAX_PATH];
-		Platform::StrCpy(path, Platform::PLATFORM_MAX_PATH, cpPath);
+		char path[RxSys::PLATFORM_MAX_PATH];
+		RxSys::StrCpy(path, RxSys::PLATFORM_MAX_PATH, cpPath);
 
 		for (size_t ite_unit = 0; ite_unit < len; ite_unit++)
 		{
@@ -434,7 +363,7 @@ namespace Rut::RxPath
 			{
 				if ((ite_unit > 0) && ((uint8_t)path[ite_unit - 1] > 0x7F)) { continue; } // check is dbcs char
 				path[ite_unit] = '\0';
-				Platform::MakeDir(path);
+				RxSys::MakeDir(path);
 				path[ite_unit] = '\\';
 			}
 			break;
@@ -449,11 +378,11 @@ namespace Rut::RxPath
 
 	static bool MakeDirViaPath(const wchar_t* wpPath)
 	{
-		const size_t len = Platform::StrLen(wpPath);
-		assert(len <= Platform::PLATFORM_MAX_PATH);
+		const size_t len = RxSys::StrLen(wpPath);
+		assert(len <= RxSys::PLATFORM_MAX_PATH);
 
-		wchar_t path[Platform::PLATFORM_MAX_PATH];
-		Platform::StrCpy(path, Platform::PLATFORM_MAX_PATH, wpPath);
+		wchar_t path[RxSys::PLATFORM_MAX_PATH];
+		RxSys::StrCpy(path, RxSys::PLATFORM_MAX_PATH, wpPath);
 
 		for (size_t ite_char = 0; ite_char < len; ite_char++)
 		{
@@ -463,7 +392,7 @@ namespace Rut::RxPath
 			case L'\\':
 			{
 				path[ite_char] = L'\0';
-				Platform::MakeDir(path);
+				RxSys::MakeDir(path);
 				path[ite_char] = L'\\';
 			}
 			break;
@@ -486,31 +415,19 @@ namespace Rut::RxPath
 		return MakeDirViaPath(wsPath.data());
 	}
 
-
-	std::uintmax_t GetFileSize(std::string_view msPath)
-	{
-		return Platform::GetFileSize(msPath.data());
-	}
-
-	std::uintmax_t GetFileSize(std::wstring_view wsPath)
-	{
-		return Platform::GetFileSize(wsPath.data());
-	}
-
-
 	std::string ModulePathA(void* pBase)
 	{
 		std::string path;
-		path.resize(Platform::PLATFORM_MAX_PATH);
-		path.resize(Platform::GetModulePath(path.data(), Platform::PLATFORM_MAX_PATH, pBase));
+		path.resize(RxSys::PLATFORM_MAX_PATH);
+		path.resize(RxSys::GetModulePath(path.data(), RxSys::PLATFORM_MAX_PATH, pBase));
 		return path;
 	}
 
 	std::wstring ModulePathW(void* pBase)
 	{
 		std::wstring path;
-		path.resize(Platform::PLATFORM_MAX_PATH);
-		path.resize(Platform::GetModulePath(path.data(), Platform::PLATFORM_MAX_PATH, pBase));
+		path.resize(RxSys::PLATFORM_MAX_PATH);
+		path.resize(RxSys::GetModulePath(path.data(), RxSys::PLATFORM_MAX_PATH, pBase));
 		return path;
 	}
 
@@ -535,216 +452,17 @@ namespace Rut::RxPath
 	std::string ModuleDirA()
 	{
 		std::string path;
-		path.resize(Platform::PLATFORM_MAX_PATH);
-		path.resize(Platform::GetModuleDir(path.data(), Platform::PLATFORM_MAX_PATH));
+		path.resize(RxSys::PLATFORM_MAX_PATH);
+		path.resize(RxSys::GetModuleDir(path.data(), RxSys::PLATFORM_MAX_PATH));
 		return path;
 	}
 
 	std::wstring ModuleDirW()
 	{
 		std::wstring path;
-		path.resize(Platform::PLATFORM_MAX_PATH);
-		path.resize(Platform::GetModuleDir(path.data(), Platform::PLATFORM_MAX_PATH));
+		path.resize(RxSys::PLATFORM_MAX_PATH);
+		path.resize(RxSys::GetModuleDir(path.data(), RxSys::PLATFORM_MAX_PATH));
 		return path;
 	}
 
-}
-
-namespace Rut::RxPath
-{
-	bool AllFilePaths(std::string msFolder, std::vector<std::string>& vecList)
-	{
-		RxPath::Format(msFolder, '\\', true);
-
-		std::queue<std::string> dirs;
-		WIN32_FIND_DATAA find_data = { 0 };
-
-		dirs.push(msFolder.data());
-
-		for (HANDLE hFind = INVALID_HANDLE_VALUE; !dirs.empty(); dirs.pop())
-		{
-			std::string& dirName = dirs.front();
-
-			hFind = FindFirstFileA((dirName + "*").c_str(), &find_data);
-			if (hFind == INVALID_HANDLE_VALUE) { return false; }
-
-			do
-			{
-				if (!strcmp(find_data.cFileName, ".") || !strcmp(find_data.cFileName, "..")) { continue; }
-
-				if (find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-				{
-					dirs.push(dirName + find_data.cFileName + "\\");
-					continue;
-				}
-
-				vecList.emplace_back(RxPath::Format(dirName + find_data.cFileName, L'/'));
-
-			} while (FindNextFileA(hFind, &find_data));
-
-			FindClose(hFind);
-		}
-
-		return true;
-	}
-
-	bool AllFilePaths(std::wstring wsFolder, std::vector<std::wstring>& vecList)
-	{
-		RxPath::Format(wsFolder, L'\\', true);
-
-		std::queue<std::wstring> dirs;
-		WIN32_FIND_DATAW find_data = { 0 };
-
-		dirs.push(wsFolder.data());
-
-		for (HANDLE hfile = INVALID_HANDLE_VALUE; !dirs.empty(); dirs.pop())
-		{
-			std::wstring& dirName = dirs.front();
-
-			hfile = FindFirstFileW((dirName + L"*").c_str(), &find_data);
-			if (hfile == INVALID_HANDLE_VALUE) { return false; }
-
-			do
-			{
-				if (!wcscmp(find_data.cFileName, L".") || !wcscmp(find_data.cFileName, L"..")) { continue; }
-
-				if (find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-				{
-					dirs.push(dirName + find_data.cFileName + L"\\");
-					continue;
-				}
-
-				vecList.emplace_back(RxPath::Format(dirName + find_data.cFileName, L'/'));
-
-			} while (FindNextFileW(hfile, &find_data));
-
-			FindClose(hfile);
-		}
-
-		return true;
-	}
-
-	bool CurFileNames(std::string msFolder, std::vector<std::string>& vecList, bool isAddBasePath)
-	{
-		RxPath::Format(msFolder, '\\', true);
-
-		const std::string folder = msFolder.data();
-
-		WIN32_FIND_DATAA find_data = { 0 };
-
-		const HANDLE hfile = FindFirstFileA((folder + "*").c_str(), &find_data);
-		if (hfile == INVALID_HANDLE_VALUE) { return false; }
-
-		do
-		{
-			if (!strcmp(find_data.cFileName, ".") || !strcmp(find_data.cFileName, "..")) { continue; }
-			if (find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) continue;
-
-			if (isAddBasePath)
-			{
-				vecList.emplace_back(RxPath::Format(msFolder + find_data.cFileName, '/'));
-			}
-			else
-			{
-				vecList.emplace_back(RxPath::Format(find_data.cFileName, '/'));
-			}
-
-		} while (FindNextFileA(hfile, &find_data));
-
-		FindClose(hfile);
-		return true;
-	}
-
-	bool CurFileNames(std::wstring wsFolder, std::vector<std::wstring>& vecList, bool isAddBasePath)
-	{
-		RxPath::Format(wsFolder, L'\\', true);
-
-		const std::wstring folder = wsFolder.data();
-
-		WIN32_FIND_DATAW find_data = { 0 };
-
-		const HANDLE hfile = FindFirstFileW((folder + L"*").c_str(), &find_data);
-		if (hfile == INVALID_HANDLE_VALUE) { return false; }
-
-		do
-		{
-			if (!wcscmp(find_data.cFileName, L".") || !wcscmp(find_data.cFileName, L"..")) { continue; }
-			if (find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) continue;
-
-			if (isAddBasePath)
-			{
-				vecList.emplace_back(RxPath::Format(wsFolder + find_data.cFileName, L'/'));
-			}
-			else
-			{
-				vecList.emplace_back(RxPath::Format(find_data.cFileName, L'/'));
-			}
-
-		} while (FindNextFileW(hfile, &find_data));
-
-		FindClose(hfile);
-		return true;
-	}
-
-	bool CurFolderNames(std::string msFolder, std::vector<std::string>& vecList, bool isAddBasePath)
-	{
-		RxPath::Format(msFolder, '\\', true);
-
-		const std::string folder = msFolder.data();
-
-		WIN32_FIND_DATAA find_data = { 0 };
-
-		const HANDLE hfile = FindFirstFileA((folder + "*").c_str(), &find_data);
-		if (hfile == INVALID_HANDLE_VALUE) { return false; }
-
-		do
-		{
-			if (!strcmp(find_data.cFileName, ".") || !strcmp(find_data.cFileName, "..")) { continue; }
-			if (find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-			{
-				if (isAddBasePath)
-				{
-					vecList.emplace_back(RxPath::Format(msFolder + find_data.cFileName, '/'));
-				}
-				else
-				{
-					vecList.emplace_back(RxPath::Format(find_data.cFileName, '/'));
-				}
-			}
-
-		} while (FindNextFileA(hfile, &find_data));
-
-		FindClose(hfile);
-		return true;
-	}
-
-	bool CurFolderNames(std::wstring wsFolder, std::vector<std::wstring>& vecList, bool isAddBasePath)
-	{
-		RxPath::Format(wsFolder, L'\\', true);
-
-		WIN32_FIND_DATAW find_data = { 0 };
-
-		const HANDLE hfile = FindFirstFileW((wsFolder + L"*").c_str(), &find_data);
-		if (hfile == INVALID_HANDLE_VALUE) { return false; }
-
-		do
-		{
-			if (!wcscmp(find_data.cFileName, L".") || !wcscmp(find_data.cFileName, L"..")) { continue; }
-			if (find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-			{
-				if (isAddBasePath)
-				{
-					vecList.emplace_back(RxPath::Format(wsFolder + find_data.cFileName, L'/'));
-				}
-				else
-				{
-					vecList.emplace_back(RxPath::Format(find_data.cFileName, L'/'));
-				}
-			}
-
-		} while (FindNextFileW(hfile, &find_data));
-
-		FindClose(hfile);
-		return true;
-	}
 }
