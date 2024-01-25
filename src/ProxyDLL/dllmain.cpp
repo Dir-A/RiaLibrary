@@ -1,4 +1,4 @@
-﻿#include "../../lib/RxProxy/version.h"
+﻿#include "lib/RxProxy/version.h"
 
 
 static DWORD g_dwExeBase = (DWORD)GetModuleHandleW(NULL);

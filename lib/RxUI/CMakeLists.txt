@@ -1,5 +1,5 @@
 ﻿# Library Name
-set(PROJECT_NAME RxUI)
+set(USER_PROJECT_NAME RxUI)
 
 # Cpp Standard
 set(CMAKE_CXX_STANDARD 20)
@@ -14,4 +14,4 @@ list(APPEND SRC_FILE
 )
 
 # Set Current Library
-add_library(${PROJECT_NAME} "${SRC_FILE}")
+add_library(${USER_PROJECT_NAME} "${SRC_FILE}")

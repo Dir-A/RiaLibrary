@@ -4,12 +4,12 @@ if (NOT CMAKE_SIZEOF_VOID_P EQUAL 4)
 endif()
 
 # Value Define
-set(PROJECT_NAME ProxyDLL)
+set(USER_PROJECT_NAME ProxyDLL)
 
 # Cpp Standard
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Current Project
-project("${PROJECT_NAME}")
-add_library(${PROJECT_NAME} MODULE "dllmain.cpp")
+project("${USER_PROJECT_NAME}")
+add_library(${USER_PROJECT_NAME} MODULE "dllmain.cpp")

@@ -1,9 +1,9 @@
 ﻿#include <stdexcept>
 #include <Windows.h>
 
-#include "../../lib/Rut/RxPath.h"
-#include "../../lib/Rut/RxINI.h"
-#include "../../lib/RxHook/RxHook.h"
+#include "lib/Rut/RxPath.h"
+#include "lib/Rut/RxINI.h"
+#include "lib/RxHook/RxHook.h"
 
 using namespace Rut;
 
